@@ -23,3 +23,6 @@ Thumbs.db
 # Testing
 coverage/
 *.log
+
+# Hide google firebase Config here
+script/firebase-config.js
