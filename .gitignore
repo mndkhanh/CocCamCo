@@ -25,4 +25,4 @@ coverage/
 *.log
 
 # Hide google firebase Config here
-script/firebase-config.js
+public/script/firebase-config.js
