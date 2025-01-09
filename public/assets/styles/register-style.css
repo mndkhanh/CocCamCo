@@ -1,0 +1,103 @@
+/* General form styles */
+form {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: block;
+      color: #333;
+}
+
+input[type="text"],
+input[type="email"] {
+      width: calc(100% - 22px);
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+}
+
+button {
+      display: inline-block;
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      margin-right: 5px;
+}
+
+button:hover {
+      background-color: #0056b3;
+}
+
+input[type="submit"] {
+      display: block;
+      background-color: #28a745;
+      color: white;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+}
+
+input[type="submit"]:hover {
+      background-color: #218838;
+}
+
+/* Verification code container */
+#verificationCodeContainer {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 20px;
+}
+
+/* Verification code input fields */
+.code-input {
+      width: 50px;
+      height: 60px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      background-color: #fff;
+      color: #333;
+      transition: border-color 0.3s ease;
+}
+
+.code-input:focus {
+      border-color: #007BFF;
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+      -moz-appearance: textfield;
+}

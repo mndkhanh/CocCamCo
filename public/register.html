@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Tham gia giải đấu</title>
+      <link rel="stylesheet" href="./assets/styles/register-style.css">
+</head>
+
+<body>
+      <form>
+            <label>Họ và tên</label><br>
+            <input type="text" placeholder="Nguyễn Văn A" id="nameTxt" required> <br>
+            <label>Email</label><br>
+            <input type="email" placeholder="NguyenVanA@gmail.com" id="emailTxt" required>
+            <button id="sendEmailBtn">Gửi mã</button><br>
+            <label>Mã xác nhận</label><br>
+            <div id="verificationCodeContainer">
+                  <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+                  <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+                  <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+                  <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+                  <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+                  <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+            </div>
+            <button id="checkCodeBtn">Kiểm tra</button><br>
+            <button id="sayHelloBtn">Say Hello</button>
+            <input type="submit" value="Gửi đơn">
+      </form>
+      <script src="./assets/js/register-page.js"></script>
+
+      <script type="module" src="./script/register.js"></script>
+</body>
+
+</html>
