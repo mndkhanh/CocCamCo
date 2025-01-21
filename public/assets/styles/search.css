@@ -1,0 +1,81 @@
+body, input, textarea, button {
+    font-size: inherit;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+body {
+    background-image: url('/public/assets/image/bg-red.jfif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #f0f0f0; /* Màu nền nếu ảnh không tải được */
+  }
+
+.container {
+    margin-top: 130px;
+}
+
+.navbar {
+    display: flex;
+    margin: 30px 0 0 50px;
+}
+
+.navbar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+}
+
+.navbar div {
+    margin: auto 0;
+    padding-left: 15px;
+    font-size: 50px;
+}
+
+h1 {
+    font-size: 95px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    margin-top: 85px;
+    justify-content: center;
+}
+
+form input {
+    width: 120px;
+    height: 47px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+form>button {
+    margin-left: 25px;
+    width: 120px;
+    height: 47px;
+    border-radius: 10px;
+}
+
+.form-input>input {
+    width: 600px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.form-input div {
+    margin-top: 7px;
+}
+
+.form-input {
+    padding-right: 25px;
+}
+
+form>input, form>button {
+    background: linear-gradient(to right, #FFA500, #FF0000);
+    border: 1px solid black;
+}
+
+
