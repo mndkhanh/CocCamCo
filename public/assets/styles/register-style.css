@@ -64,7 +64,6 @@ body {
 form {
       max-width: 400px;
       margin: auto;
-      background: linear-gradient(321.23deg, rgba(191, 191, 191, 0.062) 5.98%, rgba(0, 0, 0, 0) 66.28%), rgba(0, 0, 0, 0.14);
 
       h3 {
             margin: 0;
@@ -212,7 +211,6 @@ button:hover {
       order: 0;
       flex-grow: 0;
       background: linear-gradient(321.23deg, rgba(191, 191, 191, 0.062) 5.98%, rgba(0, 0, 0, 0) 66.28%), rgba(0, 0, 0, 0.14);
-      box-shadow: -8px 4px 5px rgba(0, 0, 0, 0.24);
       backdrop-filter: blur(26.5px);
       color: white;
 }
@@ -228,4 +226,9 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
+}
+
+.error-input {
+      color: red;
+      border: red;
 }
