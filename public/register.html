@@ -5,30 +5,65 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Tham gia giải đấu</title>
+      <link rel="apple-touch-icon" sizes="57x57" href="./assets/favicons/apple-icon-57x57.png">
+      <link rel="apple-touch-icon" sizes="60x60" href="./assets/favicons/apple-icon-60x60.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="./assets/favicons/apple-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="76x76" href="./assets/favicons/apple-icon-76x76.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="./assets/favicons/apple-icon-114x114.png">
+      <link rel="apple-touch-icon" sizes="120x120" href="./assets/favicons/apple-icon-120x120.png">
+      <link rel="apple-touch-icon" sizes="144x144" href="./assets/favicons/apple-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="./assets/favicons/apple-icon-152x152.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicons/apple-icon-180x180.png">
+      <link rel="icon" type="image/png" sizes="192x192" href="./assets/favicons/android-icon-192x192.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicons/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicons/favicon-96x96.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicons/favicon-16x16.png">
+      <link rel="manifest" href="./assets/favicons/manifest.json">
+      <meta name="msapplication-TileColor" content="#ffffff">
+      <meta name="msapplication-TileImage" content="./assets/favicons/ms-icon-144x144.png">
+      <meta name="theme-color" content="#ffffff">
       <link rel="stylesheet" href="./assets/styles/register-style.css">
 </head>
 
 <body>
-      <form>
-            <label>Họ và tên</label><br>
-            <input type="text" placeholder="Nguyễn Văn A" id="nameTxt" required> <br>
-            <label>Email</label><br>
-            <input type="email" placeholder="NguyenVanA@gmail.com" id="emailTxt" required>
-            <button id="sendEmailBtn">Gửi mã</button><br>
-            <label>Mã xác nhận</label><br>
-            <div id="verificationCodeContainer">
-                  <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
-                  <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
-                  <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
-                  <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
-                  <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
-                  <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+      <div class="header">
+            <div>
+                  <img src="./assets/favicons/apple-icon-72x72.png" alt="Logo_CCC">
+                  <h1>Cóc Cầm Cơ - Trang đăng ký</h1>
             </div>
-            <button id="checkCodeBtn">Kiểm tra</button><br>
-            <input type="submit" value="Gửi đơn">
-      </form>
-      <script src="./assets/js/register-page.js"></script>
+            <a href="./index.html"><button><svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                              viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
+                              <path
+                                    d="M280-200v-80h284q63 0 109.5-40T720-420q0-60-46.5-100T564-560H312l104 104-56 56-200-200 200-200 56 56-104 104h252q97 0 166.5 63T800-420q0 94-69.5 157T564-200H280Z" />
+                        </svg> <span>Trở lại</span></button></a>
+      </div>
 
+      <div class="body">
+            <h1>GIẢI ĐẤU BILLIARDS <br>CÓC CẦM CƠ LẦN II</h1>
+            <div>
+                  <form class="register-form">
+                        <h1>Đăng ký</h1>
+                        <input type="text" placeholder="Họ và tên" id="nameTxt" required>
+                        <input type="tel" placeholder="Số điện thoại" inputmode="numeric" pattern="[0][0-9]\d+" id="PNTxt" required>
+                        <input type="number" placeholder="Tuổi" inputmode="numeric" id="ageTxt" required>
+                        <input type="email" placeholder="Địa chỉ email" id="emailTxt" required>
+                        <button id="sendEmailBtn">Gửi mã</button><br>
+                        <h3>Mã xác nhận</h3>
+                        <div id="verificationCodeContainer">
+                              <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+                              <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+                              <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+                              <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+                              <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+                              <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
+                        </div>
+                        <button class="submitBtn">Gửi đơn</button>
+
+                        <div class="contact-info"><a href="https://www.facebook.com/coccamco.fpthcm" target="_blank">Liên hệ với chúng tôi</a></div>
+                  </form>
+            </div>
+      </div>
+      <script src="./assets/js/register-page.js"></script>
       <script type="module" src="./script/register.js"></script>
 </body>
 
