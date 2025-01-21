@@ -1,7 +1,16 @@
 body, input, textarea, button {
     font-size: inherit;
     font-family: 'Arial', sans-serif;
+    color: white;
 }
+
+body {
+    background-image: url('/public/assets/image/bg-red.jfif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #f0f0f0; /* Màu nền nếu ảnh không tải được */
+  }
 
 .container {
     margin-top: 130px;
@@ -43,7 +52,7 @@ form input {
     border: 1px solid black;
 }
 
-form button {
+form>button {
     margin-left: 25px;
     width: 120px;
     height: 47px;
@@ -63,4 +72,10 @@ form button {
 .form-input {
     padding-right: 25px;
 }
+
+form>input, form>button {
+    background: linear-gradient(to right, #FFA500, #FF0000);
+    border: 1px solid black;
+}
+
 
