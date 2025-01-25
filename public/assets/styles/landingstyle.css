@@ -6,6 +6,7 @@ body {
     padding-right: 50px;
     font-size: 150%;
 }
+/*start of main page*/
 .landing-header{
     display: flex;
     flex-direction: row;
@@ -24,27 +25,54 @@ body {
 .landing-right-navigation{
     padding-left: 500px;
     display: flex;
-    flex-direction: row;
     justify-content: center;
+    align-items: center;
     font-size: 120%;
+    flex: 1;
 }
 .landing-right-navigation ul{
     display: flex;
-    gap: 150px;
+    justify-content: space-between;
     list-style: none;
     width: 100%;
 }
-.landing-right-navigation li{
-    flex: 1;
+.landing-right-navigation li{ 
     display: flex;
+    flex: 1;
+    border-radius: 15px;
     justify-content: center;
     align-content: center;
+    padding: 20px 0 20px;
 }
 .landing-right-navigation li:hover{
-    box-shadow: 0 4px 8px rgba(0,0,0,10);
+    box-shadow: 0 6px 8px rgba(40,40,40,10);
 }
 .landing-right-navigation a{
     display: block;
     text-decoration: none;
     color: white;
 }
+.landing-banner{
+    font-size: 180%;
+    color: rgb(255,255,255);
+    text-align: justify;
+    justify-items: center;
+}
+.landing-body{
+    font-size: 120%;
+    display: flex ;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.landing-b-left, .landing-b-right{
+    flex: 1;
+    margin: 0 20px;
+}
+.landing-b-right h2, .landing-b-left h2{
+    margin: 0 auto;
+}
+/*about us page*/
+
+/*tournament page*/
+
+/*contact page*/
