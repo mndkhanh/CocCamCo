@@ -1,5 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 const firebaseConfig = {
   apiKey: "AIzaSyD61Kw0yPaojDqln9WIeaQ-wO6zqLoyVGU",
   authDomain: "my-ccc-landing-page-gen2.firebaseapp.com",
@@ -12,5 +16,18 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const firestore = getFirestore(app);
-console.log(firestore);
+console.log("Firebase đã được khởi tạo:", app);
+const db = getFirestore();
+console.log("Firestore đã được khởi tạo");
+const colRef = collection(db, "paymentInfo");
+getDocs(colRef)
+  .then((snapshot) => {
+    let books = [];
+    snapshot.docs.forEach((doc) => {
+      books.push({ ...doc.data(), id: doc.id });
+    });
+    console.log("Dữ liệu nhận được:", books);
+  })
+  .catch((err) => {
+    console.error("Lỗi khi truy xuất dữ liệu:", err.message);
+  });
