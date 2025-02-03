@@ -1,4 +1,6 @@
 body {
+    background-position: center;
+    background-attachment: fixed;
     background-image: url("../background/bgr-register-page.png");
     color: white;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -129,3 +131,12 @@ body {
 /*tournament page*/
 
 /*contact page*/
+.contact-page{
+font-size: 80%;
+background: linear-gradient(180deg, rgba(67, 67, 89, 0.4) 25.84%, rgba(170, 68, 131, 0.4) 87.73%);
+display: flex;
+gap: 300px;
+}
+.contact-right p{
+    text-decoration: underline;
+}
