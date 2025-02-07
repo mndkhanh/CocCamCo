@@ -20,24 +20,28 @@ async function sendSuccessRegister(playerInfo) {
 
       const emailContent = `
           <p>Xin chào ${name},</p>
-          <p>Bạn đã gửi đơn đăng ký thành công. Sau đây là thông tin đăng ký:</p>
-          <p><strong>Player Info:</strong></p>
-          <ul>
-              <li><strong>Name:</strong> ${name}</li>
-              <li><strong>Email:</strong> ${email}</li>
-              <li><strong>Phone Number:</strong> ${phoneNumber}</li>
-              <li><strong>Age:</strong> ${age}</li>
-              <li><strong>Registration Time:</strong> ${getVNDate(registerTime)}</li>
-          </ul>
-          <p>Thank you for joining us.</p>
-          <p>Best regards,<br>Your Team</p>
+            <p>Bạn đã gửi đơn đăng ký thành công. Sau đây là thông tin đăng ký:</p>
+            <p><strong>Player Info:</strong></p>
+            <ul>
+                  <li><strong>Họ và tên:</strong> ${name}</li>
+                  <li><strong>Email:</strong> ${email}</li>
+                  <li><strong>Số điện thoại:</strong> ${phoneNumber}</li>
+                  <li><strong>Tuổi:</strong> ${age}</li>
+                  <li><strong>Đăng ký vào lúc:</strong> ${getVNDate(registerTime)}</li>
+            </ul>
+            <p><strong>Vui lòng thanh toán trong vòng 48 giờ để trở thành thí sinh chính thức. Tra cứu thông tin thanh toán ở
+                        đường link sau:</strong></p><br>
+            <a href="https://coccamco.web.app/search">https://coccamco.web.app/search</a>
+
+            <p>Vui lòng đợi các thông tin mới nhất từ chúng tôi.</p>
+            <p>Best regards,<br>Cóc Cầm Cơ</p>
       `;
 
       // Configure the email options
       const mailOptions = {
             from: 'coccamco.fpthcm@gmail.com',
             to: email,
-            subject: '[CÓC CẦM CƠ] - GỬI ĐƠN ĐĂNG KÝ THÀNH CÔNG & THÔNG BÁO THANH TOÁN LỆ PHÍ THAM GIA',
+            subject: '[CÓC CẦM CƠ] - THÔNG BÁO ĐĂNG KÝ THÀNH CÔNG & THANH TOÁN LỆ PHÍ THAM GIA',
             html: emailContent
       };
 
