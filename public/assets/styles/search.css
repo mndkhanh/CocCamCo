@@ -127,24 +127,21 @@ form>input, form>button {
   padding: 5px 15px;
   border-radius: 20px;
   font-weight: bold;
-  text-align: center;
   min-width: 100px;
 }
 
 .status.pending {
   background-color: #ffd700;
   color: black;
+  text-align: center;
 }
 
 .status.success {
   background-color: #4CAF50;
   color: white;
+  text-align: center;
 }
 
-.status.failed {
-  background-color: #f44336;
-  color: white;
-}
 
 .qr-code {
   text-align: center;
@@ -185,6 +182,25 @@ form>input, form>button {
   .form-input > input {
     width: 100%;
   }
+
+  .field.email {
+    order: 1;
+    }
+    .field.fullname {
+    order: 2;
+    }
+    .field.status {
+    order: 3;
+    }
+    .field.payment-id {
+    order: 4;
+    }
+    .field.creation-time {
+    order: 5;
+    }
+    .field.expire-time {
+    order: 6;
+    }
 }
 
 @media (max-width: 480px) {
