@@ -159,31 +159,72 @@ form>input, form>button {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Media Queries cho Responsive */
+/* Thêm styles mới cho info container */
+.info-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 15px 0;
+}
+
+.info-item {
+  flex: 1 1 calc(50% - 10px);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  min-width: 250px;
+}
+
+.info-item strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.info-item span,
+.info-item a {
+  display: inline-block;
+}
+
+/* Media Queries cho Mobile */
 @media (max-width: 768px) {
-  .container {
-    padding: 0 15px;
-  }
-
   .user-info {
-    padding: 20px;
+    padding: 15px;
   }
 
-  .info-row {
+  .info-container {
     flex-direction: column;
     gap: 10px;
   }
 
-  .info-row p {
-    min-width: 100%;
+  .info-item {
+    flex: 1 1 100%;
+    min-width: unset;
+    padding: 12px;
   }
 
-  h1 {
-    font-size: 48px;
+  /* Đặt thứ tự hiển thị */
+  .info-item:nth-child(1) { order: 1; } /* Email */
+  .info-item:nth-child(2) { order: 2; } /* Họ và tên */
+  .info-item:nth-child(3) { order: 3; } /* Mã thanh toán */
+  .info-item:nth-child(4) { order: 4; } /* Trạng thái */
+  .info-item:nth-child(5) { order: 5; } /* Thời gian tạo */
+  .info-item:nth-child(6) { order: 6; } /* Thời gian hết hạn */
+
+  .user-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
   }
 
-  .form-input > input {
-    width: 100%;
+  .info-item {
+    font-size: 0.9rem;
+  }
+
+  .status {
+    margin-top: 5px;
+  }
+
+  .qr-code {
+    margin: 20px auto;
   }
 }
 
@@ -194,6 +235,20 @@ form>input, form>button {
 
   .navbar div {
     font-size: 30px;
+  }
+
+  .user-info {
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .info-item {
+    padding: 10px;
+  }
+
+  .form-input > input {
+    width: 100%;
+    max-width: 300px;
   }
 }
 

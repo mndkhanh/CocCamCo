@@ -16,21 +16,21 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// console.log("Firebase đã được khởi tạo:", app);
+console.log("Firebase đã được khởi tạo:", app);
 const db = getFirestore();
-// console.log("Firestore đã được khởi tạo");
+console.log("Firestore đã được khởi tạo");
 const colRef = collection(db, "paymentInfo");
-// getDocs(colRef)
-//   .then((snapshot) => {
-//     let books = [];
-//     snapshot.docs.forEach((doc) => {
-//       books.push({ ...doc.data(), id: doc.id });
-//     });
-//     console.log("Dữ liệu nhận được:", books);
-//   })
-//   .catch((err) => {
-//     console.error("Lỗi khi truy xuất dữ liệu:", err.message);
-//   });
+getDocs(colRef)
+  .then((snapshot) => {
+    let books = [];
+    snapshot.docs.forEach((doc) => {
+      books.push({ ...doc.data(), id: doc.id });
+    });
+    console.log("Dữ liệu nhận được:", books);
+  })
+  .catch((err) => {
+    console.error("Lỗi khi truy xuất dữ liệu:", err.message);
+  });
 
 const searchForm = document.querySelector(".search");
 const searchInput = searchForm.querySelector("input[name='email']");
@@ -51,8 +51,8 @@ searchForm.addEventListener("submit", (event) => {
     .then((snapshot) => {
       let userData = null;
       snapshot.docs.forEach((doc) => {
-        // console.log("Checking document ID:", doc.id);
-        // console.log("Comparing with:", searchEmail);
+        console.log("Checking document ID:", doc.id);
+        console.log("Comparing with:", searchEmail);
         if (doc.id === searchEmail) {
           userData = { ...doc.data(), id: doc.id };
         }
@@ -73,7 +73,7 @@ function displayUserData(userData) {
   // Hàm để chuyển đổi trạng thái thành class tương ứng
   const getStatusClass = (status) => {
     if (!status) return '';
-    switch(status.toUpperCase()) {
+    switch (status.toUpperCase()) {
       case 'DONE':
         return 'success';
       case 'PENDING':
@@ -95,23 +95,37 @@ function displayUserData(userData) {
   resultsContainer.innerHTML = `
     <div class="user-info">
       <h2>Thông tin thanh toán</h2>
-      <div class="info-row">
-        <p><strong>Email:</strong> ${userData.id}</p>
-        <p><strong>Mã thanh toán:</strong> 
+      <div class="info-container">
+        <div class="info-item">
+          <strong>Email:</strong> 
+          <span>${userData.id}</span>
+        </div>
+        <div class="info-item">
+          <strong>Họ và tên:</strong>
+          <span>${userData.fullname || 'Chưa cập nhật'}</span>
+        </div>
+        <div class="info-item">
+          <strong>Mã thanh toán:</strong>
           <a href="${createPaymentUrl(userData.paymentID)}" 
              target="_blank" 
              class="payment-link">
              ${userData.paymentID || 'Nhấp để thanh toán'}
           </a>
-        </p>
-      </div>
-      <div class="info-row">
-        <p><strong>Trạng thái:</strong> <span class="status ${getStatusClass(userData.paymentStatus)}">${userData.paymentStatus || 'Chưa xác định'}</span></p>
-        <p><strong>Thời gian thanh toán:</strong> ${userData.paymentTime || 'Chưa thanh toán'}</p>
-      </div>
-      <div class="info-row">
-        <p><strong>Thời gian tạo:</strong> ${formatTimestamp(userData.generateTime)}</p>
-        <p><strong>Thời gian hết hạn:</strong> ${formatTimestamp(userData.expireTime)}</p>
+        </div>
+        <div class="info-item">
+          <strong>Trạng thái:</strong>
+          <span class="status ${getStatusClass(userData.paymentStatus)}">
+            ${userData.paymentStatus || 'Chưa xác định'}
+          </span>
+        </div>
+        <div class="info-item">
+          <strong>Thời gian tạo:</strong>
+          <span>${formatTimestamp(userData.generateTime)}</span>
+        </div>
+        <div class="info-item">
+          <strong>Thời gian hết hạn:</strong>
+          <span>${formatTimestamp(userData.expireTime)}</span>
+        </div>
       </div>
       ${userData.qrRanking ? `
         <div class="qr-code">
