@@ -1,81 +1,211 @@
-body, input, textarea, button {
-    font-size: inherit;
-    font-family: 'Arial', sans-serif;
-    color: white;
+body,
+input,
+textarea,
+button {
+  font-size: inherit;
+  font-family: 'Arial', sans-serif;
+  color: white;
 }
 
 body {
-    background-image: url('/public/assets/image/bg-red.jfif');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-color: #f0f0f0; /* Màu nền nếu ảnh không tải được */
-  }
+  background-image: url('/public/assets/image/bg-red.jfif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #f0f0f0;
+  /* Màu nền nếu ảnh không tải được */
+}
 
 .container {
-    margin-top: 130px;
+  margin-top: 130px;
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
 }
 
 .navbar {
-    display: flex;
-    margin: 30px 0 0 50px;
+  display: flex;
+  margin: 30px 0 0 50px;
 }
 
 .navbar img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
 }
 
 .navbar div {
-    margin: auto 0;
-    padding-left: 15px;
-    font-size: 50px;
+  margin: auto 0;
+  padding-left: 15px;
+  font-size: 50px;
 }
 
 h1 {
-    font-size: 95px;
-    margin: 0 auto;
-    text-align: center;
+  font-size: 95px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 form {
-    display: flex;
-    margin-top: 85px;
-    justify-content: center;
+  display: flex;
+  margin-top: 85px;
+  justify-content: center;
 }
 
 form input {
-    width: 120px;
-    height: 47px;
-    border-radius: 10px;
-    border: 1px solid black;
+  width: 120px;
+  height: 47px;
+  border-radius: 10px;
+  border: 1px solid black;
 }
 
 form>button {
-    margin-left: 25px;
-    width: 120px;
-    height: 47px;
-    border-radius: 10px;
+  margin-left: 25px;
+  width: 120px;
+  height: 47px;
+  border-radius: 10px;
 }
 
 .form-input>input {
-    width: 600px;
-    height: 40px;
-    border-radius: 10px;
+  width: 600px;
+  height: 40px;
+  border-radius: 10px;
+  color: black;
 }
 
 .form-input div {
-    margin-top: 7px;
+  margin-top: 7px;
 }
 
 .form-input {
-    padding-right: 25px;
+  padding-right: 25px;
 }
 
-form>input, form>button {
-    background: linear-gradient(to right, #FFA500, #FF0000);
-    border: 1px solid black;
+form>input,
+form>button {
+  background: linear-gradient(to right, #FFA500, #FF0000);
+  border: 1px solid black;
+}
+
+.user-info {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  border-radius: 15px;
+  margin: 30px auto;
+  max-width: 800px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "fullname paymentid"
+    "email generate-time"
+    "status expire-time";
+    align-items: center;
+}
+
+.info-grid p{
+  margin: 5px 0;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
 }
 
 
+.email { grid-area: email; }
+.paymentid { grid-area: paymentid; }
+.fullname { grid-area: fullname; }
+.generate-time { grid-area: generate-time; }
+.status { grid-area: status; }
+.expire-time { grid-area: expire-time; }
+
+.payment-link {
+  color: #FFA500;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: rgba(255, 165, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.payment-link:hover {
+  background: rgba(255, 165, 0, 0.2);
+  color: #FFD700;
+}
+
+.status-button {
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  min-width: 100px;
+}
+
+.status-button.pending {
+  background-color: #ffd700;
+  color: black;
+  text-align: center;
+}
+
+.status-button.success {
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+}
+
+
+.qr-code {
+  text-align: center;
+  margin: 30px auto;
+  max-width: 300px;
+}
+
+.qr-code img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Queries cho Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .user-info {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  .form-input>input {
+    width: 100%;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "fullname"
+    "email"
+    "status" 
+    "paymentid"
+    "generate-time"
+    "expire-time";
+    }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  .navbar div {
+    font-size: 30px;
+  }
+}
