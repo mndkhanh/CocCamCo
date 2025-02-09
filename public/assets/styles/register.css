@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
+
+body {
+      background-image: url("../background/bgr-register-page.png");
+      color: white;
+      font-family: "Noto Sans", serif;
+}
+
+
+.noto-sans-regular {
+      font-family: "Noto Sans", serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      font-variation-settings:
+            "wdth" 100;
+}
+
+.oswald-title {
+      font-family: "Oswald", serif;
+      font-optical-sizing: auto;
+      font-weight: 900;
+      font-style: normal;
+}
+
+.header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+
+      div {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+      }
+
+      img {
+            border-radius: 999px;
+      }
+
+      a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            gap: 50px;
+
+            button {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  width: 125px;
+            }
+      }
+}
+
+
+.body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 150px;
+
+      >h1 {
+            font-size: 5rem;
+            margin-left: 100px;
+      }
+}
+
+.body>div {
+      width: 500px;
+      height: 670px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: linear-gradient(321.23deg, rgba(191, 191, 191, 0.062) 5.98%, rgba(0, 0, 0, 0) 66.28%), rgba(0, 0, 0, 0.14);
+      box-shadow: -8px 4px 5px rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(26.5px);
+}
+
+/* General form styles */
+form {
+      max-width: 400px;
+      margin: auto;
+
+      h1 {
+            margin: 0;
+      }
+
+      h3 {
+            display: inline-block;
+            margin: 0;
+            margin-bottom: 20px;
+            margin-top: 20px;
+      }
+
+      #sendEmailBtn {
+            display: inline-block;
+            width: 80px;
+            height: 40px;
+      }
+
+
+}
+
+.contact-info {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      a {
+            margin-top: 50px;
+            color: rgb(206, 202, 202);
+            font-weight: 100;
+            text-decoration: underline;
+
+            &:hover {
+                  color: white;
+            }
+      }
+}
+
+input {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      font-size: 16px;
+      /* Username */
+
+      box-sizing: border-box;
+
+      /* Auto layout */
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 14px 16px;
+
+
+      border: 1px solid #FFFFFF;
+      border-radius: 12px;
+
+      /* Inside auto layout */
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      background: linear-gradient(321.23deg, rgba(191, 191, 191, 0.062) 5.98%, rgba(0, 0, 0, 0) 66.28%), rgba(0, 0, 0, 0.14);
+      box-shadow: -8px 4px 5px rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(26.5px);
+      color: white;
+
+      &:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+      }
+
+}
+
+button {
+      display: inline-block;
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      /* Login */
+
+      /* Auto layout */
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 14px 10px;
+      gap: 10px;
+
+      width: 100px;
+      height: 41px;
+
+      background: linear-gradient(90.57deg, #2E4CEE 9.91%, #2E4CEE 43.06%, #2E4CEE 91.56%);
+
+      border-radius: 12px;
+
+      /* Inside auto layout */
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
+
+}
+
+button:hover {
+      background: linear-gradient(90.57deg, #2E4CEE 9.91%, #221EBF 43.06%, #040F75 91.56%);
+}
+
+#submitBtn {
+      margin-top: 30px;
+      width: 100%;
+      font-size: 20px;
+      height: 50px;
+}
+
+/* Verification code container */
+#verificationCodeContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+      width: 100%;
+}
+
+/* Verification code input fields */
+.code-input {
+      width: 15%;
+      height: 65px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+
+      background-color: #fff;
+      color: #333;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+
+      /* Auto layout */
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+
+      border: 1px solid #FFFFFF;
+      border-radius: 12px;
+
+      /* Inside auto layout */
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      background: linear-gradient(321.23deg, rgba(191, 191, 191, 0.062) 5.98%, rgba(0, 0, 0, 0) 66.28%), rgba(0, 0, 0, 0.14);
+      backdrop-filter: blur(26.5px);
+      color: white;
+}
+
+.code-input:focus {
+      border-color: #007BFF;
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+}
+
+.error-input {
+      border: 2px solid red;
+      /* Red border for error state */
+      box-shadow: 0 0 5px red;
+      /* Optional: Add a glow effect */
+      border-color: red;
+}
+
+.error-input:focus {
+      border: 2px solid red;
+      border-color: red;
+      outline: none;
+      box-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+}
+
+.error-txt {
+      margin: 0;
+      padding: 0;
+      color: red;
+      font-size: 15px;
+      font-style: italic;
+      height: 15px;
+}
+
+.verifCode-container {
+      margin-top: 30px;
+}
+
+@media screen and (max-width: 1000px) {
+      .header {
+            display: flex;
+            flex-direction: column;
+      }
+
+      .header>div>h1 {
+            font-size: 1.5rem;
+      }
+
+      .body>h1 {
+            display: none;
+      }
+
+      .body>div {
+            max-width: 300px;
+      }
+}

@@ -8,69 +8,248 @@ const firestore = getFirestore(app);
 
 //---------------------------------------------------------------------------- some refs to collection
 const playersRef = collection(firestore, "players");
-const verificationCodesRef = collection(firestore, "verificationCodes");
-const testRef = collection(firestore, "test");
-
-
 
 //---------------------------------------------------------------------------- DOM elements
+const nameTxt = document.getElementById("nameTxt");
+const PNTxt = document.getElementById("PNTxt");
+const ageTxt = document.getElementById("ageTxt");
 const emailTxt = document.getElementById("emailTxt");
+
+const errorNameTxt = document.getElementById("errorNameTxt");
+const errorPNTxt = document.getElementById("errorPNTxt");
+const errorAgeTxt = document.getElementById("errorAgeTxt");
+const errorEmailTxt = document.getElementById("errorEmailTxt");
+const errorVerCodeTxt = document.getElementById("errorVerCodeTxt");
+
 const sendEmailBtn = document.getElementById("sendEmailBtn");
+const submitBtn = document.querySelector("#submitBtn");
+//---------------------------------------------------------------------------- js logic from firebase functions
 
-//---------------------------------------------------------------------------- js logic
+const emailUsed = httpsCallable(functions, "isEmailUsed");
 
-/**
- * Checks if the given email is already used by any other players.
- *
- * @async
- * @function isEmailUsed
- * @returns {Promise<boolean>} - Returns `true` if the email is found in the players collection, otherwise `false`.
- */
-async function isEmailUsed() {
-      const email = emailTxt.value;
-      const docRef = doc(playersRef, email);
-      const docSnap = await getDoc(docRef);
-      return docSnap.exists();
+const availSlot = httpsCallable(functions, "hasAvailSlot");
+
+
+
+//---------------------------------------------------------------------------- DOM EVENT VALIDATION
+function setError(errorTxt, str) {
+      if (errorTxt) {
+            errorTxt.innerHTML = str;
+      }
+}
+
+function unsetError(errorTxt) {
+      if (errorTxt) {
+            errorTxt.innerHTML = "";
+      }
+}
+
+
+// Check Name
+function isValidName() {
+      if (nameTxt.value == "") {
+            setError(errorNameTxt, "*Họ và tên không được để trống.")
+            nameTxt.classList.add("error-input");
+            return false;
+      }
+
+      unsetError(errorNameTxt);
+      nameTxt.classList.remove("error-input");
+      return true;
+}
+
+//check Phone number
+function isValidPN() {
+      if (PNTxt.value == "") {
+            setError(errorPNTxt, "*Số điện thoại không được để trống.");
+            PNTxt.classList.add("error-input");
+            return false;
+      }
+      const phonePattern = /^0\d{9}$/;
+      if (!phonePattern.test(PNTxt.value)) {
+            setError(errorPNTxt, "*Phải đủ 10 số và bắt đầu bằng 0.");
+            PNTxt.classList.add("error-input");
+            return false;
+      }
+
+      unsetError(errorPNTxt);
+      PNTxt.classList.remove("error-input");
+      return true;
+}
+
+// check age
+function isValidAge() {
+      if (ageTxt.value == "") {
+            setError(errorAgeTxt, "*Tuổi không được để trống.");
+            ageTxt.classList.add("error-input");
+            return false;
+      }
+
+      const age = Number(ageTxt.value);
+      if (age <= 0 || age >= 100) {
+            setError(errorAgeTxt, "*Vui lòng chọn độ tuổi hợp lý.");
+            ageTxt.classList.add("error-input");
+            return false;
+      }
+
+      unsetError(errorAgeTxt);
+      ageTxt.classList.remove("error-input");
+      return true;
+}
+
+//check email
+async function isValidEmail() {
+      if (emailTxt.value == "") {
+            setError(errorEmailTxt, "*Email không được để trống.");
+            emailTxt.classList.add("error-input");
+            return false;
+      }
+
+      const emailPattern = /^.+@.+$/;
+      if (!emailPattern.test(emailTxt.value)) {
+            setError(errorEmailTxt, "*Email không đúng định dạng.");
+            emailTxt.classList.add("error-input");
+            return false;
+      }
+
+      const response = await emailUsed({ email: emailTxt.value });
+      const usedEmail = response.data;
+      console.log(usedEmail);
+      if (usedEmail) {
+            setError(errorEmailTxt, "*Email đã được đăng ký.");
+            emailTxt.classList.add("error-input");
+            return false;
+      }
+
+      unsetError(errorEmailTxt);
+      emailTxt.classList.remove("error-input");
+      return true;
+}
+
+// Function to check if all verification code fields are filled
+function areFilledVerificationCode() {
+      const codeInputs = document.querySelectorAll("#verificationCodeContainer .code-input");
+      let areFilledAll = true;
+      for (const input of codeInputs) {
+            const validInput = isValidCodeInput(input);
+            areFilledAll = areFilledAll && validInput;
+      }
+
+      if (areFilledAll) {
+            unsetError(errorVerCodeTxt); // Clear error message
+      } else {
+            setError(errorVerCodeTxt, "*Mã xác minh không được để trống."); // Show error message
+      }
+
+      return areFilledAll;
+}
+
+function isValidCodeInput(input) {
+      if (input.value.trim() === "") {
+            input.classList.add("error-input");
+            return false;
+      } else {
+            input.classList.remove("error-input");
+            return true;
+      }
 }
 
 
 
-/**
- * 
- * Checks if there are any left slots
- * 
- * @returns {Promise<boolean>}
- * 
- */
-async function hasAvailSlot() {
-      const querySnapShot = await getDocs(playersRef);
-      const currentNumOfSlots = querySnapShot.size;
-      return 32 - currentNumOfSlots > 0;
+
+nameTxt.addEventListener("change", isValidName);
+PNTxt.addEventListener("change", isValidPN);
+ageTxt.addEventListener("change", isValidAge);
+emailTxt.addEventListener("change", isValidEmail);
+
+
+//---------------------------------------------------------------------------- Function get the code from 6-inputs
+function getVerificationCode() {
+      const codeInputs = document.querySelectorAll('#verificationCodeContainer .code-input');
+
+      let codeStr = '';
+      codeInputs.forEach(input => {
+            codeStr += input.value;
+      });
+
+      // Convert the string to a number base-10. 
+      const verificationCode = parseInt(codeStr, 10);
+
+      return verificationCode;
 }
 
 
+//---------------------------------------------------------------------------- DOM BUTTON EVENT TRIGGER
 
-//---------------------------------------------------------------------------- DOM EVENT TRIGGER
-emailTxt.addEventListener("change", async () => {
-      if (await isEmailUsed()) {
-            alert("Email đã được đăng ký. Vui lòng chọn email khác!");
+// Trigger the email sending when the button is clicked
+sendEmailBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const bool = await isValidEmail();
+      if (!bool) {
             return;
+      }
+      try {
+            // Call the Firebase Cloud Function to send an email
+            const sendEmailWithVerCode = httpsCallable(functions, 'sendEmailWithVerCode');
+
+            const response = await sendEmailWithVerCode({ email: emailTxt.value });
+            const codeStatus = response.data;
+            if (codeStatus && codeStatus.status === "ACTIVE") setError(errorVerCodeTxt, "*Gửi thành công. Mã sẽ hết hạn sau 2 phút.");
+            else setError(errorVerCodeTxt, "*Lỗi khi gửi email. Try again.");
+      } catch (error) {
+            console.error('Error calling sendEmail:', error);
+            setError(errorVerCodeTxt, "*Lỗi khi gửi email. Try again.");
       }
 });
 
-sendEmailBtn.addEventListener("click", async () => {
-      if (await isEmailUsed()) {
-            alert("Email đã được đăng ký. Vui lòng chọn email khác!");
+
+submitBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      // Validate all inputs
+      const isNameValid = isValidName();
+      const isPhoneValid = isValidPN();
+      const isAgeValid = isValidAge();
+      const isEmailValid = await isValidEmail();
+      const areVerificationCodeFilled = areFilledVerificationCode();
+
+      // Check if there are any empty slots
+      const response = await availSlot();
+      const anyLeftSlot = response.data;
+      if (!anyLeftSlot) {
+            alert("Giải đấu đã nhận đủ đơn đăng ký. Chúng tôi sẽ cập nhật khi còn slot trống.");
             return;
       }
-      if (await !hasAvailSlot()) {
-            alert("Giải đấu đã nhận đủ đơn đăng ký. Chúng tôi sẽ cập nhật khi còn slot trống");
+
+      // If any validation fails, stop the submission
+      if (!(isNameValid && isPhoneValid && isAgeValid && isEmailValid && areVerificationCodeFilled)) {
             return;
       }
 
+      try {
+            const sendRegisterForm = httpsCallable(functions, 'sendRegisterForm');
+            const playerInfo = {
+                  name: nameTxt.value,
+                  phoneNumber: PNTxt.value,
+                  age: Number(ageTxt.value.trim()),
+                  email: emailTxt.value,
+                  code: getVerificationCode(),
+            }
+
+            const registerStatus = await sendRegisterForm(playerInfo);
+
+            //TODO: real check 
+            console.log(registerStatus);
+
+      } catch (error) {
+            console.error('Error calling sendRegisterForm:', error);
+            setError(errorVerCodeTxt, "*Lỗi khi gửi đơn. Try again.");
+      }
+});
 
 
-})
+
+
 
 
 

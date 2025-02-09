@@ -22,14 +22,15 @@
       <meta name="msapplication-TileColor" content="#ffffff">
       <meta name="msapplication-TileImage" content="./assets/favicons/ms-icon-144x144.png">
       <meta name="theme-color" content="#ffffff">
-      <link rel="stylesheet" href="./assets/styles/register-style.css">
+      <link rel="stylesheet" href="./assets/styles/register.css">
+
 </head>
 
 <body>
       <div class="header">
             <div>
                   <img src="./assets/favicons/apple-icon-72x72.png" alt="Logo_CCC">
-                  <h1>Cóc Cầm Cơ - Trang đăng ký</h1>
+                  <h1 class="oswald-title">Cóc Cầm Cơ - Trang đăng ký</h1>
             </div>
             <a href="./index.html"><button><svg xmlns="http://www.w3.org/2000/svg" height="24px"
                               viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
@@ -39,27 +40,39 @@
       </div>
 
       <div class="body">
-            <h1>GIẢI ĐẤU BILLIARDS <br>CÓC CẦM CƠ LẦN II</h1>
+            <h1 class="oswald-title">GIẢI ĐẤU BILLIARDS <br>CÓC CẦM CƠ LẦN II</h1>
             <div>
-                  <form class="register-form">
+                  <form class="register-form" autocomplete="off">
                         <h1>Đăng ký</h1>
-                        <input type="text" placeholder="Họ và tên" id="nameTxt" required>
-                        <input type="tel" placeholder="Số điện thoại" inputmode="numeric" pattern="[0][0-9]\d+" id="PNTxt" required>
-                        <input type="number" placeholder="Tuổi" inputmode="numeric" id="ageTxt" required>
-                        <input type="email" placeholder="Địa chỉ email" id="emailTxt" class="error-input" required>
-                        <button id="sendEmailBtn">Gửi mã</button><br>
-                        <h3>Mã xác nhận</h3>
-                        <div id="verificationCodeContainer">
-                              <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
-                              <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
-                              <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
-                              <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
-                              <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
-                              <input type="number" class="code-input" pattern="[0-9]" inputmode="numeric" required>
-                        </div>
-                        <button class="submitBtn">Gửi đơn</button>
 
-                        <div class="contact-info"><a href="https://www.facebook.com/coccamco.fpthcm" target="_blank">Liên hệ với chúng tôi</a></div>
+                        <span id="errorNameTxt" class="error-txt"></span><br>
+                        <input type="text" placeholder="Họ và tên" id="nameTxt">
+
+                        <span id="errorPNTxt" class="error-txt"></span><br>
+                        <input type="number" placeholder="Số điện thoại" inputmode="numeric" id="PNTxt">
+
+                        <span id="errorAgeTxt" class="error-txt"></span><br>
+                        <input type="number" placeholder="Tuổi" inputmode="numeric" id="ageTxt">
+
+                        <span id="errorEmailTxt" class="error-txt"></span><br>
+                        <input type="text" placeholder="Địa chỉ email" id="emailTxt">
+
+                        <div class="verifCode-container">
+                              <button id="sendEmailBtn">Gửi mã</button><br>
+                              <span id="errorVerCodeTxt" class="error-txt"></span><br>
+                              <div id="verificationCodeContainer">
+                                    <input type="number" class="code-input" inputmode="numeric">
+                                    <input type="number" class="code-input" inputmode="numeric">
+                                    <input type="number" class="code-input" inputmode="numeric">
+                                    <input type="number" class="code-input" inputmode="numeric">
+                                    <input type="number" class="code-input" inputmode="numeric">
+                                    <input type="number" class="code-input" inputmode="numeric">
+                              </div>
+                        </div>
+                        <button id="submitBtn">Gửi đơn</button>
+
+                        <div class="contact-info"><a href="https://www.facebook.com/coccamco.fpthcm"
+                                    target="_blank">Liên hệ với chúng tôi</a></div>
                   </form>
             </div>
       </div>
