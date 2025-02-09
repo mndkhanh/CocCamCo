@@ -31,9 +31,6 @@ getDocs(colRef)
   .catch((err) => {
     console.error("Lỗi khi truy xuất dữ liệu:", err.message);
   });
-<<<<<<< HEAD
-=======
-
 
 const searchForm = document.querySelector(".search");
 const searchInput = searchForm.querySelector("input[name='email']");
@@ -76,7 +73,7 @@ function displayUserData(userData) {
   // Hàm để chuyển đổi trạng thái thành class tương ứng
   const getStatusClass = (status) => {
     if (!status) return '';
-    switch(status.toUpperCase()) {
+    switch (status.toUpperCase()) {
       case 'DONE':
         return 'success';
       case 'PENDING':
@@ -139,4 +136,3 @@ function formatTimestamp(timestamp) {
     second: '2-digit'
   });
 }
->>>>>>> main
