@@ -73,7 +73,7 @@ function displayUserData(userData) {
   // Hàm để chuyển đổi trạng thái thành class tương ứng
   const getStatusClass = (status) => {
     if (!status) return '';
-    switch(status.toUpperCase()) {
+    switch (status.toUpperCase()) {
       case 'DONE':
         return 'success';
       case 'PENDING':
@@ -95,25 +95,19 @@ function displayUserData(userData) {
   resultsContainer.innerHTML = `
     <div class="user-info">
       <h2>Thông tin thanh toán</h2>
-    
-      <div class="info-row">
-        <p class="field email"><strong>Email:</strong> ${userData.id}</p>
-        <p class="field paymentid"><strong>Mã thanh toán:</strong> 
+      <div class="info-grid">
+        <p class="email"><strong>Email:</strong> ${userData.id}</p>
+        <p class="fullname"><strong>Họ và tên:</strong> ${userData.fullname || 'Chưa có dữ liệu'}</p>
+        <p class="paymentid"><strong>Mã thanh toán:</strong> 
           <a href="${createPaymentUrl(userData.paymentID)}" 
              target="_blank" 
              class="payment-link">
              ${userData.paymentID || 'Nhấp để thanh toán'}
           </a>
         </p>
-      </div>
-      <div class="info-row">
-        <p  class="field fullname"><strong>Họ và tên:</strong> ${userData.fullname || 'Chưa có dữ liệu'}</p>
-        <p><strong>Thời gian tạo:</strong> ${formatTimestamp(userData.generateTime)}</p>
-      </div>
-      <div class="info-row">
-        <p class="field status"><strong>Trạng thái:</strong> <span class="status ${getStatusClass(userData.paymentStatus)}">${userData.paymentStatus || 'Chưa xác định'}</span></p>
-        <p><strong>Thời gian hết hạn:</strong> ${formatTimestamp(userData.expireTime)}</p>
-      </div>
+        <p class="status"><strong>Trạng thái:</strong> <span class="status-button ${getStatusClass(userData.paymentStatus)}">${userData.paymentStatus || 'Chưa xác định'}</span></p>
+        <p class="generate-time"><strong>Thời gian tạo:</strong> ${formatTimestamp(userData.generateTime)}</p>
+        <p class="expire-time"><strong>Thời gian hết hạn:</strong> ${formatTimestamp(userData.expireTime)}</p>
       ${userData.qrRanking ? `
         <div class="qr-code">
           <p><strong>Mã QR:</strong></p>
