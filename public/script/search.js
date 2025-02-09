@@ -16,21 +16,21 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-console.log("Firebase đã được khởi tạo:", app);
+// console.log("Firebase đã được khởi tạo:", app);
 const db = getFirestore();
-console.log("Firestore đã được khởi tạo");
+// console.log("Firestore đã được khởi tạo");
 const colRef = collection(db, "paymentInfo");
-getDocs(colRef)
-  .then((snapshot) => {
-    let books = [];
-    snapshot.docs.forEach((doc) => {
-      books.push({ ...doc.data(), id: doc.id });
-    });
-    console.log("Dữ liệu nhận được:", books);
-  })
-  .catch((err) => {
-    console.error("Lỗi khi truy xuất dữ liệu:", err.message);
-  });
+// getDocs(colRef)
+//   .then((snapshot) => {
+//     let books = [];
+//     snapshot.docs.forEach((doc) => {
+//       books.push({ ...doc.data(), id: doc.id });
+//     });
+//     console.log("Dữ liệu nhận được:", books);
+//   })
+//   .catch((err) => {
+//     console.error("Lỗi khi truy xuất dữ liệu:", err.message);
+//   });
 
 const searchForm = document.querySelector(".search");
 const searchInput = searchForm.querySelector("input[name='email']");
@@ -51,8 +51,8 @@ searchForm.addEventListener("submit", (event) => {
     .then((snapshot) => {
       let userData = null;
       snapshot.docs.forEach((doc) => {
-        console.log("Checking document ID:", doc.id);
-        console.log("Comparing with:", searchEmail);
+        // console.log("Checking document ID:", doc.id);
+        // console.log("Comparing with:", searchEmail);
         if (doc.id === searchEmail) {
           userData = { ...doc.data(), id: doc.id };
         }
@@ -73,7 +73,7 @@ function displayUserData(userData) {
   // Hàm để chuyển đổi trạng thái thành class tương ứng
   const getStatusClass = (status) => {
     if (!status) return '';
-    switch (status.toUpperCase()) {
+    switch(status.toUpperCase()) {
       case 'DONE':
         return 'success';
       case 'PENDING':
