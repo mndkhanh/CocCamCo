@@ -14,6 +14,9 @@ body {
 
 .container {
     margin-top: 130px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
 }
 
 .navbar {
@@ -63,6 +66,7 @@ form>button {
     width: 600px;
     height: 40px;
     border-radius: 10px;
+    color: black;
 }
 
 .form-input div {
@@ -76,6 +80,116 @@ form>button {
 form>input, form>button {
     background: linear-gradient(to right, #FFA500, #FF0000);
     border: 1px solid black;
+}
+
+.user-info {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  border-radius: 15px;
+  margin: 30px auto;
+  max-width: 800px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 15px 0;
+  align-items: center;
+}
+
+.info-row p {
+  flex: 1;
+  min-width: 250px;
+  margin: 5px 0;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.payment-link {
+  color: #FFA500;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: rgba(255, 165, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.payment-link:hover {
+  background: rgba(255, 165, 0, 0.2);
+  color: #FFD700;
+}
+
+.status {
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-align: center;
+  min-width: 100px;
+}
+
+.status.pending {
+  background-color: #ffd700;  /* Màu vàng cho trạng thái PENDING */
+  color: black;
+}
+
+.status.success {
+  background-color: #4CAF50;  /* Màu xanh lá cho trạng thái DONE/SUCCESS */
+  color: white;
+}
+
+.qr-code {
+  text-align: center;
+  margin: 30px auto;
+  max-width: 300px;
+}
+
+.qr-code img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Queries cho Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .user-info {
+    padding: 20px;
+  }
+
+  .info-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .info-row p {
+    min-width: 100%;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  .form-input > input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  .navbar div {
+    font-size: 30px;
+  }
 }
 
 
