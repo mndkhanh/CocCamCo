@@ -26,3 +26,7 @@ coverage/
 
 # Hide google firebase Config here
 public/script/firebase-config.js
+
+firebase-config.js
+firebase-admin.js
+email-config.js

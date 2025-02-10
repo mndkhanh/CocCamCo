@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+</head>
+
+<body>
+      <p>Xin chào ${name},</p>
+      <p>Bạn đã gửi đơn đăng ký thành công. Sau đây là thông tin đăng ký:</p>
+      <p><strong>Player Info:</strong></p>
+      <ul>
+            <li><strong>Họ và tên:</strong> ${name}</li>
+            <li><strong>Email:</strong> ${email}</li>
+            <li><strong>Số điện thoại:</strong> ${phoneNumber}</li>
+            <li><strong>Tuổi:</strong> ${age}</li>
+            <li><strong>Đăng ký vào lúc:</strong> ${getVNDate(registerTime)}</li>
+      </ul>
+      <p><strong>Vui lòng thanh toán trong vòng 48 giờ để trở thành thí sinh chính thức. Tra cứu thông tin thanh toán ở
+                  đường link sau:</strong></p><br>
+      <a href="https://coccamco.web.app/search">https://coccamco.web.app/search</a>
+
+      <p>Vui lòng đợi các thông tin mới nhất từ chúng tôi.</p>
+      <p>Best regards,<br>Cóc Cầm Cơ</p>
+      <script src="./script/test.js"></script>
+</body>
+
+</html>
