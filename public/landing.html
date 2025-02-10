@@ -7,6 +7,7 @@
         <link rel = "stylesheet" href = "../public/assets/styles/landingstyle.css">
     </head>
     <body>
+        <!--START LANDING PAGE-->
         <div class = "landing-page">
             <div class = "landing-header">
                 <div class = "landing-left-logo">
@@ -15,35 +16,112 @@
                 <h1>Cóc Cầm Cơ</h1>
                 <div class = "landing-right-navigation">
                     <ul>
-                        <li><a href = "">About</a></li>
-                        <li><a href = "">Tournament</a></li>
-                        <li><a href = "">Timeline</a></li>
-                        <li><a href = "">Contact</a></li>
+                        <li><a href = "">Thông tin</a></li>
+                        <li><a href = "">Giải đấu</a></li>
+                        <li><a href = "">Thời gian</a></li>
+                        <li><a href = "">Liên lạc</a></li>
                     </ul>
                 </div>
             </div>
             <div class = "landing-banner">
+                <div class = "landing-smol-link">
+                    <a href = "https://www.facebook.com/coccamco.fpthcm">Follow us</a>
+                    <img src="../public/assets/image/facebook.png">
+                </div>
                 <h1>GIẢI ĐẤU BILLIARD CÓC CẦM CƠ - II</h1>
             </div>
             <div class = "landing-body">
                 <div class = "landing-b-left">
-                    <h2>Cóc Cầm Cơ</h2>
+                    <h2>CÓC CẦM CƠ</h2>
                     <p>Từ việc tổ chức giải Billiard chuyên nghiệp đến các hoạt động nhân văn, chúng tôi cam kết mang đến nhứng hoạt động ý nghĩa và giá trị tốt đẹp cho cộng đồng</p>
                 </div>
                 <div class = "landing-b-right">
-                    <h2>Deadline</h2>
+                    <h2>DEADLINE</h2>
                     <!-- TO DO-->
-                    <div class = "landing-b-right-timer"><p>unavailable now</p></div>
+                     
+                    <div class = "landing-b-right-timer"></p>
+                        <p id="timer"></p>
+
+                        <script>
+                        // Set the date we're counting down to
+                        var countDownDate = new Date("Feb 25, 2025 15:37:25").getTime();
+                        
+                        // Update the count down every 1 second
+                        var x = setInterval(function() {
+                        
+                          // Get today's date and time
+                          var now = new Date().getTime();
+                        
+                          // Find the distance between now and the count down date
+                          var distance = countDownDate - now;
+                        
+                          // Time calculations for days, hours, minutes and seconds
+                          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                        
+                          // Display the result in the element with id="demo"
+                          document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+                          + minutes + "m " + seconds + "s ";
+                        
+                          // If the count down is finished, write some text
+                          if (distance < 0) {
+                            clearInterval(x);
+                            document.getElementById("timer").innerHTML = "EXPIRED";
+                          }
+                        }, 1000);
+                        </script></div>
                     <div class = "landing-b-right-btn">
-                        <button id = "landing-regi-btn">Register now</button>
+                        <button id = "landing-regi-btn">Tham gia ngay</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class = "about">
+        <!--END LANDING PAGE-->
 
+        <!--START ABOUT PAGE-->
+        <div class = "about-page">
+
+            <p>about</p>
         </div>
+        <!--END ABOUT PAGE-->
 
+        <!--START TOURNAMENT PAGE-->
+        <div class = "tournament-page">
+            <p>tournament</p>
+        </div>
+        <!--END TOURNAMENT PAGE-->
+
+        <!--START TIMELINE PAGE-->
+        <div class = "timeline-page">
+            <p>timeline</p>
+        </div>
+        <!--END TIMELINE PAGE-->
+
+        <!--START CONTACT PAGE-->
+        <div class = "contact-page">
+            <div class ="contact-left">
+                <p id = "contact-left-tittle">Liên hệ với chúng tôi tại:</p>
+                <p>Email: ...</p>
+                <p>Fanpage: ...</p>
+                <p>Hotline 1: ...</p>
+                <p>Hotline 2: ...</p>
+            </div>  
+            <div class = "contact-middle">
+                <div class = contact-mid-logo>
+                    <img src=".\assets\favicons\apple-icon-144x144.png" alt="Logo_CCC">
+                </div>
+                 <h1>CÓC CẦM CƠ</h1>
+            </div>
+            <div class = "contact-right">
+                <p>Fonts provided by Google Fonts</p>
+                <p>&copy; GDGoC FPTU HCM 2024 - All Right Reserved</p>
+                <p>Icons provided by ...</p>
+                <p>Địa chỉ: Lô E2A-7, Đường D1, P.Long Thạnh Mỹ, TP.Hồ Chí Minh, Ho Chi Minh 700000</p>
+            </div>
+        </div>
+        <!--END CONTACT PAGE -->
 
 
     </body>
