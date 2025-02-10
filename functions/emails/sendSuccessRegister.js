@@ -1,14 +1,17 @@
 import { transporter } from "./email-config.js";
 
-function getVNDate(timestamp) { //Format: 16:52:01 25/01/2025
-      return new Date(timestamp).toLocaleString('vi-VN', {
-            day: '2-digit',    // Day (e.g., 25)
-            month: '2-digit',  // Month (e.g., 01)
-            year: 'numeric',   // Year (e.g., 2025)
-            hour: '2-digit',   // Hour in 24-hour format (e.g., 14)
-            minute: '2-digit', // Minute (e.g., 30)
-            second: '2-digit', // Second (e.g., 45)
-            hour12: false,     // 24-hour clock
+function getVNDate(timestamp) {
+      const date = new Date(timestamp);
+      date.setHours(date.getHours() + 7); // ✅ Cộng trực tiếp 7 giờ
+
+      return date.toLocaleString('vi-VN', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
       });
 }
 

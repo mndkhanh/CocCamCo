@@ -3,8 +3,6 @@ import { firestore } from "../firebase-admin.js";
 import { PAYMENT_STATIC_INFO } from "./payment-static-info.js";
 import { sendFailedPaymentEmail, sendSuccessPaymentEmail } from "../emails/sendPaymentInform.js"
 import cors from "cors";
-import { QuerySnapshot } from "firebase-admin/firestore";
-import { object } from "firebase-functions/v1/storage";
 const corsHandler = cors({ origin: true }); // Allow all origins
 
 
@@ -122,14 +120,24 @@ const checkPlayerPayment = functions.https.onRequest((request, response) => {
                   // then check the amount
                   // if success, set playerPayment to PAID, otherwise: FAILED
                   for (const transaction of transactions) {
+
+                        // manipulate string content transaction
                         const description = transaction.description;
-                        if (!description.includes("COCCAMCO")) continue; // if not having the "COCCAMCO" string in the content transaction, continue operacting the next transaction
+                        if (!description.includes("COCCAMCO")) continue; // if not having the "COCCAMCO" string in the content transaction, continue operating the next transaction
+                        const match = description.match(/COCCAMCO\s([A-Za-z0-9]{10})/);
+
+                        if (!match) continue; // if not qualify the regex, pass this transaction
+                        const paymentID = match[1]; // get the paymentID
 
                         // extract the paymentInfo in firestore
-                        const paymentID = description.trim().split(" ")[1];
                         const paymentInfo = retrievePaymentInfoByPaymentID(playerPayments, paymentID);
                         if (!paymentInfo) {
                               continue;
+                        }
+
+                        const paymentStatus = paymentInfo.paymentStatus;
+                        if (paymentStatus !== "PENDING") {
+                              continue; // if paymentStatus is FAILED or PAID, continue to the next transaction
                         }
 
                         //get the email
