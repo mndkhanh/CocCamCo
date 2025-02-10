@@ -159,7 +159,7 @@ const sendRegisterForm = functions.https.onCall(async (request) => {
             registerStatus.comment = "Player registered successfully.";
 
             // Generate payment info for the player
-            const successGeneratePayment = await generatePaymentInfo(email);
+            const successGeneratePayment = await generatePaymentInfo(email, name);
             if (!successGeneratePayment) {
                   console.log("Generate payment info for", email, "went to error. Check again.");
             }

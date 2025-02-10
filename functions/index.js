@@ -3,8 +3,10 @@ import { sendRegisterForm } from "./register/register.js";
 
 import { isEmailUsed, hasAvailSlot } from "./player-check/index.js";
 
+import { checkPlayerPayment } from "./player-payment/checkPayment.js";
 
 
 
-export { sendEmailWithVerCode, sendRegisterForm, isEmailUsed, hasAvailSlot };
+
+export { sendEmailWithVerCode, sendRegisterForm, isEmailUsed, hasAvailSlot, checkPlayerPayment };
 

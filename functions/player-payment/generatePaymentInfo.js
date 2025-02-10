@@ -96,7 +96,7 @@ async function isPaymentInfoActive(email) {
 
 
 
-async function generatePaymentInfo(email) {
+async function generatePaymentInfo(email, name) {
       if (!email) return false;
 
       const isRegistered = await isPlayerRegistered(email);
@@ -112,11 +112,13 @@ async function generatePaymentInfo(email) {
 
       const personalPaymentInfo = {
             qrBanking: getQRBankingURL(paymentID),
-            paymentStatus: "PENDING", // ERROR & SUCCESS
+            paymentStatus: "PENDING", // FAILED & PAID
             generateTime: new Date().getTime(),
             paymentTime: 0,
             expireTime: new Date().getTime() + PAYMENT_EXPIRATION_TIME_AMOUNT, // in 48h,
-            paymentID: paymentID
+            paymentID: paymentID,
+            email: email,
+            name: name
 
       }
       try {
