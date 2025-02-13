@@ -81,10 +81,49 @@ form>button {
   padding-right: 25px;
 }
 
-form>input,
-form>button {
+.search-btn::before,
+.guide-btn::before {
+content: "";
+position: absolute;
+top: 0;
+left: -75%;
+width: 50%;
+height: 100%;
+background: rgba(255, 255, 255, 0.4);
+transform: skewX(-30deg);
+transition: all 0.5s ease;
+}
+
+/* Khi hover, dải sáng sẽ quét ngang sang phải nút */
+.search-btn:hover::before,
+.guide-btn:hover::before {
+left: 120%;
+}
+
+/* Thêm hiệu ứng phóng to nhẹ, thay đổi màu... tùy thích */
+.search-btn:hover,
+.guide-btn:hover {
+transform: scale(1.05);
+box-shadow: 0 0 8px rgba(250, 130, 49, 0.6);
+background: linear-gradient(to left, #09122C, #BE3144);
+}
+
+.search-btn,
+.guide-btn {
   background: linear-gradient(to right, #FFA500, #FF0000);
   border: 1px solid black;
+  box-shadow: 0 0 5px linear-gradient(to right, #FFA500, #FF0000),
+              0 0 25px linear-gradient(to right, #FFA500, #FF0000);
+  position: relative;
+  cursor: pointer;
+  overflow: hidden; 
+  transition: all 0.3s ease;
+}
+
+.no-info {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 30px;
 }
 
 .user-info {
@@ -104,10 +143,10 @@ form>button {
     "fullname paymentid"
     "email generate-time"
     "status expire-time";
-    align-items: center;
+  align-items: center;
 }
 
-.info-grid p{
+.info-grid p {
   margin: 5px 0;
   padding: 10px;
   background: rgba(255, 255, 255, 0.1);
@@ -115,12 +154,29 @@ form>button {
 }
 
 
-.email { grid-area: email; }
-.paymentid { grid-area: paymentid; }
-.fullname { grid-area: fullname; }
-.generate-time { grid-area: generate-time; }
-.status { grid-area: status; }
-.expire-time { grid-area: expire-time; }
+.email {
+  grid-area: email;
+}
+
+.paymentid {
+  grid-area: paymentid;
+}
+
+.fullname {
+  grid-area: fullname;
+}
+
+.generate-time {
+  grid-area: generate-time;
+}
+
+.status {
+  grid-area: status;
+}
+
+.expire-time {
+  grid-area: expire-time;
+}
 
 .payment-link {
   color: #FFA500;
@@ -191,13 +247,13 @@ form>button {
   .info-grid {
     grid-template-columns: 1fr;
     grid-template-areas:
-    "fullname"
-    "email"
-    "status" 
-    "paymentid"
-    "generate-time"
-    "expire-time";
-    }
+      "fullname"
+      "email"
+      "status"
+      "paymentid"
+      "generate-time"
+      "expire-time";
+  }
 }
 
 @media (max-width: 480px) {

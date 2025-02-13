@@ -3,6 +3,8 @@ import {
   getFirestore,
   collection,
   getDocs,
+  onSnapshot,
+  doc
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 const firebaseConfig = {
   apiKey: "AIzaSyD61Kw0yPaojDqln9WIeaQ-wO6zqLoyVGU",
@@ -46,35 +48,28 @@ searchForm.addEventListener("submit", (event) => {
     alert("Vui lòng nhập email để tìm kiếm.");
     return;
   }
-
-  getDocs(colRef)
-    .then((snapshot) => {
-      let userData = null;
-      snapshot.docs.forEach((doc) => {
-        console.log("Checking document ID:", doc.id);
-        console.log("Comparing with:", searchEmail);
-        if (doc.id === searchEmail) {
-          userData = { ...doc.data(), id: doc.id };
-        }
-      });
-
-      if (userData) {
-        displayUserData(userData);
-      } else {
-        resultsContainer.innerHTML = "<p>Không tìm thấy dữ liệu cho email này.</p>";
-      }
-    })
-    .catch((err) => {
-      console.error("Lỗi khi truy xuất dữ liệu:", err.message);
-    });
+  
+  //Truy xuất dữ liệu từ Firestore theo thời gian thực
+  const docRef = doc(db, "paymentInfo", searchEmail);
+  onSnapshot(docRef, (doc) => {
+    let userData = null;
+    if (doc.exists()) {
+      userData = { ...doc.data(), id: doc.id };
+      displayUserData(userData);
+    } else {
+      resultsContainer.innerHTML = `<p class="no-info">Không tìm thấy dữ liệu cho email này.</p>`;
+    }
+  });
 });
+
+
 
 function displayUserData(userData) {
   // Hàm để chuyển đổi trạng thái thành class tương ứng
   const getStatusClass = (status) => {
     if (!status) return '';
     switch (status.toUpperCase()) {
-      case 'DONE':
+      case 'PAID':
         return 'success';
       case 'PENDING':
         return 'pending';
@@ -97,7 +92,7 @@ function displayUserData(userData) {
       <h2>Thông tin thanh toán</h2>
       <div class="info-grid">
         <p class="email"><strong>Email:</strong> ${userData.id}</p>
-        <p class="fullname"><strong>Họ và tên:</strong> ${userData.fullname || 'Chưa có dữ liệu'}</p>
+        <p class="fullname"><strong>Họ và tên:</strong> ${userData.name || 'Chưa có dữ liệu'}</p>
         <p class="paymentid"><strong>Mã thanh toán:</strong> 
           <a href="${createPaymentUrl(userData.paymentID)}" 
              target="_blank" 
