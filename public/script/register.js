@@ -44,6 +44,13 @@ function unsetError(errorTxt) {
       }
 }
 
+function unsetErrorAll() {
+      errorPNTxt.innerHTML = "";
+      errorNameTxt.innerHTML = "";
+      errorAgeTxt.innerHTML = "";
+      errorEmailTxt.innerHTML = "";
+      errorVerCodeTxt.innerHTML = "";
+}
 
 // Check Name
 function isValidName() {
@@ -203,6 +210,7 @@ sendEmailBtn.addEventListener("click", async (e) => {
 });
 
 
+// --------------------------------- submit form 
 submitBtn.addEventListener("click", async (e) => {
       e.preventDefault();
 
@@ -213,20 +221,26 @@ submitBtn.addEventListener("click", async (e) => {
       const isEmailValid = await isValidEmail();
       const areVerificationCodeFilled = areFilledVerificationCode();
 
-      // Check if there are any empty slots
       const response = await availSlot();
       const anyLeftSlot = response.data;
-      if (!anyLeftSlot) {
-            alert("Giải đấu đã nhận đủ đơn đăng ký. Chúng tôi sẽ cập nhật khi còn slot trống.");
-            return;
-      }
 
       // If any validation fails, stop the submission
       if (!(isNameValid && isPhoneValid && isAgeValid && isEmailValid && areVerificationCodeFilled)) {
             return;
       }
 
+      // Check if there are any empty slots
+      if (!anyLeftSlot) {
+            //set the failure window to have below failed detail
+            setFailureWindow("Giải đấu đã nhận đủ đơn đăng ký. Chúng tôi sẽ cập nhật khi có các thông tin mới nhất.");
+            return;
+      }
+
       try {
+            // set loading effect to be active
+            setLoadingEffect();
+
+            //send registration form
             const sendRegisterForm = httpsCallable(functions, 'sendRegisterForm');
             const playerInfo = {
                   name: nameTxt.value,
@@ -236,18 +250,52 @@ submitBtn.addEventListener("click", async (e) => {
                   code: getVerificationCode(),
             }
 
-            const registerStatus = await sendRegisterForm(playerInfo);
+            const response = await sendRegisterForm(playerInfo);
+            const registerStatus = await response.data;
+            const status = registerStatus.status;
+            const comment = registerStatus.comment;
+            // check the register status
+            if (status === "SUCCESS") { // successfully submitted
+                  // unset loading effect
+                  unsetLoadingEffect();
+                  //show success registration window
+                  setSuccessWindow();
+                  //set the form empty
+                  unsetErrorAll();
+            } else { // failure
+                  // unset loading effect
+                  unsetLoadingEffect();
+                  // show failure window 
+                  setFailureWindow(comment);
+            }
 
-            //TODO: real check 
-            console.log(registerStatus);
 
       } catch (error) {
+            // unset loading effect and show failure window
+            unsetLoadingEffect();
+            setFailureWindow("Lỗi hệ thống, chụp lại màn hình lỗi để được hỗ trợ: " + error);
             console.error('Error calling sendRegisterForm:', error);
-            setError(errorVerCodeTxt, "*Lỗi khi gửi đơn. Try again.");
       }
 });
 
+function setFailureWindow(comment) {
+      document.querySelector(".message-box-wrapper-failure").classList.add("active");
+      document.querySelector("#error-message-text").innerHTML = comment;
+}
 
+function setSuccessWindow() {
+      document.querySelector(".message-box-wrapper-success").classList.add("active");
+}
+
+function unsetLoadingEffect() {
+      document.querySelector(".loading-effect").classList.remove("active");
+}
+
+function setLoadingEffect() {
+      document.querySelector(".loading-effect").classList.add("active");
+}
+
+// --------------------------------- ending submit form 
 
 
 
