@@ -48,3 +48,10 @@ codeInputs[0].addEventListener("paste", (e) => {
       });
       codeInputs[pasteData.length - 1]?.focus();
 });
+
+document.querySelector("#btnCloseSuccessMessageBox").addEventListener("click", () => {
+      document.querySelector(".message-box-wrapper-success").classList.remove("active");
+})
+document.querySelector("#btnCloseFailureMessageBox").addEventListener("click", () => {
+      document.querySelector(".message-box-wrapper-failure").classList.remove("active");
+})

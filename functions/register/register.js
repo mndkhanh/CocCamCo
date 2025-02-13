@@ -82,7 +82,7 @@ async function isValidCode(email, code) {
       return okCode;
 }
 
-async function validateAllFields(name, phoneNumber, age, email, code) {
+async function validateAllFields(name, phoneNumber, age, email) {
       if (!isValidName(name)) {
             return false;
       }
@@ -99,11 +99,6 @@ async function validateAllFields(name, phoneNumber, age, email, code) {
       if (!validEmail) {
             return false;
       }
-
-      const validCode = await isValidCode(email, code)
-      if (!validCode) {
-            return false;
-      }
       return true;
 }
 
@@ -114,7 +109,7 @@ async function validateAllFields(name, phoneNumber, age, email, code) {
 const sendRegisterForm = functions.https.onCall(async (request) => {
       let registerStatus = {
             status: "",
-            comment: "",
+            comment: ""
       };
 
       try {
@@ -133,17 +128,26 @@ const sendRegisterForm = functions.https.onCall(async (request) => {
             const leftSlot = await hasAvailSlot();
             if (!leftSlot) {
                   registerStatus.status = "FAILED";
-                  registerStatus.comment = "All slots are full.";
+                  registerStatus.comment = "Giải đã nhận đủ số lượng người. Chúng tôi sẽ cập nhật khi có thông tin mới nhất.";
                   return registerStatus;
             }
 
             // Validate all fields
-            const isValidAll = await validateAllFields(name, phoneNumber, age, email, code);
+            const isValidAll = await validateAllFields(name, phoneNumber, age, email);
             if (!isValidAll) {
                   registerStatus.status = "FAILED";
-                  registerStatus.comment = "Thông tin lỗi. Try again.";
+                  registerStatus.comment = "Thông tin không đúng định dạng hoặc gặp lỗi. Hãy thử lại!";
                   return registerStatus;
             }
+
+            // Validate code
+            const validCode = await isValidCode(email, code)
+            if (!validCode) {
+                  registerStatus.status = "FAILED";
+                  registerStatus.comment = "Mã đã hết hạn hoặc không đúng. Hãy thử lại.";
+                  return registerStatus;
+            }
+
 
             // Save the player to the database
             const actualStorePlayerData = {
@@ -155,8 +159,7 @@ const sendRegisterForm = functions.https.onCall(async (request) => {
             }
             await playersRef.doc(email).set(actualStorePlayerData);
 
-            registerStatus.status = "SUCCESS";
-            registerStatus.comment = "Player registered successfully.";
+
 
             // Generate payment info for the player
             const successGeneratePayment = await generatePaymentInfo(email, name);
@@ -171,11 +174,14 @@ const sendRegisterForm = functions.https.onCall(async (request) => {
                   console.log("Send success registration failed to the email: ", email);
             }
 
+
+            registerStatus.status = "SUCCESS";
+            registerStatus.comment = "Đăng ký thành công. Vui lòng chờ các thông báo tiếp theo.";
             return registerStatus;
       } catch (error) {
             console.error("Error registering player:", error);
             registerStatus.status = "FAILED";
-            registerStatus.comment = "Internal server error.";
+            registerStatus.comment = "Lỗi server. Vui lòng liên hệ để được hỗ trợ";
             return registerStatus;
       }
 });

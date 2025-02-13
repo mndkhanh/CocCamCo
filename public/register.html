@@ -27,6 +27,70 @@
 </head>
 
 <body>
+      <!-- loading effect -->
+      <div class="loading-effect">
+            <img width="50px" src="./assets/image/loading-icon.gif" alt="">
+      </div>
+
+      <div class="message-box-wrapper-success">
+            <div class="message-box">
+                  <div class="message-box-header">
+                        <div class="btn-close-wrapper">
+                              <div class="registerStatus">✅ Đăng ký thành công!</div>
+                              <div id="btnCloseSuccessMessageBox">
+                                    <img width="30px" height="30px" src="./assets/image/close.png" alt="">
+                              </div>
+                        </div>
+                  </div>
+                  <div class="message-box-body">
+                        <div class="message-text">
+                              <strong>Bạn đã gửi đơn đăng ký tham gia giải đấu thành công!</strong> <br><br>
+                              Vui lòng thanh toán lệ phí tham gia thi đấu <strong>trong vòng 48h</strong>. <br><br>
+                              Sau khi thanh toán thành công,
+                              bạn sẽ trở thành thí sinh chính thức của giải đấu.
+                        </div>
+                        <div class="btnGoToSearch">
+                              <a href="./search.html">
+                                    <img width="30px" src="./assets/image/payment.png" alt="">
+                                    Trang Thanh toán
+                                    <img width="30px" src="./assets/image/arrow-right.png" alt="">
+                              </a>
+                        </div>
+                  </div>
+            </div>
+      </div>
+
+      <div class="message-box-wrapper-failure">
+            <div class="message-box">
+                  <div class="message-box-header">
+                        <div class="btn-close-wrapper">
+                              <div class="registerStatus">❌ Đăng ký không thành công!</div>
+                              <div id="btnCloseFailureMessageBox">
+                                    <img width="30px" height="30px" src="./assets/image/close.png" alt="">
+                              </div>
+                        </div>
+                  </div>
+                  <div class="message-box-body failure">
+                        <div class="message-text">
+                              <div style="color: red; padding: 0; margin: 0;"><strong>Xảy ra lỗi khi gửi đơn!</strong>
+                              </div><br>
+                              <strong>Chi tiết: </strong>
+                              <p id="error-message-text" style="color: red; font-weight: 600; font-size: 17px;">
+                              </p>
+                        </div>
+                        <div class="btnGoToSearch">
+                              <a href="https://www.facebook.com/coccamco.fpthcm" target="_blank">
+                                    Liên hệ để được hỗ trợ
+                                    <img width="30px" src="./assets/image/arrow-right.png" alt="">
+                              </a>
+                        </div>
+                  </div>
+            </div>
+      </div>
+
+
+
+
       <div class="header">
             <div>
                   <img src="./assets/favicons/apple-icon-72x72.png" alt="Logo_CCC">
@@ -74,6 +138,7 @@
                         <div class="contact-info"><a href="https://www.facebook.com/coccamco.fpthcm"
                                     target="_blank">Liên hệ với chúng tôi</a></div>
                   </form>
+
             </div>
       </div>
       <script src="./assets/js/register-page.js"></script>
