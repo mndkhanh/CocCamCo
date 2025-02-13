@@ -1,0 +1,17 @@
+{
+  "name": "coccamco",
+  "version": "1.0.0",
+  "description": "WELCOME TO AN INTRODUCTION LANDING PAGE ABOUT OUR BILLIARDS TOURNAMENT PROJECT",
+  "main": "service-account-key.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.10.0",
+    "phin": "^3.7.1"
+  }
+}

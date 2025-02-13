@@ -1,7 +1,12 @@
-const functions = require("firebase-functions/v2");
-const admin = require("firebase-admin");
-admin.initializeApp();
+import { sendEmailWithVerCode } from "./emails/sendEmailWithVerCode.js";
+import { sendRegisterForm } from "./register/register.js";
 
-exports.randomNumber = functions.https.onCall((data, context) => {
-      return `hello you there`;
-}) 
+import { isEmailUsed, hasAvailSlot } from "./player-check/index.js";
+
+import { checkPlayerPayment } from "./player-payment/checkPayment.js";
+
+
+
+
+export { sendEmailWithVerCode, sendRegisterForm, isEmailUsed, hasAvailSlot, checkPlayerPayment };
+

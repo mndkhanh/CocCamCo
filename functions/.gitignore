@@ -1,2 +1,35 @@
 node_modules/
 *.local
+
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log
+yarn-error.log
+
+# Environment Variables
+.env
+
+# Build directories
+dist/
+build/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# IDE configurations
+.vscode/
+.idea/
+
+# Testing
+coverage/
+*.log
+
+# Hide google firebase Config here
+public/script/firebase-config.js
+
+firebase-config.js
+firebase-admin.js
+email-config.js

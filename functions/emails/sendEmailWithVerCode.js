@@ -32,7 +32,7 @@ const sendEmailWithVerCode = functions.https.onCall(async (request) => {
             const mailOptions = {
                   from: 'coccamco.fpthcm@gmail.com',
                   to: email,
-                  subject: `[Cóc Cầm Cơ] - Mã xác minh email ${email}`,
+                  subject: `[CÓC CẦM CƠ] - MÃ XÁC MINH ĐĂNG KÝ THAM GIA`,
                   text: `Mã xác minh: ${code}`,
             };
 
