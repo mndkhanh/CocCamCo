@@ -79,14 +79,14 @@ async function isPaymentInfoActive(email) {
             return false;
       }
 
-      //THERE ARE: ERROR, SUCCESS, PENDING
+      //THERE ARE: FAILED, PAID, PENDING
       const paymentStatus = personalPaymentInfo.data().paymentStatus;
       console.log(paymentStatus);
-      if (paymentStatus == "ERROR") {
+      if (paymentStatus == "FAILED") {
             console.log("The player payment status went to error");
             return false;
       }
-      if (paymentStatus == "SUCCESS") {
+      if (paymentStatus == "PAID") {
             console.log("The player is already paid for the fee");
             return true;
       }

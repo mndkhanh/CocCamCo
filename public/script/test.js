@@ -1,6 +1,18 @@
-import { getApp } from "firebase/app";
-import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
+document.querySelector("#btnShowDialog").addEventListener("click", () => {
+      document.querySelector("#dialog").showModal();
+})
 
-const functions = getFunctions(getApp());
-connectFunctionsEmulator(functions, "127.0.0.1", 5001);
-console.log()
+document.getElementById("btnSave").addEventListener("click", (e) => {
+      e.preventDefault();
+      const name = document.querySelector("#txtName").value;
+      const password = document.querySelector("#txtPassword").value;
+      document.querySelector("output").innerHTML = String(name) + password;
+
+      document.getElementById("dialog").close();
+
+})
+
+document.getElementById("btnCancel").addEventListener("click", (e) => {
+      e.preventDefault();
+      document.getElementById("dialog").close();
+});
