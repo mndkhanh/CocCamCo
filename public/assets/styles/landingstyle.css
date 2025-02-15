@@ -1,142 +1,515 @@
+:root {
+    --primary-color: #AF42A6;
+    --secondary-color: white;
+    --text-color: #ffffff;
+    --background-color: #090d13;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-position: center;
-    background-attachment: fixed;
-    background-image: url("../background/bgr-register-page.png");
-    color: white;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    padding-left: 40px;
-    padding-right: 50px;
-    font-size: 150%;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
 }
-/*start of main page*/
-.landing-header{
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 120px;
+
+/* Header & Navigation */
+header {
+    background-color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
-.landing-header h1{
-    align-content: center;
-    padding-left: 20px;
+
+.logo img{
+    border-radius: 50px;
 }
-.landing-left-logo{
-    display: flex;
-    align-items: center;
-}
-.landing-left-logo img{
-    border-radius:50% ;
-}
-.landing-right-navigation{
-    padding-left: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 120%;
-    flex: 1;
-}
-.landing-right-navigation ul{
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
-    list-style: none;
-    width: 100%;
-}
-.landing-right-navigation li{ 
-    display: flex;
-    flex: 1;
-    border-radius: 15px;
-    justify-content: center;
-    align-content: center;
-    padding: 20px 0 20px;
-}
-.landing-right-navigation li:hover{
-    box-shadow: 0 6px 8px rgba(40,40,40,10);
-}
-.landing-right-navigation a{
-    display: block;
-    text-decoration: none;
-    color: white;
+    align-items: center;
 }
 
-
-.landing-banner{
-    font-size: 180%;
-    color: rgb(255,255,255);
-    text-align: justify;
-    justify-items: center;
-    display:flex;
-    justify-content: flex-start;
-    padding-bottom: 60px;
-}
-.landing-smol-link{
-    transform: rotate(90deg);
+.logo-group {
     display: flex;
     align-items: center;
     gap: 10px;
 }
-.landing-smol-link img{
-    width: 20px;
-    height: auto;
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
 }
-.landing-smol-link a{
+
+
+
+.nav-links a {
     text-decoration: none;
-    font-size: 50%;
-    color: white;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
-.landing-body{
-    font-size: 120%;
-    display: flex ;
+
+.nav-links a:hover {
+    color: rgb(42, 42, 158);
+}
+
+/* Main Content */
+main {
+    margin-top: 80px;
+}
+
+section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: var(--secondary-color);
+}
+
+h2,
+h3 {
+    color: var(--secondary-color);
+}
+
+/* Hero Section */
+#hero {
+    background: url('image/bgr-register-page.png') center/cover;
+    color: var(--white);
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+}
+
+#hero h1 {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.hero-content {
+    display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch;
+    max-width: 1000px;
+    margin: 3rem auto 0;
+    gap: 2rem;
 }
-.landing-body h1{
-    font-size: 200%;
-}
-.landing-b-left, .landing-b-right{
+
+.quote-section,
+.deadline-section {
     flex: 1;
-    margin: 0 20px;
-}
-.landing-b-right h2, .landing-b-left h2{
-    font-weight: bold;
-    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 10px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
-.landing-b-right-timer{
+
+.deadline-section p{
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.quote-section h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.quote-section h3 {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.deadline-section {
+    text-align: center;
+}
+
+.deadline-info {
+    margin-bottom: 1.5rem;
+}
+
+.deadline-info h3 {
+    color: var(--white);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+
+.register-button {
+    border: 1px solid #f7f7f7;
+    margin-top: 1rem;
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    background-image: linear-gradient(to right, #1D15B2, #530A46);
+    color: var(--white);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.register-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.register-button:active {
+    transform: translateY(0);
+}
+
+/* About Section */
+#about {
+    text-align: center;
+    background-color: black;
+    padding: 6rem 2rem;
+}
+
+#about h2 {
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-image {
+    background-image: linear-gradient(#1D15B2, #530A46);
+    margin-bottom: 4rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
-#timer{
-    font-weight: bold;
-    font-size: 200%;
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.about-image img:hover {
+    transform: scale(1.02);
+}
+
+.about-quotes {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.quote-box {
+    flex: 1;
+    padding: 5rem;
+    background-image: linear-gradient(#1D15B2, #530A46);
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.quote-box:hover {
+    transform: translateY(-5px);
+}
+
+.quote-box blockquote {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    font-style: italic;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.quote-box cite {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.about-slogan {
+    padding: 3rem 2rem;
+    background-image: linear-gradient(#1D15B2, #530A46);
+    border-radius: 10px;
+    margin-top: 2rem;
+}
+
+.about-slogan h3 {
+    color: var(--white);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.about-slogan p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
     margin: 0 auto;
-    padding-bottom: 40px;
+}
+
+
+/* Tournament Information */
+#tournament h2 {
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.tournament-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.info-card {
+    background: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+}
+
+.info-card h3 {
+    color: black;
+    margin-bottom: 1rem;
+}
+
+.info-card p {
+    color: var(--primary-color);
+}
+
+/* Timeline */
+
+#timeline h2 {
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background: var(--secondary-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    top: 15px;
+}
+
+.timeline-item:nth-child(odd)::after {
+    right: -10px;
+}
+
+.timeline-item:nth-child(even)::after {
+    left: -10px;
+}
+
+/* Contact Form */
+.contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Footer */
+.main-footer {
+    background-color: #090f16;
+    color: #ecf0f1;
+    padding: 40px 0;
+    margin-top: 50px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-row {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.footer-col {
+    flex: 1;
+}
+
+.footer-col h4 {
+    color: #3498db;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-col p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.footer-bottom {
+    border-top: 1px solid #34495e;
     padding-top: 20px;
+    text-align: center;
 }
-.landing-b-right-btn{
-    display: flex;
-    justify-content: center;
-}
-#landing-regi-btn{
-    font-size: 90%;
-    padding: 5px 30px;
-    background: linear-gradient(90deg, #1D15B2 0%, #530A46 100%);
-    border: 3px solid #FFFFFF;
-    color: white;
-}
-#landing-regi-btn:hover{
-    border: 3px solid rgb(0,0,0);
-    box-shadow: 0 6px 8px rgba(0,0,0,10);
-}
-/*about us page*/
 
-/*tournament page*/
-
-/*contact page*/
-.contact-page{
-font-size: 80%;
-background: linear-gradient(180deg, rgba(67, 67, 89, 0.4) 25.84%, rgba(170, 68, 131, 0.4) 87.73%);
-display: flex;
-gap: 300px;
+.footer-bottom p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #bdc3c7;
 }
-.contact-right p{
-    text-decoration: underline;
+
+
+/* Responsive Design */
+@media (max-width: 800px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hero-content {
+        flex-direction: column;
+    }
+
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-item:nth-child(even) {
+        left: 0;
+    }
+
+    .timeline-item::after {
+        left: 21px;
+    }
+
+    .about-quotes {
+        flex-direction: column;
+    }
+
+    .quote-box {
+        margin-bottom: 1rem;
+    }
+
+    .about-slogan {
+        padding: 2rem 1rem;
+    }
+
+    .about-slogan h3 {
+        font-size: 1.5rem;
+    }
+
+    .about-slogan p {
+        font-size: 1rem;
+    }
+
+
 }
