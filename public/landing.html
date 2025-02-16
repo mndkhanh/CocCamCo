@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Billiard Tournament 2025</title>
     <link rel="stylesheet" href="../public/assets/styles/landingstyle.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -19,9 +21,9 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#about">About Us</a></li>
-                <li><a href="#tournament">Tournament Info</a></li>
+                <li><a href="#tournament">Thông tin giải đấu </a></li>
                 <li><a href="#timeline">Timeline</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact">Liên lạc</a></li>
             </ul>
         </nav>
     </header>
@@ -37,11 +39,9 @@
                 </div>
                 <div class="deadline-section">
                     <div class="deadline-info">
-                        <h3>Registration Deadline</h3>
+                        <h2>DEADLINE</h2>
                         <div class="landing-b-right-timer">
-                            </p>
                             <p id="timer"></p>
-
                             <script>
                                 var countDownDate = new Date("Feb 25, 2025 15:37:25").getTime();
                                 var x = setInterval(function () {
@@ -51,14 +51,15 @@
                                     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                                     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                                    document.getElementById("timer").innerHTML = days + "d " + hours + "h "
-                                        + minutes + "m " + seconds + "s ";
+                                    document.getElementById("timer").innerHTML = days + " " + hours + "  "
+                                        + minutes +"  " + seconds ;
                                     if (distance < 0) {
                                         clearInterval(x);
                                         document.getElementById("timer").innerHTML = "EXPIRED";
                                     }
                                 }, 1000);
                             </script>
+                            <h3>Ngày giờ phút giây</h3>
                         </div>
                     </div>
                     <button id="register-btn" class="register-button">Đăng ký ngay</button>
