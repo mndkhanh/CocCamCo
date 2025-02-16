@@ -12,23 +12,30 @@
 }
 
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif, 'Paytone One';
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
+    background-image:url("../background/bgr-register-page.png");
+    /* Giữ background-image gốc */
+    background-position: center;
+    background-size: cover;
+    /* Thêm background-size: cover để đảm bảo ảnh phủ kín */
+    background-attachment: fixed;
+    position: relative;
+    /* Thêm position: relative để định vị lớp phủ */
 }
+
 
 /* Header & Navigation */
 header {
-    background-color: black;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
 }
 
-.logo img{
+.logo img {
     border-radius: 50px;
 }
 
@@ -45,12 +52,17 @@ nav {
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 1.5rem;
+    font-family: 'Oswald';
+    font-weight: 60;
+    font-style: normal;
 }
 
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 2.3rem;
+    font-size: 1.3rem;
 }
 
 
@@ -58,8 +70,9 @@ nav {
 .nav-links a {
     text-decoration: none;
     color: var(--text-color);
-    font-weight: 500;
     transition: color 0.3s ease;
+    font-family: 'Oswald';
+    padding-right: 50px;
 }
 
 .nav-links a:hover {
@@ -88,72 +101,87 @@ h3 {
 
 /* Hero Section */
 #hero {
-    background: url("../background/bgr-register-page.png") center/cover;
     color: var(--white);
     text-align: center;
-    padding: 8rem 2rem 4rem;
+    padding: 2.2rem 4rem;
 }
 
 #hero h1 {
-    font-size: 3.5rem;
+    font-size: 4.65rem;
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'Paytone One';
 }
 
 .hero-content {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    max-width: 1000px;
-    margin: 3rem auto 0;
-    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    gap: 5rem;
 }
 
 .quote-section,
 .deadline-section {
     flex: 1;
-    padding: 2rem;
-    border-radius: 10px;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.deadline-section p{
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
-
 .quote-section h2 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 3.9rem;
+    margin-bottom: 0rem;
+    font-family: 'Paytone One';
+    font-weight: 300;
+    text-align: left;
 }
 
 .quote-section h3 {
-    font-size: 1rem;
+    font-size: 1.3rem;
     opacity: 0.9;
+    text-align: left;
+    font-family: 'Oswald';
 }
 
 .deadline-section {
     text-align: center;
 }
 
+
 .deadline-info {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0rem;
 }
 
-.deadline-info h3 {
-    color: var(--white);
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+.deadline-info h2 {
+    font-size: 3.9rem;
+    font-family: 'Paytone One';
+    font-weight: 300;
+}
+
+.deadline-info p {
+    font-size: 4rem;
+    font-weight: bold;
+    word-spacing: 2.3rem;
+    
+}
+
+.deadline-info h3{
+    font-size: 2rem;
+    font-weight: bold;
+    word-spacing: 3.5rem;
+    
 }
 
 
 .register-button {
     border: 1px solid #f7f7f7;
     margin-top: 1rem;
-    padding: 1rem 3rem;
     font-size: 1.2rem;
     background-image: linear-gradient(to right, #1D15B2, #530A46);
     color: var(--white);
@@ -177,7 +205,6 @@ h3 {
 /* About Section */
 #about {
     text-align: center;
-    background-color: black;
     padding: 6rem 2rem;
 }
 
@@ -205,6 +232,29 @@ h3 {
     padding-bottom: 3rem;
     padding-left: 3rem;
     padding-right: 3rem;
+    position: relative;
+    /* Thêm position: relative để định vị lớp phủ */
+}
+
+.about-image::before {
+    content: "";
+    position: absolute;
+    /* Định vị lớp phủ tuyệt đối so với .about-image */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(96, 68, 68, 0.3);
+    /* Màu trắng trong suốt (opacity 0.3) */
+    /* Bạn có thể thay đổi màu và giá trị opacity tại đây */
+    z-index: 0;
+    /* Đặt lớp phủ phía sau nội dung của .about-image */
+}
+
+/* Đảm bảo nội dung của .about-image nằm trên lớp phủ (tùy chọn, nhưng nên dùng) */
+.about-image>* {
+    position: relative;
+    z-index: 1;
 }
 
 .about-image img {
@@ -228,9 +278,35 @@ h3 {
     flex: 1;
     padding: 5rem;
     background-image: linear-gradient(#1D15B2, #530A46);
+    /* Giữ background-image gốc */
     border-radius: 10px;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease;
+    position: relative;
+    /* Thêm position: relative để định vị lớp phủ */
+    overflow: hidden;
+    /* Đảm bảo lớp phủ không tràn ra ngoài border-radius */
+}
+
+.quote-box::before {
+    content: "";
+    position: absolute;
+    /* Định vị lớp phủ tuyệt đối so với .quote-box */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(96, 68, 68, 0.3);
+    /* Màu trắng trong suốt (opacity 0.3) */
+    /* Bạn có thể thay đổi màu và giá trị opacity tại đây */
+    z-index: 0;
+    /* Đặt lớp phủ phía sau nội dung của .quote-box */
+}
+
+/* Đảm bảo nội dung của .quote-box nằm trên lớp phủ (tùy chọn, nhưng nên dùng) */
+.quote-box>* {
+    position: relative;
+    z-index: 1;
 }
 
 .quote-box:hover {
@@ -254,8 +330,34 @@ h3 {
 .about-slogan {
     padding: 3rem 2rem;
     background-image: linear-gradient(#1D15B2, #530A46);
+    /* Giữ background-image gốc */
     border-radius: 10px;
     margin-top: 2rem;
+    position: relative;
+    /* Thêm position: relative để định vị lớp phủ */
+    overflow: hidden;
+    /* Đảm bảo lớp phủ không tràn ra ngoài border-radius */
+}
+
+.about-slogan::before {
+    content: "";
+    position: absolute;
+    /* Định vị lớp phủ tuyệt đối so với .about-slogan */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(96, 68, 68, 0.3);
+    /* Màu trắng trong suốt (opacity 0.3) */
+    /* Bạn có thể thay đổi màu và giá trị opacity tại đây */
+    z-index: 0;
+    /* Đặt lớp phủ phía sau nội dung của .about-slogan */
+}
+
+/* Đảm bảo nội dung của .about-slogan nằm trên lớp phủ (tùy chọn, nhưng nên dùng) */
+.about-slogan>* {
+    position: relative;
+    z-index: 1;
 }
 
 .about-slogan h3 {
