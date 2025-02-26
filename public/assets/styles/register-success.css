@@ -1,0 +1,19 @@
+.content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      p{
+            text-align: justify;
+      }
+}
+
+#btnPayment {
+      width: 150px;
+      margin: 0 auto;
+
+      a {
+            text-decoration: none;
+            color: white;
+      }
+}
