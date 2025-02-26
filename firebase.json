@@ -2,6 +2,12 @@
   "hosting": {
     "site": "coccamco",
     "public": "public",
+    "rewrites": [
+      {
+        "source": "/",
+        "destination": "/landing-page.html"
+      }
+    ],
     "cleanUrls": true,
     "ignore": [
       "firebase.json",
