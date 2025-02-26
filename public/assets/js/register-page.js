@@ -39,3 +39,19 @@ document.querySelectorAll('.code-input').forEach((input, index, inputs) => {
             }
       });
 });
+
+let codeInputs = document.querySelectorAll("#verificationCodeContainer input");
+codeInputs[0].addEventListener("paste", (e) => {
+      const pasteData = e.clipboardData.getData("text").split("");
+      codeInputs.forEach((input, index) => {
+            input.value = pasteData[index] || "";
+      });
+      codeInputs[pasteData.length - 1]?.focus();
+});
+
+document.querySelector("#btnCloseSuccessMessageBox").addEventListener("click", () => {
+      document.querySelector(".message-box-wrapper-success").classList.remove("active");
+})
+document.querySelector("#btnCloseFailureMessageBox").addEventListener("click", () => {
+      document.querySelector(".message-box-wrapper-failure").classList.remove("active");
+})
