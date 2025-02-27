@@ -1,7 +1,0 @@
-dialog {
-
-      &::backdrop {
-            background: red;
-            opacity: 50%;
-      }
-}
