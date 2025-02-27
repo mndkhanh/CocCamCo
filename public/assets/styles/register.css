@@ -461,21 +461,28 @@ input::-webkit-inner-spin-button {
 
 }
 
-.loading-effect {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
+#loading-effect-dialog {
+      border: none;
+      outline: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      backdrop-filter: blur(1px);
+      background: rgba(0, 0, 0, 0.3);
       z-index: 1;
-      position: absolute;
-      opacity: 100%;
-      transition: ease-in-out;
-      border-radius: 10px;
-      background: rgb(65, 61, 61, 0.4);
-      visibility: hidden;
-}
 
+
+      div {
+            background: transparent;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+      }
+}
 
 .message-box-wrapper-success {
       display: flex;
@@ -486,8 +493,11 @@ input::-webkit-inner-spin-button {
       height: 100vh;
       width: 100vw;
       visibility: hidden;
-      background: rgb(65, 61, 61, 0.4);
+      backdrop-filter: blur(1px);
+      background: rgba(0, 0, 0, 0.3);
+      position: fixed;
 }
+
 
 .message-box-wrapper-failure {
       display: flex;
@@ -498,7 +508,9 @@ input::-webkit-inner-spin-button {
       height: 100vh;
       width: 100vw;
       visibility: hidden;
-      background: rgb(65, 61, 61, 0.4);
+      backdrop-filter: blur(1px);
+      background: rgba(0, 0, 0, 0.3);
+      position: fixed;
 }
 
 .message-box {
@@ -506,19 +518,23 @@ input::-webkit-inner-spin-button {
       min-width: 400px;
       max-width: 500px;
       min-height: 500px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 2px solid #E67F0D;
       border-radius: 20px;
-      border: 2px solid black;
 }
 
 .message-box-header {
+      * {
+            background: transparent;
+      }
+
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 10px 0;
-      border-radius: 20px 20px 0 0;
-      background: linear-gradient(321.23deg, rgba(191, 191, 191, 0.062) 5.98%, rgba(0, 0, 0, 0) 66.28%), rgba(0, 0, 0, 0.14);
-      box-shadow: -8px 4px 5px rgba(0, 0, 0, 0.24);
-      backdrop-filter: blur(26.5px);
+      background: linear-gradient(278.52deg, #E67F0D -10.75%, #2D3142 136.82%);
+      border: 2px solid #E67F0D;
+      border-radius: 17px 17px 0px 0px;
 
       .btn-close-wrapper {
             width: 90%;
@@ -532,9 +548,10 @@ input::-webkit-inner-spin-button {
             }
 
 
-
-
       }
+
+
+
 }
 
 #btnCloseSuccessMessageBox {
@@ -560,7 +577,6 @@ input::-webkit-inner-spin-button {
 .message-box-body {
       width: 100%;
       height: 500px;
-      background: rgba(214, 238, 214, 0.95);
       color: black;
       border-radius: 0 0 20px 20px;
 
@@ -569,10 +585,6 @@ input::-webkit-inner-spin-button {
             height: 300px;
       }
 
-}
-
-.failure {
-      background: rgb(243, 194, 194);
 }
 
 

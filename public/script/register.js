@@ -5,7 +5,6 @@ import { getFirestore, collection, doc, getDoc, query, getDocs } from "https://w
 const functions = getFunctions(app);
 const firestore = getFirestore(app);
 
-
 //---------------------------------------------------------------------------- some refs to collection
 const playersRef = collection(firestore, "players");
 
@@ -28,7 +27,6 @@ const submitBtn = document.querySelector("#submitBtn");
 const emailUsed = httpsCallable(functions, "isEmailUsed");
 
 const availSlot = httpsCallable(functions, "hasAvailSlot");
-
 
 
 //---------------------------------------------------------------------------- DOM EVENT VALIDATION
@@ -290,13 +288,14 @@ function setSuccessWindow() {
       document.querySelector(".message-box-wrapper-success").classList.add("active");
 }
 
-function unsetLoadingEffect() {
-      document.querySelector(".loading-effect").classList.remove("active");
+function setLoadingEffect() {
+      document.querySelector("#loading-effect-dialog").showModal();
 }
 
-function setLoadingEffect() {
-      document.querySelector(".loading-effect").classList.add("active");
+function unsetLoadingEffect() {
+      document.querySelector("#loading-effect-dialog").close();
 }
+
 
 // --------------------------------- ending submit form 
 
