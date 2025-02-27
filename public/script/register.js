@@ -5,7 +5,6 @@ import { getFirestore, collection, doc, getDoc, query, getDocs } from "https://w
 const functions = getFunctions(app);
 const firestore = getFirestore(app);
 
-
 //---------------------------------------------------------------------------- some refs to collection
 const playersRef = collection(firestore, "players");
 
@@ -28,7 +27,6 @@ const submitBtn = document.querySelector("#submitBtn");
 const emailUsed = httpsCallable(functions, "isEmailUsed");
 
 const availSlot = httpsCallable(functions, "hasAvailSlot");
-
 
 
 //---------------------------------------------------------------------------- DOM EVENT VALIDATION
@@ -196,11 +194,14 @@ sendEmailBtn.addEventListener("click", async (e) => {
             return;
       }
       try {
+            //loading effect
+            document.querySelector("#send-email-loading-icon").style = "visibility: visible;";
             // Call the Firebase Cloud Function to send an email
             const sendEmailWithVerCode = httpsCallable(functions, 'sendEmailWithVerCode');
 
             const response = await sendEmailWithVerCode({ email: emailTxt.value });
             const codeStatus = response.data;
+            document.querySelector("#send-email-loading-icon").style = "visibility: hidden;";
             if (codeStatus && codeStatus.status === "ACTIVE") setError(errorVerCodeTxt, "*Gửi thành công. Mã sẽ hết hạn sau 2 phút.");
             else setError(errorVerCodeTxt, "*Lỗi khi gửi email. Try again.");
       } catch (error) {
@@ -287,13 +288,14 @@ function setSuccessWindow() {
       document.querySelector(".message-box-wrapper-success").classList.add("active");
 }
 
-function unsetLoadingEffect() {
-      document.querySelector(".loading-effect").classList.remove("active");
+function setLoadingEffect() {
+      document.querySelector("#loading-effect-dialog").showModal();
 }
 
-function setLoadingEffect() {
-      document.querySelector(".loading-effect").classList.add("active");
+function unsetLoadingEffect() {
+      document.querySelector("#loading-effect-dialog").close();
 }
+
 
 // --------------------------------- ending submit form 
 
