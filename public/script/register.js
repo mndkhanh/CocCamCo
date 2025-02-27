@@ -196,11 +196,14 @@ sendEmailBtn.addEventListener("click", async (e) => {
             return;
       }
       try {
+            //loading effect
+            document.querySelector("#send-email-loading-icon").style = "visibility: visible;";
             // Call the Firebase Cloud Function to send an email
             const sendEmailWithVerCode = httpsCallable(functions, 'sendEmailWithVerCode');
 
             const response = await sendEmailWithVerCode({ email: emailTxt.value });
             const codeStatus = response.data;
+            document.querySelector("#send-email-loading-icon").style = "visibility: hidden;";
             if (codeStatus && codeStatus.status === "ACTIVE") setError(errorVerCodeTxt, "*Gửi thành công. Mã sẽ hết hạn sau 2 phút.");
             else setError(errorVerCodeTxt, "*Lỗi khi gửi email. Try again.");
       } catch (error) {

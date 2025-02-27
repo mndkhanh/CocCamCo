@@ -5,6 +5,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Tham gia giải đấu</title>
+      <link rel="stylesheet" href="./assets/styles/register.css">
       <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
@@ -13,9 +14,9 @@
 
 <body>
       <!-- loading effect -->
-      <div class="loading-effect">
-            <img width="50px" src="./assets/image/loading-icon.gif" alt="">
-      </div>
+      <dialog class="loading-effect">
+            <img width="60px" src="./assets/image/logo-spin-2s.gif" alt="">
+      </dialog>
 
       <div class="message-box-wrapper-success">
             <div class="message-box">
@@ -23,7 +24,7 @@
                         <div class="btn-close-wrapper">
                               <div class="registerStatus">✅ Đăng ký thành công!</div>
                               <div id="btnCloseSuccessMessageBox">
-                                    <img width="30px" height="30px" src="./assets/image/close.png" alt="">
+                                    <img width="30px" height="30px" src="./assets/GG-icons/close-icon.png" alt="">
                               </div>
                         </div>
                   </div>
@@ -36,9 +37,9 @@
                         </div>
                         <div class="btnGoToSearch">
                               <a href="./search.html">
-                                    <img width="30px" src="./assets/image/payment.png" alt="">
+                                    <img width="30px" src="./assets/GG-icons/payment-icon.png" alt="">
                                     Trang Thanh toán
-                                    <img width="30px" src="./assets/image/arrow-right.png" alt="">
+                                    <img width="30px" src="./assets/GG-icons/ád" alt="">
                               </a>
                         </div>
                   </div>
@@ -51,7 +52,7 @@
                         <div class="btn-close-wrapper">
                               <div class="registerStatus">❌ Đăng ký không thành công!</div>
                               <div id="btnCloseFailureMessageBox">
-                                    <img width="30px" height="30px" src="./assets/image/close.png" alt="">
+                                    <img width="30px" height="30px" src="./assets/GG-icons/close-icon.png" alt="">
                               </div>
                         </div>
                   </div>
@@ -78,21 +79,43 @@
 
       <div class="header">
             <div>
-                  <img src="./assets/favicons/apple-icon-72x72.png" alt="Logo_CCC">
-                  <h1 class="oswald-title">Cóc Cầm Cơ - Trang đăng ký</h1>
+                  <img src="./assets/image/logo-with-text.png" alt="Logo_CCC">
             </div>
-            <a href="./index.html"><button><svg xmlns="http://www.w3.org/2000/svg" height="24px"
-                              viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
-                              <path
-                                    d="M280-200v-80h284q63 0 109.5-40T720-420q0-60-46.5-100T564-560H312l104 104-56 56-200-200 200-200 56 56-104 104h252q97 0 166.5 63T800-420q0 94-69.5 157T564-200H280Z" />
-                        </svg> <span>Trở lại</span></button></a>
+            <a href="./landing-page.html" class="btn-border-only lexend-regular">
+                  <img width="24px" src="./assets/GG-icons/undo-orange.png" alt="">
+                  Trở lại
+            </a>
       </div>
 
       <div class="body">
-            <h1 class="oswald-title">GIẢI ĐẤU BILLIARDS <br>CÓC CẦM CƠ LẦN II</h1>
-            <div>
-                  <form class="register-form" autocomplete="off">
-                        <h1>Đăng ký</h1>
+            <div class="left-body">
+                  <p class="lexend-regular first-title">Đăng ký giải đấu Billiards</p>
+                  <p class="lexend-black orange-color second-title">CÓC CẦM CƠ - II</p>
+                  <div class="deadline-container">
+                        <p class="lexend-bold" id="register-noti">Thời gian đăng ký còn</p>
+                        <div class="date-container">
+                              <div class="date-session">
+                                    <p class="date-number" id="day">10</p>
+                                    <p class="date-unit">Ngày</p>
+                              </div>
+                              <div class="date-session">
+                                    <p class="date-number" id="hour">15</p>
+                                    <p class="date-unit">Giờ</p>
+                              </div>
+                              <div class="date-session">
+                                    <p class="date-number" id="minute">10</p>
+                                    <p class="date-unit">Phút</p>
+                              </div>
+                              <div class="date-session">
+                                    <p class="date-number" id="second">10</p>
+                                    <p class="date-unit">Giây</p>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+            <div id="register-form">
+                  <form autocomplete="off">
+                        <h1 class="lexend-semibold orange-color transparent-background">Đăng ký</h1>
 
 
                         <span id="errorNameTxt" class="error-txt"></span><br>
@@ -108,9 +131,18 @@
                         <input type="text" placeholder="Địa chỉ email" id="emailTxt">
 
                         <div class="verifCode-container">
-                              <button id="sendEmailBtn">Gửi mã</button><br>
+                              <a id="sendEmailBtn" class="btn-smooth-background lexend-regular">
+                                    Gửi mã
+                                    <img src="./assets/GG-icons/send-email-icon.png" alt="" width="20px">
+                                    <div id="send-email-loading-icon">
+                                          <img src="./assets/image/loading-icon.gif" alt="" width="24px">
+                                    </div>
+                              </a>
+                              <p class="lexend-semibold orange-color transparent-background"
+                                    style="font-size: 18px; margin: 0px; margin-top: 10px;">Mã
+                                    xác nhận</p>
                               <span id="errorVerCodeTxt" class="error-txt"></span><br>
-                              <div id="verificationCodeContainer">
+                              <div id="verificationCodeContainer" class="transparent-background">
                                     <input type="number" class="code-input" inputmode="numeric">
                                     <input type="number" class="code-input" inputmode="numeric">
                                     <input type="number" class="code-input" inputmode="numeric">
@@ -119,10 +151,13 @@
                                     <input type="number" class="code-input" inputmode="numeric">
                               </div>
                         </div>
-                        <button id="submitBtn">Gửi đơn</button>
+                        <a class="btn-border-only lexend-semibold transparent-background" id="submitBtn">
+                              Gửi đơn đăng ký
+                        </a>
 
-                        <div class="contact-info"><a href="https://www.facebook.com/coccamco.fpthcm"
-                                    target="_blank">Liên hệ với chúng tôi</a></div>
+                        <div class="contact-info transparent-background"><a
+                                    href="https://www.facebook.com/coccamco.fpthcm" target="_blank">Liên hệ với chúng
+                                    tôi</a></div>
                   </form>
 
             </div>
