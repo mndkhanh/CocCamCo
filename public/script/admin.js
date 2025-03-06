@@ -79,9 +79,21 @@ function listenToPaymentInfoCollection() {
       });
 }
 
+//open table
+document.getElementById("openPlayerEdit").addEventListener("click", (e) => {
+      document.getElementById("match-edit-table").classList.remove("active");
+      document.getElementById("player-edit-table").classList.add("active");
+})
+
+document.getElementById("openMatchEdit").addEventListener("click", (e) => {
+      document.getElementById("player-edit-table").classList.remove("active");
+      document.getElementById("match-edit-table").classList.add("active");
+})
+
+
 // render players & payments array to ui
 function renderPlayersAndPaymentStatusToUI() {
-      const dashboardBody = document.querySelector(".dashboard-body");
+      const dashboardBody = document.querySelector("#player-edit-table .dashboard-body");
       dashboardBody.innerHTML = ""; // set to empty whenever rendering new list of data
       if (payments.length == 0 || players.length == 0) {
             return;
@@ -120,7 +132,7 @@ function getPlayerRowDomElem(rollNumber, email, name, age, phoneNumber, register
               <div class="col-8">
                 <div class="btn-wrapper">
                   <div class="btnPaymentEdit btnPaymentStatus ${getPaymentStatusClass(paymentStatus)}"><img width="30px" height="30px"
-                      src="./assets/image/payment.png" alt="PaymentStatus">
+                      src="./assets/GG-icons/payment-black-icon.png" alt="PaymentStatus">
                   </div>
                 </div>
               </div>
@@ -250,29 +262,33 @@ document.addEventListener("click", async (e) => {
             console.log("Editing player with email:", email);
 
             try {
-                  const playerDoc = await getDoc(doc(firestore, "players", email));
-                  const player = playerDoc.data();
-
-                  if (!player) {
-                        console.log("No player found with this email.");
-                        return;
-                  }
-
-                  console.log("Editing player:", player);
-
-                  // Extract player details
-                  const { name, age, phoneNumber, registerTime } = player;
-
-                  // Populate the dialog form
-                  setDataForPlayerDialog(email, name, age, phoneNumber, registerTime);
-
-                  // Open the dialog
-                  document.querySelector("#playerEditDialog").showModal();
+                  await openPlayerDialogForEmail(email);
             } catch (err) {
                   console.error("Error fetching player data:", err);
             }
       }
 });
+
+async function openPlayerDialogForEmail(email) {
+      const playerDoc = await getDoc(doc(firestore, "players", email));
+      const player = playerDoc.data();
+
+      if (!player) {
+            console.log("No player found with this email.");
+            return;
+      }
+
+      console.log("Editing player:", player);
+
+      // Extract player details
+      const { name, age, phoneNumber, registerTime } = player;
+
+      // Populate the dialog form
+      setDataForPlayerDialog(email, name, age, phoneNumber, registerTime);
+
+      // Open the dialog
+      document.querySelector("#playerEditDialog").showModal();
+}
 
 
 document.querySelector("#btnPlayerSaveEdit").addEventListener("click", async (e) => {
@@ -350,7 +366,7 @@ document.querySelector("#btnDeletePlayer").addEventListener("click", async (e) =
 })
 
 
-document.querySelector(".dashboard-body").addEventListener("click", async (e) => {
+document.querySelector("#player-edit-table .dashboard-body").addEventListener("click", async (e) => {
       const btn = e.target.closest(".btnPaymentEdit");
       if (!btn) return; // Ignore clicks that are not on .btnPaymentEdit
 
@@ -664,3 +680,9 @@ function generateUniqueIDPayment() {
       return timestampPart + randomPart;
 }
 // -----------------------------------------------
+
+
+
+
+
+

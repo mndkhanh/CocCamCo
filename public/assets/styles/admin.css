@@ -27,9 +27,6 @@
       background: white;
 }
 
-.active {
-      visibility: visible;
-}
 
 h1 {
       text-align: center;
@@ -42,10 +39,19 @@ h1 {
       justify-content: center;
       align-items: center;
       margin-top: 30px;
+      position: relative;
+}
+
+.table-form {
+      position: absolute;
+      visibility: hidden;
+      width: 75%;
+      top: 0;
+
 }
 
 .dashboard-box {
-      width: 75%;
+      width: 100%;
       display: flex;
       flex-direction: column;
       border: 1px solid black;
@@ -58,36 +64,38 @@ h1 {
       background: #e2e2e2;
 }
 
-.col-1 {
-      flex: 0.5;
-}
+#player-edit-table {
+      .col-1 {
+            flex: 0.5;
+      }
 
-.col-2 {
-      flex: 2;
-}
+      .col-2 {
+            flex: 2;
+      }
 
-.col-3 {
-      flex: 2;
-}
+      .col-3 {
+            flex: 2;
+      }
 
-.col-4 {
-      flex: 0.5;
-}
+      .col-4 {
+            flex: 0.5;
+      }
 
-.col-5 {
-      flex: 1;
-}
+      .col-5 {
+            flex: 1;
+      }
 
-.col-6 {
-      flex: 2;
-}
+      .col-6 {
+            flex: 2;
+      }
 
-.col-7 {
-      flex: 0.5;
-}
+      .col-7 {
+            flex: 0.5;
+      }
 
-.col-8 {
-      flex: 1;
+      .col-8 {
+            flex: 1;
+      }
 }
 
 .dashboard-body {
@@ -384,4 +392,42 @@ h1 {
 #inputPaymentComment {
       flex: 3.5;
       width: 100%;
+}
+
+#match-edit-table {
+      .col-1 {
+            flex: 0.5;
+      }
+
+      .col-2 {
+            flex: 2;
+      }
+
+      .col-3 {
+            flex: 2;
+      }
+
+      .col-4 {
+            flex: 0.5;
+      }
+
+      .col-5 {
+            flex: 1;
+      }
+
+      .col-6 {
+            flex: 2;
+      }
+
+      
+}
+
+
+
+
+
+
+
+.active {
+      visibility: visible;
 }

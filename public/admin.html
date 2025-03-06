@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <div class="sign-in-form-wrapper active">
+  <div class="sign-in-form-wrapper">
     <img src="./assets/favicons/android-icon-72x72.png" alt="">
     <h1>Sign in to COCCAMCO Dashboard </h1>
     <div class="sign-in-form">
@@ -28,23 +28,65 @@
     <body>
       <h1>Welcome to Admin Dashboard</h1>
 
-      <div class="container">
-        <div class="dashboard-box">
-          <div class="dashboard-header">
-            <div class="col-1">No.</div>
-            <div class="col-2">Email</div>
-            <div class="col-3">Name</div>
-            <div class="col-4">Age</div>
-            <div class="col-5">Phone Number</div>
-            <div class="col-6">Register At</div>
-            <div class="col-7">Edit</div>
-            <div class="col-8">Payment Status</div>
-          </div>
+      <button id="openPlayerEdit">Player Edit</button>
+      <button id="openMatchEdit">Match Edit</button>
 
-          <div class="dashboard-body">
+      <div class="container">
+        <div id="player-edit-table" class="table-form">
+          <div class="dashboard-box">
+            <div class="dashboard-header">
+              <div class="col-1">No.</div>
+              <div class="col-2">Email</div>
+              <div class="col-3">Name</div>
+              <div class="col-4">Age</div>
+              <div class="col-5">Phone Number</div>
+              <div class="col-6">Register At</div>
+              <div class="col-7">Edit</div>
+              <div class="col-8">Payment Status</div>
+            </div>
+
+            <div class="dashboard-body">
+            </div>
           </div>
         </div>
+        <div id="match-edit-table" class="table-form active">
+          <div class="dashboard-box">
+            <div class="dashboard-header">
+              <div class="col-1">No.</div>
+              <div class="col-2">Player01</div>
+              <div class="col-3">Score</div>
+              <div class="col-4">Player02</div>
+              <div class="col-5">Status</div>
+              <div class="col-6">Edit</div>
+            </div>
+            <div class="dashboard-body">
+              <div class="dashboard-row">
+                <div class="col-1">1</div>
+                <div class="col-2">
+                  <input type="text" class="Playe01Email" hidden>
+                  <input type="text" class="Playe01Name" placeholder="Player 01 Name">
+                </div>
+                <div class="col-3">
+                  1 : 1
+                </div>
+                <div class="cok-4">
+                  <input type="text" class="Playe02Email" hidden>
+                  <input type="text" class="Playe02Name" placeholder="Player 02 Name">
+                </div>
+                <div class="col-5">
+                  Đấu xong
+                </div>
+                <div class="col-6">2023
+                  <img width="24px" src="./assets/GG-icons/payment-icon.png" alt="">
+                </div>
 
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
       </div>
 
     </body>
@@ -126,13 +168,13 @@
         <div class="payment-status-select-box">
           <label>Payment Status: </label>
           <div class="btnPaymentStatus status-option payment-pending-status selected" data-payment-status="PENDING">
-            <img width="20px" src="./assets/image/payment.png" alt="PENDING">
+            <img width="20px" src="./assets/GG-icons/payment-black-icon.png" alt="PENDING">
           </div>
           <div class="btnPaymentStatus status-option payment-failed-status" data-payment-status="FAILED">
-            <img width="20px" src="./assets/image/payment.png" alt="FAILED">
+            <img width="20px" src="./assets/GG-icons/payment-black-icon.png" alt="FAILED">
           </div>
           <div class="btnPaymentStatus status-option payment-paid-status" data-payment-status="PAID">
-            <img width="20px" src="./assets/image/payment.png" alt="PAID">
+            <img width="20px" src="./assets/GG-icons/payment-black-icon.png" alt="PAID">
           </div>
           <output id="status-value">PENDING</output>
           <button id="btnReactivcatePayment">Reactivate</button>
