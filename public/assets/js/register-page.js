@@ -80,9 +80,7 @@ function updateCountdown() {
     document.getElementById("second").innerText = String(seconds).padStart(2, '0');
 }
 
-// Cập nhật mỗi giây
 setInterval(updateCountdown, 1000);
 
-// Chạy ngay khi tải trang
 updateCountdown();
 
