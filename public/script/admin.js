@@ -964,7 +964,7 @@ async function saveMatchToFirestore(dashboardRow) {
       if (firstMatchID == 1) {
             return;
       }
-      const secondMatchID = firstMatchID / 2;
+      const secondMatchID = firstMatchID % 2 == 0 ? firstMatchID / 2 : (firstMatchID - 1) / 2;
       const matchRefForWinner = doc(firestore, "matches", String(secondMatchID));
       if (firstMatchID % 2 == 0) {
             await setDoc(matchRefForWinner, {
