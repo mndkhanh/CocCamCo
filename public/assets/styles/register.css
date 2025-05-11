@@ -614,3 +614,9 @@ input::-webkit-inner-spin-button {
 .active {
       visibility: visible;
 }
+
+.logo-part {
+      &:hover{
+            cursor: pointer;
+      }
+}
