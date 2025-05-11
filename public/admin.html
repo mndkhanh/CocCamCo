@@ -1,199 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin COCCAMCO</title>
+    <link rel="stylesheet" href="./assets/styles/admin.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin COCCAMCO</title>
-  <link rel="stylesheet" href="./assets/styles/admin.css">
-</head>
-
-<body>
-  <div class="sign-in-form-wrapper">
-    <img src="./assets/favicons/android-icon-72x72.png" alt="">
-    <h1>Sign in to COCCAMCO Dashboard </h1>
-    <div class="sign-in-form">
-      <input id="emailTxt" type="text" placeholder="abc@gmail.com"><br>
-      <input id="passwordTxt" type="password" placeholder="***"><br>
-      <button id="btnLogin">Admin Login</button>
+  <body>
+    <div class="sign-in-form-wrapper">
+      <img src="./assets/favicons/android-icon-72x72.png" alt="" />
+      <h1>Sign in to COCCAMCO Dashboard</h1>
+      <div class="sign-in-form">
+        <input id="emailTxt" type="text" placeholder="abc@gmail.com" /><br />
+        <input id="passwordTxt" type="password" placeholder="***" /><br />
+        <button id="btnLogin">Admin Login</button>
+      </div>
     </div>
-  </div>
 
-  <div class="dashboard-container">
-    <header>
-      <div><img src="./assets/favicons/android-icon-48x48.png" alt=""></div>
-      <div id="btnLogout"><button>Log Out</button></div>
-    </header>
+    <div class="dashboard-container">
+      <header>
+        <div><img src="./assets/favicons/android-icon-48x48.png" alt="" /></div>
+        <div id="btnLogout"><button>Log Out</button></div>
+      </header>
 
-    <body>
-      <h1>Welcome to Admin Dashboard</h1>
+      <body>
+        <h1>Welcome to Admin Dashboard</h1>
 
-      <button id="openPlayerEdit">Player Edit</button>
-      <button id="openMatchEdit">Match Edit</button>
+        <button id="openPlayerEdit">Player Edit</button>
+        <button id="openMatchEdit">Match Edit</button>
 
-      <div class="container">
-        <div id="player-edit-table" class="table-form">
-          <div class="dashboard-box">
-            <div class="dashboard-header">
-              <div class="col-1">No.</div>
-              <div class="col-2">Email</div>
-              <div class="col-3">Name</div>
-              <div class="col-4">Age</div>
-              <div class="col-5">Phone Number</div>
-              <div class="col-6">Register At</div>
-              <div class="col-7">Edit</div>
-              <div class="col-8">Payment Status</div>
-            </div>
-
-            <div class="dashboard-body">
-            </div>
-          </div>
-        </div>
-        <div id="match-edit-table" class="table-form active">
-          <div class="dashboard-box">
-            <div class="dashboard-header">
-              <div class="col-1">No.</div>
-              <div class="col-2">Player01</div>
-              <div class="col-3">Score</div>
-              <div class="col-4">Player02</div>
-              <div class="col-5">Status</div>
-              <div class="col-6">Edit</div>
-            </div>
-            <div class="dashboard-body">
-              <div class="dashboard-row">
-                <div class="col-1">1</div>
-                <div class="col-2">
-                  <input type="text" class="Playe01Email" hidden>
-                  <input type="text" class="Playe01Name" placeholder="Player 01 Name">
-                </div>
-                <div class="col-3">
-                  1 : 1
-                </div>
-                <div class="cok-4">
-                  <input type="text" class="Playe02Email" hidden>
-                  <input type="text" class="Playe02Name" placeholder="Player 02 Name">
-                </div>
-                <div class="col-5">
-                  Đấu xong
-                </div>
-                <div class="col-6">2023
-                  <img width="24px" src="./assets/GG-icons/payment-icon.png" alt="">
-                </div>
-
+        <div class="container">
+          <div id="player-edit-table" class="table-form">
+            <div class="dashboard-box">
+              <div class="dashboard-header">
+                <div class="col-1">No.</div>
+                <div class="col-2">Email</div>
+                <div class="col-3">Name</div>
+                <div class="col-4">Age</div>
+                <div class="col-5">Phone Number</div>
+                <div class="col-6">Register At</div>
+                <div class="col-7">Edit</div>
+                <div class="col-8">Payment Status</div>
               </div>
 
+              <div class="dashboard-body"></div>
+            </div>
+          </div>
+          <div id="match-edit-table" class="table-form active">
+            <div id="match-menu">
+              <input type="text" placeholder="Search name" id="inpSearchName"  autocomplete="off"/>
+              <select id="select-round-filter">
+                <option value="ALL">ALL</option>
+                <option value="R32">Vòng 32</option>
+                <option value="R16">Vòng 16</option>
+                <option value="R8">Vòng 8</option>
+                <option value="R4">Vòng 4</option>
+                <option value="R2">Vòng 2</option>
+                <option value="R3_4">Tranh 3-4</option>
+              </select>
+              <p style="margin-right: 0">
+                See full edit <input type="checkbox" id="see-full-edit-check" />
+              </p>
             </div>
 
+            <div class="dashboard-box">
+              <div class="dashboard-header">
+                <div class="col-0 hidden-when-full-edit">Round</div>
+                <div class="col-1">No.</div>
+                <div class="col-2 hidden-when-full-edit">Table</div>
+                <div class="col-3">Player01</div>
+                <div class="col-4">Score</div>
+                <div class="col-5">Player02</div>
+                <div class="col-6">Status</div>
+                <div class="col-7">Winner</div>
+                <div class="col-8">Comment</div>
+                <div class="col-9">Action</div>
+              </div>
+              <div class="dashboard-body"></div>
+            </div>
+          </div>
+        </div>
+      </body>
+
+      <!-- Dialogs here -->
+
+      <!-- Player Dialog -->
+      <dialog id="playerEditDialog">
+        <div class="player-dialog-header">
+          <h3>Player Edit</h3>
+          <div class="btnCloseDialog">
+            <img
+              width="30px"
+              height="30px"
+              src="./assets/image/close-black.png"
+              alt="Đóng"
+            />
+          </div>
+        </div>
+
+        <form id="playerEditForm">
+          <label>Email:</label>
+          <input type="email" id="inputPlayerEmail" readonly />
+
+          <label>Họ và tên:</label>
+          <input type="text" id="inputPlayerName" />
+
+          <label>Tuổi:</label>
+          <input type="number" id="inputPlayerAge" />
+
+          <label>Số điện thoại:</label>
+          <input type="text" id="inputPlayerPhoneNumber" />
+
+          <label>Đăng ký vào lúc:</label>
+          <input type="number" id="inputPlayerRegisterTime" />
+          <input type="text" id="inputPlayerFormattedTime" readonly /><br />
+
+          <div class="dialog-buttons">
+            <button id="btnPlayerSaveEdit">Save Data</button>
+            <button id="btnDeletePlayer">Delete Player</button>
+          </div>
+        </form>
+      </dialog>
+
+      <dialog id="paymentEditDialog">
+        <div class="player-dialog-header">
+          <h3>Payment Edit</h3>
+          <div class="btnCloseDialog">
+            <img
+              width="30px"
+              height="30px"
+              src="./assets/image/close-black.png"
+              alt="Đóng"
+            />
+          </div>
+        </div>
+
+        <div class="payment-edit-body">
+          <div class="left-payment-edit-body">
+            <label>Email</label><br />
+            <input type="text" id="inputPaymentEmail" readonly /><br />
+            <label>Name</label><br />
+            <input type="text" id="inputPaymentName" readonly /><br />
+            <label>Generate Time</label><br />
+            <input
+              type="number"
+              class="input-time"
+              id="inputPaymentGenerateTime"
+            />
+            <input
+              type="text"
+              class="input-format-time"
+              id="inputPaymentFormattedGenerateTime"
+              readonly
+            /><br />
+            <label>Expire Time</label><br />
+            <input
+              type="number"
+              class="input-time"
+              id="inputPaymentExpireTime"
+            />
+            <input
+              type="text"
+              class="input-format-time"
+              id="inputPaymentFormattedExpireTime"
+              readonly
+            /><br />
+            <label>Payment Time</label><br />
+            <input type="number" class="input-time" id="inputPaymentTime" />
+            <input
+              type="text"
+              class="input-format-time"
+              id="inputPaymentFormattedPaymentTime"
+              readonly
+            />
           </div>
 
+          <div class="right-payment-edit-body">
+            <div>
+              <img
+                id="imgQrBaking"
+                src="https://img.vietqr.io/image/970422-0362718422-print.png?amount=120000&addInfo=COCCAMCO%2002675CIZZJ&accountName=MAI%20NGUYEN%20DUY%20KHANH&fbclid=IwZXh0bgNhZW0CMTEAAR15DQyb2vwaU9cG5tpWt7w31udUCeFOqogpxV834ela1qh2SN5Wb40US2Y_aem_I4MNYj-yqWkWEh79a73zwA"
+                alt="QRBankingIMG"
+              />
+            </div>
+            <label>Payment ID</label><br />
+            <input type="text" id="inputPaymentID" readonly /><button
+              id="btnGenerateNewPaymentID"
+            >
+              New</button
+            ><br />
+            <label>Amount</label><br />
+            <input type="number" id="inputPaymentAmount" value="120000" />
+          </div>
         </div>
-      </div>
 
-    </body>
+        <div class="payment-edit-footer">
+          <div class="payment-status-select-box">
+            <label>Payment Status: </label>
+            <div
+              class="btnPaymentStatus status-option payment-pending-status selected"
+              data-payment-status="PENDING"
+            >
+              <img
+                width="20px"
+                src="./assets/GG-icons/payment-black-icon.png"
+                alt="PENDING"
+              />
+            </div>
+            <div
+              class="btnPaymentStatus status-option payment-failed-status"
+              data-payment-status="FAILED"
+            >
+              <img
+                width="20px"
+                src="./assets/GG-icons/payment-black-icon.png"
+                alt="FAILED"
+              />
+            </div>
+            <div
+              class="btnPaymentStatus status-option payment-paid-status"
+              data-payment-status="PAID"
+            >
+              <img
+                width="20px"
+                src="./assets/GG-icons/payment-black-icon.png"
+                alt="PAID"
+              />
+            </div>
+            <output id="status-value">PENDING</output>
+            <button id="btnReactivcatePayment">Reactivate</button>
+          </div>
 
-    <!-- Dialogs here -->
-
-    <!-- Player Dialog -->
-    <dialog id="playerEditDialog">
-      <div class="player-dialog-header">
-        <h3>Player Edit</h3>
-        <div class="btnCloseDialog">
-          <img width="30px" height="30px" src="./assets/image/close-black.png" alt="Đóng">
+          <div class="comment-part">
+            <label>Comment: </label
+            ><input type="text" id="inputPaymentComment" />
+          </div>
         </div>
-      </div>
-
-      <form id="playerEditForm">
-        <label>Email:</label>
-        <input type="email" id="inputPlayerEmail" readonly>
-
-        <label>Họ và tên:</label>
-        <input type="text" id="inputPlayerName">
-
-        <label>Tuổi:</label>
-        <input type="number" id="inputPlayerAge">
-
-        <label>Số điện thoại:</label>
-        <input type="text" id="inputPlayerPhoneNumber">
-
-        <label>Đăng ký vào lúc:</label>
-        <input type="number" id="inputPlayerRegisterTime">
-        <input type="text" id="inputPlayerFormattedTime" readonly><br>
 
         <div class="dialog-buttons">
-          <button id="btnPlayerSaveEdit">Save Data</button>
-          <button id="btnDeletePlayer">Delete Player</button>
+          <button id="btnPaymentSaveEdit">Save Payment</button>
+          <button id="btnDeletePayment">Delete Payment</button>
         </div>
-      </form>
-    </dialog>
+      </dialog>
+    </div>
 
-    <dialog id="paymentEditDialog">
-      <div class="player-dialog-header">
-        <h3>Payment Edit</h3>
-        <div class="btnCloseDialog">
-          <img width="30px" height="30px" src="./assets/image/close-black.png" alt="Đóng">
-        </div>
-      </div>
-
-      <div class="payment-edit-body">
-
-        <div class="left-payment-edit-body">
-          <label>Email</label><br>
-          <input type="text" id="inputPaymentEmail" readonly><br>
-          <label>Name</label><br>
-          <input type="text" id="inputPaymentName" readonly><br>
-          <label>Generate Time</label><br>
-          <input type="number" class="input-time" id="inputPaymentGenerateTime">
-          <input type="text" class="input-format-time" id="inputPaymentFormattedGenerateTime" readonly><br>
-          <label>Expire Time</label><br>
-          <input type="number" class="input-time" id="inputPaymentExpireTime">
-          <input type="text" class="input-format-time" id="inputPaymentFormattedExpireTime" readonly><br>
-          <label>Payment Time</label><br>
-          <input type="number" class="input-time" id="inputPaymentTime">
-          <input type="text" class="input-format-time" id="inputPaymentFormattedPaymentTime" readonly>
-        </div>
-
-        <div class="right-payment-edit-body">
-          <div><img id="imgQrBaking"
-              src="https://img.vietqr.io/image/970422-0362718422-print.png?amount=120000&addInfo=COCCAMCO%2002675CIZZJ&accountName=MAI%20NGUYEN%20DUY%20KHANH&fbclid=IwZXh0bgNhZW0CMTEAAR15DQyb2vwaU9cG5tpWt7w31udUCeFOqogpxV834ela1qh2SN5Wb40US2Y_aem_I4MNYj-yqWkWEh79a73zwA"
-              alt="QRBankingIMG"></div>
-          <label>Payment ID</label><br>
-          <input type="text" id="inputPaymentID" readonly><button id="btnGenerateNewPaymentID">New</button><br>
-          <label>Amount</label><br>
-          <input type="number" id="inputPaymentAmount" value="120000">
-        </div>
-
-      </div>
-
-      <div class="payment-edit-footer">
-        <div class="payment-status-select-box">
-          <label>Payment Status: </label>
-          <div class="btnPaymentStatus status-option payment-pending-status selected" data-payment-status="PENDING">
-            <img width="20px" src="./assets/GG-icons/payment-black-icon.png" alt="PENDING">
-          </div>
-          <div class="btnPaymentStatus status-option payment-failed-status" data-payment-status="FAILED">
-            <img width="20px" src="./assets/GG-icons/payment-black-icon.png" alt="FAILED">
-          </div>
-          <div class="btnPaymentStatus status-option payment-paid-status" data-payment-status="PAID">
-            <img width="20px" src="./assets/GG-icons/payment-black-icon.png" alt="PAID">
-          </div>
-          <output id="status-value">PENDING</output>
-          <button id="btnReactivcatePayment">Reactivate</button>
-        </div>
-
-        <div class="comment-part"><label>Comment: </label><input type="text" id="inputPaymentComment"></div>
-      </div>
-
-      <div class="dialog-buttons">
-        <button id="btnPaymentSaveEdit">Save Payment</button>
-        <button id="btnDeletePayment">Delete Payment</button>
-      </div>
-    </dialog>
-
-  </div>
-
-
-
-  <script type="module" src="./script/admin.js"></script>
-</body>
-
+    <script type="module" src="./script/admin.js"></script>
+  </body>
 </html>

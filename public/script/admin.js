@@ -19,9 +19,11 @@ function unsetSignInWindow() {
 
 let players = [];
 let payments = [];
+let matches = [];
 
 let unsubscribeListenToPlayersCollection = null;
 let unsubscribeListenToPaymentInfoCollection = null;
+let unsubcribeListenToMatchesCollection = null;
 
 // firestore related functions
 function listenToPlayersCollection() {
@@ -49,6 +51,22 @@ function listenToPlayersCollection() {
             renderPlayersAndPaymentStatusToUI();
 
             console.log("Real-time update collection players:", players);
+      });
+}
+
+function listenToMatchesCollection() {
+      return onSnapshot(collection(firestore, "matches"), (snapshot) => {
+            matches = [];
+
+            snapshot.forEach((doc) => {
+                  matches.push({ id: doc.id, ...doc.data() });
+            });
+
+            matches.sort((matchA, matchB) => { return matchA.id - matchB.id });
+
+            renderMatchesToUI();
+
+            console.log("Real-time update collection matches:", matches);
       });
 }
 
@@ -112,6 +130,120 @@ function renderPlayersAndPaymentStatusToUI() {
 
             rollNumber++;
       });
+}
+
+//render matches edit
+// const chia vong loai
+function renderMatchesToUI() {
+      const dashboardBody = document.querySelector("#match-edit-table .dashboard-body");
+      dashboardBody.innerHTML = ""; // Clear existing content
+
+      const searchValue = document.querySelector("#inpSearchName").value.trim().toLowerCase();
+      if (!matches || matches.length === 0) return;
+
+      const selectRoundFilter = document.querySelector("#select-round-filter").value;
+      const filterMatch = matches.filter((item) => {
+            const isRoundMatch = selectRoundFilter === "ALL" || item.roundCode === selectRoundFilter;
+            const isNameMatch =
+                  searchValue === "" ||
+                  item.name1.toLowerCase().includes(searchValue) ||
+                  item.name2.toLowerCase().includes(searchValue);
+            return isRoundMatch && isNameMatch;
+      });
+
+      console.log("filterMatch here: ", filterMatch);
+
+      for (const match of filterMatch) {
+            const { id, email1, email2, name1, name2, score1, score2, winnerEmail, status, comment, startAt, endAt, tableCode, roundCode } = match;
+            const matchRow = getMatchRowDomElem(id, email1, email2, name1, name2, score1, score2, winnerEmail, status, comment, startAt, endAt, tableCode, roundCode);
+            dashboardBody.appendChild(matchRow);
+      }
+
+      stickEventsToEmailInp();
+      adoptMatchStatusEffect();
+      stickEventsToMatchStatus();
+      assignEventsToSaveBtn();
+      // Move checkTheFullEditScreen here to ensure the elements are processed immediately
+      checkTheFullEditScreen();
+}
+
+
+
+
+
+function getMatchRowDomElem(id, email1, email2, name1, name2, score1, score2, winnerEmail, status, comment, startAt, endAt, tableCode, roundCode) {
+      const matchRowElem = document.createElement("div");
+      matchRowElem.classList.add("dashboard-row");
+      let statusClass;
+      switch (status) {
+            case "WAITING":
+                  statusClass = "waiting-match-status"
+                  break;
+            case "INMATCH":
+                  statusClass = "inmatch-match-status"
+                  break;
+            case "DONE":
+                  statusClass = "done-match-status"
+      }
+
+      matchRowElem.innerHTML = `
+            <div class="dashboard-row">
+                  <div class="col-0 hidden-when-full-edit">${roundCode}</div>
+                  <div class="match-id col-1">${id}</div>
+                  <div class="col-2 hidden-when-full-edit">
+                    <input type="text" class="table-code" placeholder="00" value="${tableCode}"/>
+                  </div>
+                  <div class="col-3">
+                    <input class="email1 player-email hidden-when-full-edit" type="text" placeholder="NO PLAYER" value="${email1}">
+                    <p class="name1">${name1}</p>
+                  </div>
+                  <div class="col-4">
+                    <input
+                      type="text"
+                      class="score1 match-score"
+                      placeholder="0" value="${score1}"
+                    />:<input type="text" class="score2 match-score" placeholder="0" value="${score2}"/>
+                  </div>
+                  <div class="col-5">
+                    <input class="email2 player-email hidden-when-full-edit" type="text" placeholder="NO PLAYER" value="${email2}">
+                    <p class="name2">${name2}</p>
+                  </div>
+                  <div class="col-6">
+                    <input type="text" class="match-time start-time hidden-when-full-edit " placeholder="NO TIME" value="${startAt}">
+                    <div class="hidden-when-full-edit" style="margin: 0px;">-</div>
+                    <input type="text" class="match-time end-time hidden-when-full-edit endAtElem" placeholder="NO TIME" value="${endAt}">
+                    <div class="match-status-toggle ${statusClass}">${status}</div>
+
+                  </div>
+                  <div class="col-7">
+                    <select id="select-of-row-${id}">
+                      <option value="NO PLAYER">-- choose winner--</option>
+                      <option value="${email1}">
+                        ${name1}
+                      </option>
+                      <option value="${email2}">
+                        ${name2}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-8">
+                    <input type="text" class="match-comment" placeholder="NO COMMENT" value="${comment}"/>
+                  </div>
+                  <div class="col-9">
+                    <button class="btnSaveMatch">
+                      <img width=24px src="./assets/GG-icons/save-icon.png" alt="" />
+                    </button>
+                  </div>
+            </div>
+            `;
+      const selectedElm = matchRowElem.querySelector(`#select-of-row-${id} option[value="${winnerEmail}"]`);
+      if (selectedElm) {
+            selectedElm.selected = true
+      } else {
+            matchRowElem.querySelector(`#select-of-row-${id} option[value="NO PLAYER"]`).selected = true
+      }
+      return matchRowElem;
+
 }
 
 function getPlayerRowDomElem(rollNumber, email, name, age, phoneNumber, registerTime, paymentStatus) {
@@ -212,6 +344,7 @@ auth.onAuthStateChanged((user) => {
             // set the data array to players & payments above
             unsubscribeListenToPaymentInfoCollection = listenToPaymentInfoCollection();
             unsubscribeListenToPlayersCollection = listenToPlayersCollection();
+            unsubcribeListenToMatchesCollection = listenToMatchesCollection();
 
       } else { // user logged out
             console.log("User logged out");
@@ -228,6 +361,12 @@ auth.onAuthStateChanged((user) => {
                   unsubscribeListenToPlayersCollection();
                   unsubscribeListenToPlayersCollection = null;
                   console.log("unsubcribe to players")
+            }
+
+            if (unsubcribeListenToMatchesCollection) {
+                  unsubcribeListenToMatchesCollection();
+                  unsubcribeListenToMatchesCollection = null;
+                  console.log("unsubcribe to matches");
             }
 
       }
@@ -682,7 +821,188 @@ function generateUniqueIDPayment() {
 // -----------------------------------------------
 
 
+document.getElementById("see-full-edit-check").addEventListener("click", checkTheFullEditScreen);
+function checkTheFullEditScreen() {
+      const isChecked = document.getElementById("see-full-edit-check").checked;
+      console.log(isChecked);
+      document.querySelectorAll(".hidden-when-full-edit").forEach(elem =>
+            elem.style.setProperty("display", isChecked ? "block" : "none", "important")
+      );
+}
+
+
+function stickEventsToMatchStatus() {
+      document.querySelectorAll(".match-status-toggle").forEach(button => {
+            button.addEventListener("click", function () {
+                  const endTimeBox = button.parentElement.querySelector(".endAtElem");
+                  const date = new Date();
+                  const formattedDate = date.toLocaleString("vi-VN", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "2-digit"
+                  }).replace(",", "");
+
+                  switch (button.textContent) {
+                        case "WAITING":
+                              button.textContent = "INMATCH";
+                              button.className = "inmatch-match-status match-status-toggle";
+                              endTimeBox.value = "NO TIME";
+                              break;
+                        case "INMATCH":
+                              button.textContent = "DONE";
+                              button.className = "done-match-status match-status-toggle";
+                              endTimeBox.value = formattedDate;
+                              break;
+                        default:
+                              button.textContent = "WAITING";
+                              button.className = "waiting-match-status match-status-toggle";
+                              endTimeBox.value = "NO TIME";
+                              break;
+                  }
+            });
+      });
+}
+
+
+async function stickEventsToEmailInp() {
+      document.querySelectorAll(".email1, .email2").forEach((item) => {
+            item.addEventListener("change", async () => {
+                  const isEmail1 = item.classList.contains("email1");
+                  const nameElem = item.parentElement.querySelector(isEmail1 ? ".name1" : ".name2");
+                  const email = item.value.trim();
+                  const option = item.parentElement.parentElement.querySelector(`.col-7 select option:nth-of-type(${isEmail1 ? 2 : 3})`);
+
+                  if (email === "") {
+                        item.value = "NO PLAYER";
+                        nameElem.textContent = "NO PLAYER";
+                        option.value = "NO PLAYER";
+                        option.textContent = "NO PLAYER";
+                        return;
+                  }
+
+                  const playerDoc = await getDoc(doc(firestore, "players", email));
+
+                  if (playerDoc.exists()) {
+                        const playerName = playerDoc.data().name;
+                        nameElem.textContent = playerName;
+                        option.value = email;
+                        option.textContent = playerName;
+                  } else {
+                        nameElem.textContent = "NO PLAYER";
+                        option.value = "NO PLAYER";
+                        option.textContent = "NO PLAYER";
+                  }
+            });
+      });
+}
+
+async function assignEventsToSaveBtn() {
+      document.querySelectorAll(".btnSaveMatch").forEach(item => {
+            item.addEventListener("click", async () => {
+                  const dashboardRow = item.parentElement.parentElement;
+                  const saveIcon = item.querySelector("img");
+
+                  // Show loading effect
+                  item.disabled = true;
+                  const originalSrc = saveIcon.src;
+                  saveIcon.src = "./assets/image/loading-icon.gif"; // Replace with your loading gif path
+
+                  await saveMatchToFirestore(dashboardRow);
+
+                  // Remove loading effect
+                  item.disabled = false;
+                  saveIcon.src = originalSrc;
+            });
+      });
+}
+
+
+async function saveMatchToFirestore(dashboardRow) {
+      // Get values from the row
+      const firstMatchID = dashboardRow.querySelector(".match-id").textContent;
+      const winnerEmail = dashboardRow.querySelector("select").value;
+      const winnerName = dashboardRow.querySelector("select").selectedOptions[0].textContent;
+      const tableCode = dashboardRow.querySelector(".table-code").value;
+      const comment = dashboardRow.querySelector(".match-comment").value;
+      const email1 = dashboardRow.querySelector(".email1").value;
+      const email2 = dashboardRow.querySelector(".email2").value;
+      const name1 = dashboardRow.querySelector(".name1").textContent;
+      const name2 = dashboardRow.querySelector(".name2").textContent;
+      const score1 = dashboardRow.querySelector(".score1").value;
+      const score2 = dashboardRow.querySelector(".score2").value;
+      const startAt = dashboardRow.querySelector(".start-time").value;
+      const endAt = dashboardRow.querySelector(".end-time").value;
+      const status = dashboardRow.querySelector(".match-status-toggle").textContent;
+
+      // Prepare the match info object
+      const matchInfo = {
+            winnerEmail,
+            winnerName,
+            tableCode,
+            comment,
+            email1,
+            email2,
+            name1,
+            name2,
+            score1,
+            score2,
+            startAt,
+            endAt,
+            status
+      };
+
+      // Save the match data to Firestore
+      await setDoc(doc(firestore, "matches", String(firstMatchID)), matchInfo, { merge: true });
+
+      if (winnerEmail === "NO PLAYER" || !winnerEmail || !winnerName || (winnerEmail !== email1 && winnerEmail !== email2)) {
+            return;
+      }
+
+      // if that is the final round, finish
+      if (firstMatchID == 1) {
+            return;
+      }
+      const secondMatchID = firstMatchID / 2;
+      const matchRefForWinner = doc(firestore, "matches", String(secondMatchID));
+      if (firstMatchID % 2 == 0) {
+            await setDoc(matchRefForWinner, {
+                  email1: email1,
+                  name1: name1
+            }, { merge: true });
+      } else {
+            await setDoc(matchRefForWinner, {
+                  email2: email2,
+                  name2: name2
+            }, { merge: true });
+      }
+}
 
 
 
+function adoptMatchStatusEffect() {
+      document.querySelectorAll(".match-status-toggle").forEach(button => {
+            switch (button.textContent) {
+                  case "WAITING":
+                        button.className = "waiting-match-status match-status-toggle";
+                        break;
+                  case "INMATCH":
+                        button.className = "inmatch-match-status match-status-toggle";
+                        break;
+                  case "DONE":
+                        button.className = "done-match-status match-status-toggle";
+                        break;
+            }
+      });
+}
 
+
+document.querySelector("#select-round-filter").addEventListener("change", () => {
+      renderMatchesToUI();
+})
+
+document.querySelector("#inpSearchName").addEventListener("change", () => {
+      const searchValue = document.querySelector("#inpSearchName").value;
+      renderMatchesToUI();
+})
