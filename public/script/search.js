@@ -34,7 +34,7 @@ if (searchForm) {
 
     const searchEmail = searchInput ? searchInput.value.trim() : "";
     if (!searchEmail) {
-      alert("Vui lòng nhập email để tìm kiếm.");
+      setDefaultUserDetails();
       return;
     }
     
