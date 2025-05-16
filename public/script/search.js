@@ -18,99 +18,101 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-console.log("Firebase đã được khởi tạo:", app);
 const db = getFirestore();
-console.log("Firestore đã được khởi tạo");
 const colRef = collection(db, "paymentInfo");
-getDocs(colRef)
-  .then((snapshot) => {
-    let books = [];
-    snapshot.docs.forEach((doc) => {
-      books.push({ ...doc.data(), id: doc.id });
-    });
-    console.log("Dữ liệu nhận được:", books);
-  })
-  .catch((err) => {
-    console.error("Lỗi khi truy xuất dữ liệu:", err.message);
-  });
 
-const searchForm = document.querySelector(".search");
-const searchInput = searchForm.querySelector("input[name='email']");
-const resultsContainer = document.createElement("div");
-resultsContainer.classList.add("results");
-document.querySelector(".container").appendChild(resultsContainer);
 
-searchForm.addEventListener("submit", (event) => {
-  event.preventDefault();
+const searchForm = document.querySelector(".form-search");
 
-  const searchEmail = searchInput.value.trim();
-  if (!searchEmail) {
-    alert("Vui lòng nhập email để tìm kiếm.");
-    return;
-  }
-  
-  //Truy xuất dữ liệu từ Firestore theo thời gian thực
-  const docRef = doc(db, "paymentInfo", searchEmail);
-  onSnapshot(docRef, (doc) => {
-    let userData = null;
-    if (doc.exists()) {
-      userData = { ...doc.data(), id: doc.id };
-      displayUserData(userData);
-    } else {
-      resultsContainer.innerHTML = `<p class="no-info">Không tìm thấy dữ liệu cho email này.</p>`;
+const searchInput = searchForm ? searchForm.querySelector("input[name='email']") : null;
+
+const resultContainer = document.querySelector(".user-details");
+
+if (searchForm) {
+  searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const searchEmail = searchInput ? searchInput.value.trim() : "";
+    if (!searchEmail) {
+      alert("Vui lòng nhập email để tìm kiếm.");
+      return;
     }
+    
+    const docRef = doc(db, "paymentInfo", searchEmail);
+    onSnapshot(docRef, (doc) => {
+      let userData = null;
+      if (doc.exists()) {
+        userData = { ...doc.data(), id: doc.id };
+        displayUserData(userData);
+      } else {
+        resultsContainer.innerHTML = `<p class="no-info">Không tìm thấy dữ liệu cho email này.</p>`;
+      }
+    });
   });
-});
+}
 
 
+//Hàm đặt nội dung mặc định cho div class user-detail
+function setDefaultUserDetails() {
+  const userDetail = document.querySelector(".user-details");
+  if (userDetail) {
+    userDetail.innerHTML = `<p class="user-details-text">Vui lòng nhập email để tìm kiếm</p>`;
+  }
+}
+
+setDefaultUserDetails();
 
 function displayUserData(userData) {
-  // Hàm để chuyển đổi trạng thái thành class tương ứng
   const getStatusClass = (status) => {
     if (!status) return '';
     switch (status.toUpperCase()) {
       case 'PAID':
-        return 'success';
+        return 'Đã thanh toán';
       case 'PENDING':
-        return 'pending';
+        return 'Chưa thanh toán';
       default:
         return '';
     }
   };
 
-  // Tạo URL thanh toán với mã thanh toán động
-  const createPaymentUrl = (paymentId) => {
-    const baseUrl = "https://img.vietqr.io/image/970422-0362718422-print.png";
-    const amount = "120000";
-    const accountName = "MAI%20NGUYEN%20DUY%20KHANH";
-    // Thay thế mã thanh toán vào URL
-    return `${baseUrl}?amount=${amount}&addInfo=COCCAMCO+${paymentId}&accountName=${accountName}`;
-  };
-
-  resultsContainer.innerHTML = `
-    <div class="user-info">
-      <h2>Thông tin thanh toán</h2>
+  resultContainer.innerHTML = `
       <div class="info-grid">
-        <p class="email"><strong>Email:</strong> ${userData.id}</p>
-        <p class="fullname"><strong>Họ và tên:</strong> ${userData.name || 'Chưa có dữ liệu'}</p>
-        <p class="paymentid"><strong>Mã thanh toán:</strong> 
-          <a href="${createPaymentUrl(userData.paymentID)}" 
-             target="_blank" 
-             class="payment-link">
-             ${userData.paymentID || 'Nhấp để thanh toán'}
-          </a>
-        </p>
-        <p class="status"><strong>Trạng thái:</strong> <span class="status-button ${getStatusClass(userData.paymentStatus)}">${userData.paymentStatus || 'Chưa xác định'}</span></p>
-        <p class="generate-time"><strong>Thời gian tạo:</strong> ${formatTimestamp(userData.generateTime)}</p>
-        <p class="expire-time"><strong>Thời gian hết hạn:</strong> ${formatTimestamp(userData.expireTime)}</p>
-      ${userData.qrRanking ? `
-        <div class="qr-code">
-          <p><strong>Mã QR:</strong></p>
-          <img src="${userData.qrRanking}" alt="QR Code" />
+        <p class="email">Người chơi: ${userData.name || 'Chưa có dữ liệu'}</p>
+        <p class="email">Email: ${userData.id}</p>
+        <div class="payment-info-header">
+          <img src="assets/GG-icons/payment-icon.png" alt="payment-icon">
+          <p>Tình trạng thanh toán</p>
         </div>
-      ` : ''}
-    </div>
+        <p class="status">Trạng thái: <span class="info-status">${getStatusClass(userData.paymentStatus)}</span></p>
+        <p class="expire-time">Hết hạn thanh toán: ${formatTimestamp(userData.expireTime)}</p>
+        <div class="qr-code-container">
+          <img src="${userData.qrBanking}" alt="QR Code" class="qr-code-img" />
+        </div>
+        <p>Ngân hàng: MB Bank</p>
+        <p>Số tài khoản: <span class="account-number">0362718422</span><img id="copy-account" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon"></p>
+        <p>Chủ tài khoản: MAI NGUYEN DUY KHANH</p>
+        <p>Lệ phí: 120.000 VNĐ</p>
+        <p>Nội dung chuyển khoản: <span class="payment-id">COCCAMCO + ${userData.paymentID}<img id="copy-payment" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon"></span></p>
+      </div>
   `;
+  
+  setTimeout(() => {
+    const copyAccountBtn = document.getElementById('copy-account');
+    if (copyAccountBtn) {
+      copyAccountBtn.addEventListener('click', function() {
+        const accountNumber = document.querySelector('.account-number').textContent;
+        copyToClipboard(accountNumber, 'Đã sao chép số tài khoản');
+      });
+    }
+    
+    const copyPaymentBtn = document.getElementById('copy-payment');
+    if (copyPaymentBtn) {
+      copyPaymentBtn.addEventListener('click', function() {
+        const paymentContent = document.querySelector('.payment-id').textContent;
+        copyToClipboard(paymentContent, 'Đã sao chép nội dung chuyển khoản');
+      });
+    }
+  }, 100);
 }
 
 // Hàm hỗ trợ format timestamp
@@ -125,4 +127,61 @@ function formatTimestamp(timestamp) {
     minute: '2-digit',
     second: '2-digit'
   });
+}
+
+// Hàm sao chép văn bản vào clipboard
+function copyToClipboard(text, message) {
+  const tempInput = document.createElement('input');
+  tempInput.value = text;
+  document.body.appendChild(tempInput);
+  
+  tempInput.select();
+  document.execCommand('copy');
+  
+  document.body.removeChild(tempInput);
+  
+  showToast(message);
+}
+
+// Hàm hiển thị thông báo toast
+function showToast(message) {
+  // Kiểm tra xem đã có toast nào chưa
+  let toast = document.querySelector('.toast-notification');
+  
+  // Nếu chưa có, tạo mới
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    document.body.appendChild(toast);
+    
+    // Thêm CSS cho toast
+    const style = document.createElement('style');
+    style.textContent = `
+      .toast-notification {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 4px;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      
+      .toast-notification.show {
+        opacity: 1;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  
+  toast.textContent = message;
+  toast.classList.add('show');
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2000);
 }
