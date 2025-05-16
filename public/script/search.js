@@ -37,7 +37,7 @@ if (searchForm) {
       setDefaultUserDetails();
       return;
     }
-    
+
     const docRef = doc(db, "paymentInfo", searchEmail);
     onSnapshot(docRef, (doc) => {
       let userData = null;
@@ -70,6 +70,8 @@ function displayUserData(userData) {
         return 'Đã thanh toán';
       case 'PENDING':
         return 'Chưa thanh toán';
+      case 'FAILED':
+        return 'Lỗi. Vui lòng liên hệ để được hỗ trợ!';
       default:
         return '';
     }
@@ -95,19 +97,19 @@ function displayUserData(userData) {
         <p>Nội dung chuyển khoản: <span class="payment-id">COCCAMCO + ${userData.paymentID}<img id="copy-payment" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon"></span></p>
       </div>
   `;
-  
+
   setTimeout(() => {
     const copyAccountBtn = document.getElementById('copy-account');
     if (copyAccountBtn) {
-      copyAccountBtn.addEventListener('click', function() {
+      copyAccountBtn.addEventListener('click', function () {
         const accountNumber = document.querySelector('.account-number').textContent;
         copyToClipboard(accountNumber, 'Đã sao chép số tài khoản');
       });
     }
-    
+
     const copyPaymentBtn = document.getElementById('copy-payment');
     if (copyPaymentBtn) {
-      copyPaymentBtn.addEventListener('click', function() {
+      copyPaymentBtn.addEventListener('click', function () {
         const paymentContent = document.querySelector('.payment-id').textContent;
         copyToClipboard(paymentContent, 'Đã sao chép nội dung chuyển khoản');
       });
@@ -134,12 +136,12 @@ function copyToClipboard(text, message) {
   const tempInput = document.createElement('input');
   tempInput.value = text;
   document.body.appendChild(tempInput);
-  
+
   tempInput.select();
   document.execCommand('copy');
-  
+
   document.body.removeChild(tempInput);
-  
+
   showToast(message);
 }
 
@@ -147,13 +149,13 @@ function copyToClipboard(text, message) {
 function showToast(message) {
   // Kiểm tra xem đã có toast nào chưa
   let toast = document.querySelector('.toast-notification');
-  
+
   // Nếu chưa có, tạo mới
   if (!toast) {
     toast = document.createElement('div');
     toast.className = 'toast-notification';
     document.body.appendChild(toast);
-    
+
     // Thêm CSS cho toast
     const style = document.createElement('style');
     style.textContent = `
@@ -177,10 +179,10 @@ function showToast(message) {
     `;
     document.head.appendChild(style);
   }
-  
+
   toast.textContent = message;
   toast.classList.add('show');
-  
+
   setTimeout(() => {
     toast.classList.remove('show');
   }, 2000);
