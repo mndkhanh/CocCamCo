@@ -105,7 +105,7 @@ nav {
   font-size: 2rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
-  position: relative; /* Đảm bảo hiển thị trên lửa */
+  position: relative;
 }
 .hero-content h1 {
   font-size: 5rem;
