@@ -90,15 +90,15 @@ nav {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -285px; /* Điều chỉnh vị trí lửa so với nội dung */
-  height: 500px; /* Chiều cao của hình lửa */
+  bottom: -325px;
+  height: 800px;
   background-image: url("../images/red-fire.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
-  z-index: -1; /* Đặt dưới nội dung */
-  pointer-events: none; /* Cho phép click xuyên qua vùng lửa */
-  opacity: 0.9; /* Làm mờ toàn bộ hiệu ứng lửa */
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.9;
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25)), url("../images/red-fire.png");
 }
 .hero-content h2 {
