@@ -26,7 +26,7 @@ const searchForm = document.querySelector(".form-search");
 
 const searchInput = searchForm ? searchForm.querySelector("input[name='email']") : null;
 
-const resultContainer = document.querySelector(".user-details");
+let resultContainer = document.querySelector(".user-details");
 
 if (searchForm) {
   searchForm.addEventListener("submit", (event) => {
@@ -45,7 +45,7 @@ if (searchForm) {
         userData = { ...doc.data(), id: doc.id };
         displayUserData(userData);
       } else {
-        resultsContainer.innerHTML = `<p class="no-info">Không tìm thấy dữ liệu cho email này.</p>`;
+        resultContainer.innerHTML = `<p class="no-info">Không tìm thấy dữ liệu cho email này.</p>`;
       }
     });
   });
@@ -187,3 +187,106 @@ function showToast(message) {
     toast.classList.remove('show');
   }, 2000);
 }
+
+//Chuyển mục thông tin
+document.querySelectorAll('.player-info, .view-matches').forEach(e => {
+  e.addEventListener('click', function() {
+    const panelContent = document.querySelector('.panel-content');
+    if (this.classList.contains('player-info')) {
+      panelContent.innerHTML = `<div class="user-icon">
+          <img src="assets/image/person.png" alt="Icon Person">
+        </div>
+        <div class="user-details">
+          <p class="user-details-text">Vui lòng nhập email để tìm kiếm</p>
+        </div>`;
+    } else {
+     panelContent.innerHTML = `<div class="match-container">
+            <h3
+              style="
+                text-align: center;
+                color: white;
+                margin: 0;
+                font-size: 3rem;
+              "
+            >
+              VÒNG 32
+            </h3>
+
+            <div class="match-score">
+              <div class="player">
+                <img
+                  src="assets/image/person.png"
+                  alt="Player Icon"
+                  class="player-icon"
+                />
+                <div class="player-name">Mai Nguyễn Duy Khánh</div>
+                <div class="score winner">7</div>
+              </div>
+
+              <div class="score-divider">:</div>
+
+              <div class="player">
+                <img
+                  src="assets/image/person.png"
+                  alt="Player Icon"
+                  class="player-icon"
+                />
+                <div class="player-name">Nguyễn Văn Tèo</div>
+                <div class="score">2</div>
+              </div>
+            </div>
+
+            <div class="match-details">
+              <div class="match-detail-item">
+                Cặp đấu số: <span class="highlight">31</span>
+              </div>
+              <div class="match-detail-item">
+                Bàn số: <span class="highlight">12</span>
+              </div>
+              <div class="match-detail-item">
+                Tình trạng vấn đấu: <span class="highlight">Đã đấu xong</span>
+              </div>
+              <div class="match-detail-item">
+                Người chiến thắng:
+                <span class="winner">Mai Nguyễn Duy Khánh</span>
+              </div>
+              <div class="match-detail-item">
+                Comment: <span class="highlight">No Comment</span>
+              </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px">
+              <button
+                style="
+                  background-color: #222;
+                  border: 1px solid #e67f0d;
+                  color: #e67f0d;
+                  padding: 8px 16px;
+                  border-radius: 8px;
+                  cursor: pointer;
+                "
+              >
+                Xem toàn bộ bảng đấu
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                  style="vertical-align: middle; margin-left: 5px"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>`;
+    }
+  })
+})
