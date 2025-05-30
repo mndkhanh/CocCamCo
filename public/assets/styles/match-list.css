@@ -1,0 +1,22 @@
+.panel-content {
+  display: none;
+}
+
+.active {
+  display: flex;
+}
+
+.bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../image/fire-small.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.4); /* phủ đen mờ */
+  background-blend-mode: darken;
+  z-index: -1;
+}

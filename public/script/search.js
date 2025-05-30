@@ -84,6 +84,7 @@ if (searchForm) {
   });
 }
 setDefaultUserMatch();
+setDefaultUserDetails();
 
 async function listenToMatchesCollection(email, renderMatchesToUI) {
   const unsubscribeFns = [];
