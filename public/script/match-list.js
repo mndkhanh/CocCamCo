@@ -30,12 +30,11 @@ const matchesRef = collection(firestore, "matches");
 
 let unsubscribe = null;
 let matches = [];
-let current_id = 1;
+let current_id = 7;
 
 
-const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
-
+const nextBtn = document.getElementById("nextBtn");
 prevBtn.addEventListener('click', () => {
     if (current_id > 0) {
         current_id--;
@@ -59,6 +58,30 @@ nextBtn.addEventListener('click', () => {
     console.log(current_id);
 
 });
+
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+        // Simulate prevBtn click
+        if (current_id > 0) {
+            current_id--;
+        } else if (current_id === 0) {
+            current_id = 7;
+        }
+        renderUI();
+        console.log(current_id);
+    } else if (e.key === 'ArrowRight') {
+        // Simulate nextBtn click
+        if (current_id < 7) {
+            current_id++;
+        } else if (current_id === 7) { // this condition is a logic bug, see note below
+            current_id = 0;
+        }
+        renderUI();
+        console.log(current_id);
+    }
+});
+
 
 
 
@@ -128,32 +151,34 @@ function renderUI() {
             break;
         case 1:
             round_id = "R32_A";
-            bgDiv.style.backgroundImage = "url('./assets/image/fire-small.jpg')";
+            bgDiv.style.backgroundImage = "url('./assets/match-list-bg/R32_A.png')";
             break;
         case 2:
             round_id = "R32_B";
-            bgDiv.style.backgroundImage = "url('./assets/image/fire-small.jpg')";
+            bgDiv.style.backgroundImage = "url('./assets/match-list-bg/R32_B.png')";
             break;
         case 3:
             round_id = "R16_A";
-            bgDiv.style.backgroundImage = "url('./assets/image/fire-small.jpg')";
+            bgDiv.style.backgroundImage = "url('./assets/match-list-bg/R16_A.png')";
             break;
         case 4:
             round_id = "R16_B";
-            bgDiv.style.backgroundImage = "url('./assets/image/fire-small.jpg')";
+            bgDiv.style.backgroundImage = "url('./assets/match-list-bg/R16_B.png')";
             break;
         case 5:
             round_id = "R8";
-            bgDiv.style.backgroundImage = "url('./assets/image/fire-small.jpg')";
+            bgDiv.style.backgroundImage = "url('./assets/match-list-bg/R8.png')";
             break;
         case 6:
             round_id = "R4";
-            bgDiv.style.backgroundImage = "url('./assets/image/fire-small.jpg')";
+            bgDiv.style.backgroundImage = "url('./assets/match-list-bg/R4.png')";
             break;
         case 7:
             round_id = "R2_R3_4";
-            bgDiv.style.backgroundImage = "url('./assets/image/fire-small.jpg')";
+            bgDiv.style.backgroundImage = "url('./assets/match-list-bg/R2_R3_4.png')";
             break;
+
+
     }
 
     const currentPanel = document.getElementById(`round-${round_id}`);
@@ -161,6 +186,7 @@ function renderUI() {
     if (currentPanel) {
         currentPanel.classList.add("active");
     }
+    set2ndPlayer();
 
 }
 
@@ -232,7 +258,229 @@ function generateUIRowForRoundAll() {
     })
 }
 
+function generateUIRowForRound32A() {
+    document.getElementById("round-R32_A").querySelectorAll(".ids").forEach((elem) => {
+        elem.innerHTML = `
+        <div class="flex md:gap-3 gap-2 justify-between items-center mb-5">
+
+            <!-- ID moved here -->
+            <div class="text-white md:text-2xl text-sm font-black mr-2 text-xs pointer-events-none">
+              # <span class="id"></span>    
+            </div>
+
+            <div
+              class="name1 text-[8px] font-black text-center md:text-2xl flex-2 bg-gradient-to-r from-purple-500 to-cyan-400 text-white font-bold md:px-4 py-1  md:py-4">
+            </div>
+
+            <div class="flex-1 flex flex-col text-center text-white leading-[1]">
+  <div class="font-black text-cyan-400 text-[8px] md:text-sm">
+    Bàn <span class="tableCode"></span>
+  </div>
+  <div class="text-[8px] md:text-sm">
+    <span class="score1"></span> - <span class="score2"></span>
+  </div>
+  <div class="startAt text-[8px] md:text-sm"></div>
+</div>
+
+
+            <div
+              class="name2 text-[8px] font-black text-center md:text-2xl flex-2 bg-gradient-to-r from-purple-500 to-cyan-400 text-white font-bold md:px-4 py-1  md:py-4">
+            </div>
+
+          </div>`
+    })
+}
+
+function generateUIRowForRound32B() {
+    document.getElementById("round-R32_B").querySelectorAll(".ids").forEach((elem) => {
+        elem.innerHTML = `
+<div class="flex md:gap-3 gap-2 justify-between items-center mb-5">
+
+            <div class="text-white md:text-2xl text-sm font-black mr-2 text-xs pointer-events-none">
+              # <span class="id"></span>
+            </div>
+
+            <div
+              class="name1 text-[8px] font-black text-center md:text-2xl flex-2 bg-gradient-to-r from-red-500 to-orange-400 text-white font-bold md:px-4 py-1 md:py-4">
+            </div>
+
+            <div class="flex-1 flex flex-col text-center text-white leading-[1]">
+              <div class="font-black text-orange-500 text-[8px] md:text-sm">
+                Bàn <span class="tableCode">00</span>
+              </div>
+              <div class="text-[8px] md:text-sm">
+                <span class="score1">0</span> - <span class="score2">0</span>
+              </div>
+              <div class="startAt text-[8px] md:text-sm"></div>
+            </div>
+
+            <div
+              class="name2 text-[8px] font-black text-center md:text-2xl flex-2 bg-gradient-to-r from-red-500 to-orange-400 text-white font-bold md:px-4 py-1 md:py-4">
+            </div>
+          </div>
+
+        `
+    })
+}
+
+
+function generateUIRowForRound16A() {
+    document.getElementById("round-R16_A").querySelectorAll(".ids").forEach((elem) => {
+        elem.innerHTML = `
+<div class="flex md:gap-3 gap-2 justify-between items-center mb-5">
+
+            <div class="text-white md:text-2xl text-sm font-black mr-2 text-xs pointer-events-none">
+              # <span class="id"></span>
+            </div>
+
+            <div
+              class="name1 text-[8px] font-black text-center md:text-2xl flex-2 bg-gradient-to-r from-cyan-700 to-lime-400 text-white font-bold md:px-4 py-1 md:py-4">
+            </div>
+
+            <div class="flex-1 flex flex-col text-center text-white leading-[1]">
+              <div class="font-black text-lime-400  text-[8px] md:text-sm">
+                Bàn <span class="tableCode">00</span>
+              </div>
+              <div class="text-[8px] md:text-sm">
+                <span class="score1">0</span> - <span class="score2">0</span>
+              </div>
+              <div class="startAt text-[8px] md:text-sm"></div>
+            </div>
+
+            <div
+              class="name2 text-[8px] font-black text-center md:text-2xl flex-2 bg-gradient-to-r from-cyan-700 to-lime-400 text-white font-bold md:px-4 py-1 md:py-4">
+            </div>
+          </div>
+
+        `
+    })
+}
+
+function generateUIRowForRound16B() {
+    document.getElementById("round-R16_B").querySelectorAll(".ids").forEach((elem) => {
+        elem.innerHTML = `
+<div class="flex md:gap-3 gap-2 justify-between items-center mb-5">
+
+            <div class="text-white md:text-2xl text-sm font-black mr-2 text-xs pointer-events-none">
+              # <span class="id"></span>
+            </div>
+
+            <div
+              class="name1 text-[8px] font-black text-center md:text-2xl flex-2 bg-gradient-to-r from-blue-700 to-yellow-400 text-white font-bold md:px-4 py-1 md:py-4">
+            </div>
+
+            <div class="flex-1 flex flex-col text-center text-white leading-[1]">
+              <div class="font-black text-yellow-400  text-[8px] md:text-sm">
+                Bàn <span class="tableCode">00</span>
+              </div>
+              <div class="text-[8px] md:text-sm">
+                <span class="score1">0</span> - <span class="score2">0</span>
+              </div>
+              <div class="startAt text-[8px] md:text-sm"></div>
+            </div>
+
+            <div
+              class="name2 text-[8px] font-black text-center md:text-2xl flex-2 bg-gradient-to-r from-blue-700 to-yellow-400 text-white font-bold md:px-4 py-1 md:py-4">
+            </div>
+          </div>
+
+        `
+    })
+}
+
+
+function generateUIRowForRound8() {
+    document.getElementById("round-R8").querySelectorAll(".ids").forEach((elem) => {
+        elem.innerHTML = `
+<div class="flex md:gap-3 gap-2 justify-between items-center mb-5">
+
+            <div class="text-white md:text-2xl text-sm font-black mr-2 text-xs pointer-events-none">
+              # <span class="id"></span>
+            </div>
+
+            <div
+              class="name1 text-[8px] font-black text-center md:text-2xl flex-2 bg-gradient-to-r from-blue-700 to-yellow-400 text-white font-bold md:px-4 py-1 md:py-4">
+            </div>
+
+            <div class="flex-1 flex flex-col text-center text-white leading-[1]">
+              <div class="font-black text-yellow-400  text-[8px] md:text-sm">
+                Bàn <span class="tableCode">00</span>
+              </div>
+              <div class="text-[8px] md:text-sm">
+                <span class="score1">0</span> - <span class="score2">0</span>
+              </div>
+              <div class="startAt text-[8px] md:text-sm"></div>
+            </div>
+
+            <div
+              class="name2 text-[8px] font-black text-center md:text-2xl flex-2 bg-gradient-to-r from-blue-700 to-yellow-400 text-white font-bold md:px-4 py-1 md:py-4">
+            </div>
+          </div>
+
+        `
+    })
+}
+
+
+function generateUIRowForRound4() {
+    document.getElementById("round-R4").querySelectorAll(".ids").forEach((elem) => {
+        elem.innerHTML = `
+<div class="flex md:gap-3 gap-2 justify-between items-center mb-5">
+
+            <div class="text-white md:text-2xl text-sm font-black mr-2 text-xs pointer-events-none">
+              # <span class="id"></span>
+            </div>
+
+            <div
+              class="name1 text-[8px] font-black text-center md:text-2xl flex-2 bg-gradient-to-r from-blue-700 to-yellow-400 text-white font-bold md:px-4 py-1 md:py-4">
+            </div>
+
+            <div class="flex-1 flex flex-col text-center text-white leading-[1]">
+              <div class="font-black text-yellow-400  text-[8px] md:text-sm">
+                Bàn <span class="tableCode">00</span>
+              </div>
+              <div class="text-[8px] md:text-sm">
+                <span class="score1">0</span> - <span class="score2">0</span>
+              </div>
+              <div class="startAt text-[8px] md:text-sm"></div>
+            </div>
+
+            <div
+              class="name2 text-[8px] font-black text-center md:text-2xl flex-2 bg-gradient-to-r from-blue-700 to-yellow-400 text-white font-bold md:px-4 py-1 md:py-4">
+            </div>
+          </div>
+
+        `
+    })
+}
+
+function set2ndPlayer() {
+    const match = matches[1]; // trận chung kết
+    let playerName;
+
+    if (match.winnerEmail !== match.email1 && match.winnerEmail !== match.email2) {
+        // winnerEmail khác cả 2 người
+        playerName = "NO PLAYER";
+    } else {
+        // lấy tên người không phải người thắng
+        if (match.winnerEmail === match.email1) {
+            playerName = match.name2;
+        } else {
+            playerName = match.name1;
+        }
+    }
+
+    document.getElementById("id-2nd-player").innerHTML = playerName;
+}
+
 
 // Hiển thị round đầu tiên khi load
 generateUIRowForRoundAll();
+generateUIRowForRound32A();
+generateUIRowForRound32B();
+generateUIRowForRound16A();
+generateUIRowForRound16B();
+generateUIRowForRound8();
+generateUIRowForRound4();
+
 renderUI();
