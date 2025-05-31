@@ -5,29 +5,215 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tra Cứu</title>
     <link rel="stylesheet" href="assets/styles/search.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
     <header>
-      <div class="navbar">
-        <img src="\public\assets\favicons\origin.jpg" alt="LogoCocCamCo" />
-        <div>Cóc Cầm Cơ - Tra Cứu</div>
-      </div>
+      <img
+        class="logo"
+        src="assets/image/logo-with-text.png"
+        alt="LogoCocCamCo"
+      />
     </header>
     <div class="container">
-      <h1>THÔNG TIN THÍ SINH</h1>
-      <form class="search">
-        <div class="form-input">
-          <input
-            type="text"
-            name="email"
-            placeholder="Nhập email để tìm kiếm"
-          />
-          <div>*Vui lòng nhập đúng địa chỉ email đã đăng ký</div>
-        </div>
-        <input class="search-btn" type="submit" name="submit" value="Tìm" />
-        <button class="guide-btn" class="guide">Hướng dẫn</button>
+      <h1>CÓC CẦM CƠ - II</h1>
+      <h2>Thông Tin Thí Sinh</h2>
+      <form class="form-search">
+        <input
+          class="form-input"
+          type="text"
+          name="email"
+          placeholder="Nhập đúng địa chỉ email đã đăng ký"
+        />
+        <button class="search-btn" type="submit">
+          Tìm kiếm
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            width="20"
+            height="20"
+            viewBox="0 0 50 50"
+          >
+            <path
+              d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"
+            ></path>
+          </svg>
+        </button>
       </form>
+      <div class="user-info-panel">
+        <div class="panel-header">
+          <button class="player-info tab-btn active" data-tab="player-tab">
+            Thông tin người chơi
+          </button>
+          <button class="view-matches tab-btn" data-tab="match-tab">
+            Xem cặp đấu
+          </button>
+        </div>
+        <div class="panel-content tab-content active" id="player-tab">
+          <div class="user-icon">
+            <img src="assets/image/person.png" alt="Icon Person" />
+          </div>
+          <div class="user-details">
+            <p class="user-details-text">Vui lòng nhập email để tìm kiếm</p>
+          </div>
+        </div>
+        <div class="panel-content tab-content" id="match-tab">
+          <div class="match-container">
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                margin: 20px 0;
+              "
+            >
+              <button
+                id="prev-round"
+                style="
+                  background: none;
+                  border: none;
+                  font-size: 2rem;
+                  color: #e67f0d;
+                  cursor: pointer;
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="30"
+                  fill="#e67f0d"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                </svg>
+              </button>
+
+              <h3
+                style="
+                  text-align: center;
+                  color: #e67f0d;
+                  margin: 0;
+                  font-size: 3rem;
+                "
+                id="round-name"
+              >
+                VÒNG 32
+              </h3>
+
+              <button
+                id="next-round"
+                style="
+                  background: none;
+                  border: none;
+                  font-size: 2rem;
+                  color: #e67f0d;
+                  cursor: pointer;
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="30"
+                  fill="#e67f0d"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="match-score">
+              <div class="player">
+                <img
+                  src="assets/image/person.png"
+                  alt="Player Icon"
+                  class="player-icon"
+                />
+                <div class="player-name">Mai Nguyễn Duy Khánh</div>
+                <div class="score">7</div>
+              </div>
+
+              <div class="score-divider">vs</div>
+
+              <div class="player">
+                <img
+                  src="assets/image/person.png"
+                  alt="Player Icon"
+                  class="player-icon"
+                />
+                <div class="player-name">Nguyễn Văn Tèo</div>
+                <div class="score">2</div>
+              </div>
+            </div>
+
+            <div class="match-details">
+              <div class="match-detail-item">
+                Mã cặp đấu: <span class="">31</span>
+              </div>
+              <div class="match-detail-item">
+                Bàn số: <span class="">12</span>
+              </div>
+              <div class="match-detail-item">
+                Bắt đầu lúc: <span class="">12:33 30/05/25</span>
+              </div>
+              <div class="match-detail-item">
+                Tình trạng ván đấu: <span class="highlight">Đã đấu xong</span>
+              </div>
+              <div class="match-detail-item">
+                Người chiến thắng:
+                <span class="winner">Mai Nguyễn Duy Khánh</span>
+              </div>
+              <div class="match-detail-item">
+                Note: <span class="">No Comment</span>
+              </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px">
+              <a
+                href="./match-list.html"
+                style="
+                  background-color: black;
+                  border: 1px solid #e67f0d;
+                  color: #e67f0d;
+                  padding: 8px 16px;
+                  border-radius: 8px;
+                  cursor: pointer;
+                  text-decoration: none;
+                "
+                target="_blank"
+              >
+                Xem toàn bộ bảng đấu
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                  style="vertical-align: middle; margin-left: 5px"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <script type="module" src="/public/script/search.js"></script>
+    <script type="module" src="./script/search.js"></script>
   </body>
 </html>
