@@ -209,7 +209,7 @@ function displayUserData(userData) {
       <p>Ngân hàng: MB Bank</p>
       <p>Số tài khoản: <span class="account-number">0362718422</span><img id="copy-account" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" /></p>
       <p>Chủ tài khoản: MAI NGUYEN DUY KHANH</p>
-      <p>Lệ phí: 120.000 VNĐ</p>
+      <p>Lệ phí: 80.000 VNĐ</p>
       <p>Nội dung chuyển khoản: <span class="payment-id">COCCAMCO ${userData.paymentID}<img id="copy-payment" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" /></span></p>
     </div>
   `;
