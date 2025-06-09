@@ -1,172 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tham gia giải đấu</title>
+    <link rel="stylesheet" href="./assets/styles/register.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./assets/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+  </head>
 
-<head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Tham gia giải đấu</title>
-      <link rel="stylesheet" href="./assets/styles/register.css">
-      <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
-      <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
-      <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
-      <link rel="manifest" href="./assets/favicon/site.webmanifest">
-</head>
-
-<body>
-      <!-- loading effect -->
-      <dialog id="loading-effect-dialog">
-            <div>
-                  <img class="transparent-background" width="100px" src="./assets/image/logo-spin-2s.gif" alt="">
-            </div>
-      </dialog>
-
-      <div class="message-box-wrapper-success">
-            <div class="message-box">
-                  <div class="message-box-header">
-                        <div class="btn-close-wrapper">
-                              <div class="registerStatus">✅ Đăng ký thành công!</div>
-                              <div id="btnCloseSuccessMessageBox">
-                                    <img width="30px" height="30px" src="./assets/GG-icons/close-icon.png" alt="">
-                              </div>
-                        </div>
-                  </div>
-                  <div class="message-box-body">
-                        <div class="message-text">
-                              <strong>Bạn đã gửi đơn đăng ký tham gia giải đấu thành công!</strong> <br><br>
-                              Vui lòng thanh toán lệ phí tham gia thi đấu <strong>trong vòng 48h</strong>. <br><br>
-                              Sau khi thanh toán thành công,
-                              bạn sẽ trở thành thí sinh chính thức của giải đấu.
-                        </div>
-                        <div class="btnGoToSearch">
-                              <a href="./search.html">
-                                    Thanh toán tại đây
-                                    <img width="30px" class="transparent-background"
-                                          src="./assets/GG-icons/payment-black-icon.png" alt="">
-                              </a>
-                        </div>
-                  </div>
-            </div>
+  <body>
+    <!-- loading effect -->
+    <dialog id="loading-effect-dialog">
+      <div>
+        <img
+          class="transparent-background"
+          width="100px"
+          src="./assets/image/logo-spin-2s.gif"
+          alt=""
+        />
       </div>
+    </dialog>
 
-      <div class="message-box-wrapper-failure">
-            <div class="message-box">
-                  <div class="message-box-header">
-                        <div class="btn-close-wrapper">
-                              <div class="registerStatus">❌ Đăng ký không thành công!</div>
-                              <div id="btnCloseFailureMessageBox">
-                                    <img width="30px" height="30px" src="./assets/GG-icons/close-icon.png" alt="">
-                              </div>
-                        </div>
-                  </div>
-                  <div class="message-box-body failure">
-                        <div class="message-text">
-                              <div style="color: red; padding: 0; margin: 0;"><strong>Xảy ra lỗi khi gửi đơn!</strong>
-                              </div><br>
-                              <strong>Chi tiết: </strong>
-                              <p id="error-message-text" style="color: red; font-weight: 600; font-size: 17px;">
-                              </p>
-                        </div>
-                        <div class="btnGoToSearch">
-                              <a href="https://www.facebook.com/coccamco.fpthcm" target="_blank">
-                                    Liên hệ để được hỗ trợ
-                                    <img width="30px" src="./assets/GG-icons/lien-lac-icon.png"
-                                          class="transparent-background" alt="">
-                              </a>
-                        </div>
-                  </div>
+    <div class="message-box-wrapper-success">
+      <div class="message-box">
+        <div class="message-box-header">
+          <div class="btn-close-wrapper">
+            <div class="registerStatus">✅ Đăng ký thành công!</div>
+            <div id="btnCloseSuccessMessageBox">
+              <img
+                width="30px"
+                height="30px"
+                src="./assets/GG-icons/close-icon.png"
+                alt=""
+              />
             </div>
-      </div>
-
-
-
-
-      <div class="header">
-            <div class="logo-part">
-                  <a href="./landing-page.html"><img width="80px" src="./assets/favicon/logo-orange.png" alt="Logo_CCC"></a>
-            </div>
-            <a href="./landing-page.html" class="btn-border-only lexend-regular">
-                  <img width="24px" src="./assets/GG-icons/undo-orange.png" alt="">
-                  Trở lại
+          </div>
+        </div>
+        <div class="message-box-body">
+          <div class="message-text">
+            <strong
+              >Bạn đã gửi đơn đăng ký tham gia giải đấu thành công!</strong
+            >
+            <br /><br />
+            Vui lòng thanh toán lệ phí tham gia thi đấu
+            <strong>trong vòng 48h</strong>. <br /><br />
+            Sau khi thanh toán thành công, bạn sẽ trở thành thí sinh chính thức
+            của giải đấu.
+          </div>
+          <div class="btnGoToSearch">
+            <a href="./search.html">
+              Thanh toán tại đây
+              <img
+                width="30px"
+                class="transparent-background"
+                src="./assets/GG-icons/payment-black-icon.png"
+                alt=""
+              />
             </a>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <div class="body">
-            <div class="left-body">
-                  <p class="lexend-regular first-title">Đăng ký giải đấu Billiards</p>
-                  <p class="lexend-black orange-color second-title">CÓC CẦM CƠ - II</p>
-                  <div class="deadline-container">
-                        <p class="lexend-bold" id="register-noti">Thời gian đăng ký còn</p>
-                        <div class="date-container">
-                              <div class="date-session">
-                                    <p class="date-number" id="day">10</p>
-                                    <p class="date-unit">Ngày</p>
-                              </div>
-                              <div class="date-session">
-                                    <p class="date-number" id="hour">15</p>
-                                    <p class="date-unit">Giờ</p>
-                              </div>
-                              <div class="date-session">
-                                    <p class="date-number" id="minute">10</p>
-                                    <p class="date-unit">Phút</p>
-                              </div>
-                              <div class="date-session">
-                                    <p class="date-number" id="second">10</p>
-                                    <p class="date-unit">Giây</p>
-                              </div>
-                        </div>
-                  </div>
+    <div class="message-box-wrapper-failure">
+      <div class="message-box">
+        <div class="message-box-header">
+          <div class="btn-close-wrapper">
+            <div class="registerStatus">❌ Đăng ký không thành công!</div>
+            <div id="btnCloseFailureMessageBox">
+              <img
+                width="30px"
+                height="30px"
+                src="./assets/GG-icons/close-icon.png"
+                alt=""
+              />
             </div>
-            <div id="register-form">
-                  <form autocomplete="off">
-                        <h1 class="lexend-semibold orange-color transparent-background">Đăng ký</h1>
-
-
-                        <span id="errorNameTxt" class="error-txt"></span><br>
-                        <input type="text" placeholder="Họ và tên" id="nameTxt">
-
-                        <span id="errorPNTxt" class="error-txt"></span><br>
-                        <input type="number" placeholder="Số điện thoại" inputmode="numeric" id="PNTxt">
-
-                        <span id="errorAgeTxt" class="error-txt"></span><br>
-                        <input type="number" placeholder="Tuổi" inputmode="numeric" id="ageTxt">
-
-                        <span id="errorEmailTxt" class="error-txt"></span><br>
-                        <input type="text" placeholder="Địa chỉ email" id="emailTxt">
-
-                        <div class="verifCode-container">
-                              <a id="sendEmailBtn" class="btn-smooth-background lexend-regular">
-                                    Gửi mã
-                                    <img src="./assets/GG-icons/send-email-icon.png" alt="" width="20px">
-                                    <div id="send-email-loading-icon">
-                                          <img src="./assets/image/loading-icon.gif" alt="" width="24px">
-                                    </div>
-                              </a>
-                              <p class="lexend-semibold orange-color transparent-background"
-                                    style="font-size: 18px; margin: 0px; margin-top: 10px;">Mã
-                                    xác nhận</p>
-                              <span id="errorVerCodeTxt" class="error-txt"></span><br>
-                              <div id="verificationCodeContainer" class="transparent-background">
-                                    <input type="number" class="code-input" inputmode="numeric">
-                                    <input type="number" class="code-input" inputmode="numeric">
-                                    <input type="number" class="code-input" inputmode="numeric">
-                                    <input type="number" class="code-input" inputmode="numeric">
-                                    <input type="number" class="code-input" inputmode="numeric">
-                                    <input type="number" class="code-input" inputmode="numeric">
-                              </div>
-                        </div>
-                        <a class="btn-border-only lexend-semibold transparent-background" id="submitBtn">
-                              Gửi đơn đăng ký
-                        </a>
-
-                        <div class="contact-info transparent-background"><a
-                                    href="https://www.facebook.com/coccamco.fpthcm" target="_blank">Liên hệ với chúng
-                                    tôi</a></div>
-                  </form>
-
+          </div>
+        </div>
+        <div class="message-box-body failure">
+          <div class="message-text">
+            <div style="color: red; padding: 0; margin: 0">
+              <strong>Xảy ra lỗi khi gửi đơn!</strong>
             </div>
+            <br />
+            <strong>Chi tiết: </strong>
+            <p
+              id="error-message-text"
+              style="color: red; font-weight: 600; font-size: 17px"
+            ></p>
+          </div>
+          <div class="btnGoToSearch">
+            <a href="https://www.facebook.com/coccamco.fpthcm" target="_blank">
+              Liên hệ để được hỗ trợ
+              <img
+                width="30px"
+                src="./assets/GG-icons/lien-lac-icon.png"
+                class="transparent-background"
+                alt=""
+              />
+            </a>
+          </div>
+        </div>
       </div>
-      <script src="./assets/js/register-page.js"></script>
-      <script type="module" src="./script/register.js"></script>
-</body>
+    </div>
 
+    <div class="header">
+      <div class="logo-part">
+        <a href="./landing-page.html"
+          ><img width="80px" src="./assets/logo/logo-square.svg" alt="Logo_CCC"
+        /></a>
+      </div>
+      <a href="./landing-page.html" class="btn-border-only lexend-regular">
+        <img width="24px" src="./assets/GG-icons/undo-orange.png" alt="" />
+        Trở lại
+      </a>
+    </div>
+
+    <div class="body">
+      <div class="left-body">
+        <p class="lexend-regular first-title">Đăng ký giải đấu Billiards</p>
+        <p class="lexend-black orange-color second-title">CÓC CẦM CƠ - II</p>
+        <div class="deadline-container">
+          <p class="lexend-bold" id="register-noti">Thời gian đăng ký còn</p>
+          <div class="date-container">
+            <div class="date-session">
+              <p class="date-number" id="day">10</p>
+              <p class="date-unit">Ngày</p>
+            </div>
+            <div class="date-session">
+              <p class="date-number" id="hour">15</p>
+              <p class="date-unit">Giờ</p>
+            </div>
+            <div class="date-session">
+              <p class="date-number" id="minute">10</p>
+              <p class="date-unit">Phút</p>
+            </div>
+            <div class="date-session">
+              <p class="date-number" id="second">10</p>
+              <p class="date-unit">Giây</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="register-form">
+        <form autocomplete="off">
+          <h1 class="lexend-semibold orange-color transparent-background">
+            Đăng ký
+          </h1>
+
+          <span id="errorNameTxt" class="error-txt"></span><br />
+          <input type="text" placeholder="Họ và tên" id="nameTxt" />
+
+          <span id="errorPNTxt" class="error-txt"></span><br />
+          <input
+            type="number"
+            placeholder="Số điện thoại"
+            inputmode="numeric"
+            id="PNTxt"
+          />
+
+          <span id="errorAgeTxt" class="error-txt"></span><br />
+          <input
+            type="number"
+            placeholder="Tuổi"
+            inputmode="numeric"
+            id="ageTxt"
+          />
+
+          <span id="errorEmailTxt" class="error-txt"></span><br />
+          <input type="text" placeholder="Địa chỉ email" id="emailTxt" />
+
+          <div class="verifCode-container">
+            <a id="sendEmailBtn" class="btn-smooth-background lexend-regular">
+              Gửi mã
+              <img
+                src="./assets/GG-icons/send-email-icon.png"
+                alt=""
+                width="20px"
+              />
+              <div id="send-email-loading-icon">
+                <img
+                  src="./assets/image/loading-icon.gif"
+                  alt=""
+                  width="24px"
+                />
+              </div>
+            </a>
+            <p
+              class="lexend-semibold orange-color transparent-background"
+              style="font-size: 18px; margin: 0px; margin-top: 10px"
+            >
+              Mã xác nhận
+            </p>
+            <span id="errorVerCodeTxt" class="error-txt"></span><br />
+            <div id="verificationCodeContainer" class="transparent-background">
+              <input type="number" class="code-input" inputmode="numeric" />
+              <input type="number" class="code-input" inputmode="numeric" />
+              <input type="number" class="code-input" inputmode="numeric" />
+              <input type="number" class="code-input" inputmode="numeric" />
+              <input type="number" class="code-input" inputmode="numeric" />
+              <input type="number" class="code-input" inputmode="numeric" />
+            </div>
+          </div>
+          <a
+            class="btn-border-only lexend-semibold transparent-background"
+            id="submitBtn"
+          >
+            Gửi đơn đăng ký
+          </a>
+
+          <div class="contact-info transparent-background">
+            <a href="https://www.facebook.com/coccamco.fpthcm" target="_blank"
+              >Liên hệ với chúng tôi</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="./assets/js/register-page.js"></script>
+    <script type="module" src="./script/register.js"></script>
+  </body>
 </html>
