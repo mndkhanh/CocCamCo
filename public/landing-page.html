@@ -23,19 +23,70 @@
       href="./assets/favicon/favicon-16x16.png"
     />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <script src="./assets/js/tailwind.min.js"></script>
   </head>
-  <body>
+  <body class="bg-black text-white">
     <header>
-      <nav>
-        <div class="logo">
-          <img height="80px" src="./assets/image/logo-with-text.png" alt="Logo" />
-        </div>
-        <div class="nav-links">
-          <a href="#hero">Trang Chủ</a>
-          <a href="#prize">Giải Thưởng</a>
-          <a href="#timeline">Timeline</a>
-          <a href="./rule.html">Quy Định Chung</a>
-          <button class="cta-button">THAM GIA NGAY</button>
+      <nav class="w-full flex justify-center mt-[10px]">
+        <div
+          class="w-full md:w-[70%] flex items-center justify-between relative"
+        >
+          <!-- Logo -->
+          <a class="hover:cursor-pointer flex-shrink-0">
+            <img
+              class="md:h-[60px] h-[50px] min-w-[50px]"
+              src="./assets/logo/logo-square.svg"
+              alt="Logo"
+            />
+          </a>
+
+          <!-- Hamburger nút -->
+          <button
+            id="btn-menu"
+            class="md:hidden text-white focus:outline-none z-50 relative"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+
+          <!-- Nav links desktop -->
+          <div class="nav-links hidden md:flex items-center gap-5">
+            <a href="#" class="text-white">Trang Chủ</a>
+            <a href="#prize" class="text-white">Giải Thưởng</a>
+            <a href="#timeline" class="text-white">Timeline</a>
+            <a href="./rule.html" class="text-white">Quy Định Chung</a>
+            <button class="custom-btn text-center">THAM GIA NGAY</button>
+          </div>
+
+          <!-- Sidebar menu mobile -->
+          <div
+            id="sidebar"
+            class="fixed top-0 left-[-100%] h-full w-64 bg-black text-white flex flex-col p-6 gap-6 transition-left duration-300 z-40 pointer-events-none"
+          >
+            <button
+              id="btn-close"
+              class="self-end mb-8 focus:outline-none text-white text-3xl font-bold"
+            >
+              &times;
+            </button>
+            <a href="#" class="text-white text-lg">Trang Chủ</a>
+            <a href="#prize" class="text-white text-lg">Giải Thưởng</a>
+            <a href="#timeline" class="text-white text-lg">Timeline</a>
+            <a href="./rule.html" class="text-white text-lg">Quy Định Chung</a>
+            <button class="custom-btn w-full">THAM GIA NGAY</button>
+          </div>
         </div>
       </nav>
     </header>
@@ -65,8 +116,12 @@
         <div class="prize-amount">3.0M<span>VNĐ</span></div>
         <p>Cùng Nhiều Kỷ Niệm Chương Và Các Phần Quà Giá Trị Khác</p>
         <div class="prize-buttons">
-          <a href="./rule.html#prize"><button class="outline-button">Cơ cấu giải thưởng</button></a>
-          <a href="./rule.html#rule"><button class="outline-button">Quy định giải đấu</button></a>
+          <a href="./rule.html#prize"
+            ><button class="outline-button">Cơ cấu giải thưởng</button></a
+          >
+          <a href="./rule.html#rule"
+            ><button class="outline-button">Quy định giải đấu</button></a
+          >
         </div>
       </div>
     </section>
@@ -78,7 +133,7 @@
           src="./assets/image/about-image.png"
           alt="about-image"
           class="about-image"
-          style="width: 100%; height: auto; margin-bottom: 2.5rem;"
+          style="width: 100%; height: auto; margin-bottom: 2.5rem"
         />
       </div>
       <div class="stats-container">
@@ -215,7 +270,12 @@
 
         <div class="footer-logo">
           <div>
-            <img width="100px" height="100px" src="./assets/favicon/logo-orange.png" alt="Logo" />
+            <img
+              width="100px"
+              height="100px"
+              src="./assets/favicon/logo-orange.png"
+              alt="Logo"
+            />
           </div>
           <div class="logo-subtitle">
             Coc Cam Co Billiards Organization Since 2024
@@ -223,13 +283,13 @@
         </div>
       </div>
 
-
-      
       <div class="copyright">
         <p>Copyright © 2025 Cóc Cầm Cơ</p>
         <p>All rights reserved</p>
       </div>
     </footer>
+
+    <script src="./assets/js/navbar.js"></script>
 
     <script type="module" src="./assets/js/landing-page.js"></script>
   </body>
