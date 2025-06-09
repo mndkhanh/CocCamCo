@@ -1,279 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xem Bảng Đấu</title>
+    <script src="./assets/js/tailwind.min.js"></script>
+    <link rel="stylesheet" href="./assets/styles/match-list.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Xem Bảng Đấu</title>
-  <script src="./assets/js/tailwind.min.js"></script>
-  <link rel="stylesheet" href="./assets/styles/match-list.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
-</head>
+  <body>
+    <div id="bgDiv" class="bg-image"></div>
 
-<body>
-  <div id="bgDiv" class="bg-image"></div>
-
-  <div class="panel-content flex justify-center items-center" id="round-ALL">
-    <div class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center">
-      <h3 class="md:mb-4 mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng 32 Bảng A
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-[100%] ids id-16"></div>
-        <div class="w-[100%] ids id-17"></div>
-        <div class="w-[100%] ids id-18"></div>
-        <div class="w-[100%] ids id-19"></div>
-        <div class="w-[100%] ids id-20"></div>
-        <div class="w-[100%] ids id-21"></div>
-        <div class="w-[100%] ids id-22"></div>
-        <div class="w-[100%] ids id-23"></div>
-      </div>
-
-      <h3 class="md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng 32 Bảng B
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-[100%] ids id-24"></div>
-        <div class="w-[100%] ids id-25"></div>
-        <div class="w-[100%] ids id-26"></div>
-        <div class="w-[100%] ids id-27"></div>
-        <div class="w-[100%] ids id-28"></div>
-        <div class="w-[100%] ids id-29"></div>
-        <div class="w-[100%] ids id-30"></div>
-        <div class="w-[100%] ids id-31"></div>
-      </div>
-
-      <h3 class="md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng 16 Bảng A
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-[100%] ids id-8"></div>
-        <div class="w-[100%] ids id-9"></div>
-        <div class="w-[100%] ids id-10"></div>
-        <div class="w-[100%] ids id-11"></div>
-      </div>
-
-      <h3 class="md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng 16 Bảng B
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-[100%] ids id-12"></div>
-        <div class="w-[100%] ids id-13"></div>
-        <div class="w-[100%] ids id-14"></div>
-        <div class="w-[100%] ids id-15"></div>
-      </div>
-
-      <h3
-        class="mb-2 md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng Tứ Kết
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-[100%] ids id-4"></div>
-        <div class="w-[100%] ids id-5"></div>
-        <div class="w-[100%] ids id-6"></div>
-        <div class="w-[100%] ids id-7"></div>
-      </div>
-
-      <h3 class="md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng Bán Kết
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-[100%] ids id-2"></div>
-        <div class="w-[100%] ids id-3"></div>
-      </div>
-
-      <h3 class="md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white">
-        Tranh 3/4
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-[100%] ids id-0"></div>
-      </div>
-
-      <h3 class="md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng chung kết
-      </h3>
-
-      <div class="container mb-[20vh] md:mb-[40vh] mx-auto p-4 space-y-2">
-        <div class="w-[100%] ids id-1"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="panel-content flex justify-center items-center" id="round-R32_A">
-    <div class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center">
-      <h3 class="md:mb-4 mt-[10vh] text-center text-white md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng 32 Bảng A
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-full relative ids id-16"></div>
-        <div class="w-full relative ids id-17"></div>
-        <div class="w-full relative ids id-18"></div>
-        <div class="w-full relative ids id-19"></div>
-        <div class="w-full relative ids id-20"></div>
-        <div class="w-full relative ids id-21"></div>
-        <div class="w-full relative ids id-22"></div>
-        <div class="w-full relative ids id-23"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="panel-content flex justify-center items-center" id="round-R32_B">
-    <div class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center">
-      <h3 class="md:mb-4 mt-[10vh] text-center text-white md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng 32 Bảng B
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-full relative ids id-24"></div>
-        <div class="w-full relative ids id-25"></div>
-        <div class="w-full relative ids id-26"></div>
-        <div class="w-full relative ids id-27"></div>
-        <div class="w-full relative ids id-28"></div>
-        <div class="w-full relative ids id-29"></div>
-        <div class="w-full relative ids id-30"></div>
-        <div class="w-full relative ids id-31"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="panel-content flex justify-center items-center" id="round-R16_A">
-    <div class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center">
-      <h3 class="md:mb-4 mt-[10vh] text-center text-white md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng 16 Bảng A
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-full relative ids id-8"></div>
-        <div class="w-full relative ids id-9"></div>
-        <div class="w-full relative ids id-10"></div>
-        <div class="w-full relative ids id-11"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="panel-content flex justify-center items-center" id="round-R16_B">
-    <div class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center">
-      <h3 class="md:mb-4 mt-[10vh] text-center text-white md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng 16 Bảng B
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-full relative ids id-12"></div>
-        <div class="w-full relative ids id-13"></div>
-        <div class="w-full relative ids id-14"></div>
-        <div class="w-full relative ids id-15"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="panel-content flex justify-center items-center" id="round-R8">
-    <div class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center">
-      <h3 class="md:mb-4 mt-[10vh] text-center text-yellow-400 md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng Tứ Kết
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-full relative ids id-4"></div>
-        <div class="w-full relative ids id-5"></div>
-        <div class="w-full relative ids id-6"></div>
-        <div class="w-full relative ids id-7"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="panel-content flex justify-center items-center" id="round-R4">
-    <div class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center">
-      <h3 class="md:mb-4 mt-[5vh] text-center text-yellow-400 md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng Bán Kết
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-full relative ids id-2"></div>
-        <div class="w-full relative ids id-3"></div>
-      </div>
-
-      <h3 class="md:mb-4 mt-[5vh] text-center text-yellow-400 md:text-5xl text-2xl font-black drop-shadow-white">
-        Tranh 3/4
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-full relative ids id-0"></div>
-      </div>
-
-      <h3 class="md:mb-4 mt-[5vh] text-center text-yellow-400 md:text-5xl text-2xl font-black drop-shadow-white">
-        Vòng Chung Kết
-      </h3>
-
-      <div class="container mx-auto p-4 space-y-2">
-        <div class="w-full relative ids id-1"></div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="panel-content flex justify-center items-center" id="round-R2_R3_4">
-    <div class="w-[95vw] md:w-[85vw] min-h-screen flex flex-col justify-center items-center space-y-10 py-10 mx-auto">
-      <!-- Quán quân -->
+    <div class="panel-content flex justify-center items-center" id="round-ALL">
       <div
-        class="w-full max-w-3xl bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 text-white font-extrabold text-center p-8 rounded-2xl shadow-xl border-8 border-yellow-600 relative">
-        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 text-6xl drop-shadow-lg">
-          🏆
-        </div>
-        <div class="text-xs md:text-lg uppercase tracking-widest text-yellow-100 mt-8">Quán quân</div>
-        <div class="text-xl id-1 md:text-5xl mt-4">
-          <div class="winnerName"></div>
-        </div>
-      </div>
+        class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center"
+      >
+        <h3
+          class="md:mb-4 mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng 32 Bảng A
+        </h3>
 
-      <!-- Giải nhì -->
-      <div
-        class="w-full max-w-3xl bg-gradient-to-r from-slate-400 via-slate-300 to-slate-500 text-white font-extrabold text-center p-8 rounded-2xl shadow-xl border-8 border-slate-600 relative">
-        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 text-6xl drop-shadow-lg">
-          🥈
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-[100%] ids id-16"></div>
+          <div class="w-[100%] ids id-17"></div>
+          <div class="w-[100%] ids id-18"></div>
+          <div class="w-[100%] ids id-19"></div>
+          <div class="w-[100%] ids id-20"></div>
+          <div class="w-[100%] ids id-21"></div>
+          <div class="w-[100%] ids id-22"></div>
+          <div class="w-[100%] ids id-23"></div>
         </div>
-        <div class="text-xs md:text-lg uppercase tracking-widest text-slate-100 mt-8">Giải nhì</div>
-        <div class="text-xl md:text-5xl mt-4" id="id-2nd-player">
-        </div>
-      </div>
 
-      <!-- Giải ba -->
-      <div
-        class="w-full id-0 max-w-3xl bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 text-white font-extrabold text-center p-8 rounded-2xl shadow-xl border-8 border-orange-600 relative">
-        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 text-6xl drop-shadow-lg">
-          🥉
+        <h3
+          class="md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng 32 Bảng B
+        </h3>
+
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-[100%] ids id-24"></div>
+          <div class="w-[100%] ids id-25"></div>
+          <div class="w-[100%] ids id-26"></div>
+          <div class="w-[100%] ids id-27"></div>
+          <div class="w-[100%] ids id-28"></div>
+          <div class="w-[100%] ids id-29"></div>
+          <div class="w-[100%] ids id-30"></div>
+          <div class="w-[100%] ids id-31"></div>
         </div>
-        <div class="text-xs md:text-lg uppercase tracking-widest text-orange-100 mt-8">Giải ba</div>
-        <div class="text-xl id-0 md:text-5xl mt-4 ">
-          <div class="winnerName"></div>
+
+        <h3
+          class="md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng 16 Bảng A
+        </h3>
+
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-[100%] ids id-8"></div>
+          <div class="w-[100%] ids id-9"></div>
+          <div class="w-[100%] ids id-10"></div>
+          <div class="w-[100%] ids id-11"></div>
+        </div>
+
+        <h3
+          class="md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng 16 Bảng B
+        </h3>
+
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-[100%] ids id-12"></div>
+          <div class="w-[100%] ids id-13"></div>
+          <div class="w-[100%] ids id-14"></div>
+          <div class="w-[100%] ids id-15"></div>
+        </div>
+
+        <h3
+          class="mb-2 md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng Tứ Kết
+        </h3>
+
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-[100%] ids id-4"></div>
+          <div class="w-[100%] ids id-5"></div>
+          <div class="w-[100%] ids id-6"></div>
+          <div class="w-[100%] ids id-7"></div>
+        </div>
+
+        <h3
+          class="md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng Bán Kết
+        </h3>
+
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-[100%] ids id-2"></div>
+          <div class="w-[100%] ids id-3"></div>
+        </div>
+
+        <h3
+          class="md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Tranh 3/4
+        </h3>
+
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-[100%] ids id-0"></div>
+        </div>
+
+        <h3
+          class="md:mb-4 md:mt-[10vh] text-center text-[#e67f0d] md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng chung kết
+        </h3>
+
+        <div class="container mb-[20vh] md:mb-[40vh] mx-auto p-4 space-y-2">
+          <div class="w-[100%] ids id-1"></div>
         </div>
       </div>
     </div>
 
+    <div
+      class="panel-content flex justify-center items-center"
+      id="round-R32_A"
+    >
+      <div
+        class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center"
+      >
+        <h3
+          class="md:mb-4 mt-[10vh] text-center text-white md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng 32 Bảng A
+        </h3>
 
-  </div>
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-full relative ids id-16"></div>
+          <div class="w-full relative ids id-17"></div>
+          <div class="w-full relative ids id-18"></div>
+          <div class="w-full relative ids id-19"></div>
+          <div class="w-full relative ids id-20"></div>
+          <div class="w-full relative ids id-21"></div>
+          <div class="w-full relative ids id-22"></div>
+          <div class="w-full relative ids id-23"></div>
+        </div>
+      </div>
+    </div>
 
-  <div class="fixed bottom-4 right-4 flex space-x-2 md:hidden">
-    <button id="prevBtn"
-      class="flex items-center gap-2 px-4 py-1 text-[#e67f0d] font-bold border border-[#e67f0d] whitespace-nowrap rounded-xl ml-2 cursor-pointer transition-all active:shadow-inner active:relative active:top-[2px] bg-[rgba(0,0,0,0.8)] md:text-base md:px-6 md:py-2">
-      &lt; Previous Round
-    </button>
-    <button id="nextBtn"
-      class="flex items-center gap-2 px-4 py-1 text-[#e67f0d] font-bold border border-[#e67f0d] whitespace-nowrap rounded-xl ml-2 cursor-pointer transition-all active:shadow-inner active:relative active:top-[2px] bg-[rgba(0,0,0,0.8)] md:text-base md:px-6 md:py-2">
-      Next Round &gt;
-    </button>
-  </div>
+    <div
+      class="panel-content flex justify-center items-center"
+      id="round-R32_B"
+    >
+      <div
+        class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center"
+      >
+        <h3
+          class="md:mb-4 mt-[10vh] text-center text-white md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng 32 Bảng B
+        </h3>
 
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-full relative ids id-24"></div>
+          <div class="w-full relative ids id-25"></div>
+          <div class="w-full relative ids id-26"></div>
+          <div class="w-full relative ids id-27"></div>
+          <div class="w-full relative ids id-28"></div>
+          <div class="w-full relative ids id-29"></div>
+          <div class="w-full relative ids id-30"></div>
+          <div class="w-full relative ids id-31"></div>
+        </div>
+      </div>
+    </div>
 
+    <div
+      class="panel-content flex justify-center items-center"
+      id="round-R16_A"
+    >
+      <div
+        class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center"
+      >
+        <h3
+          class="md:mb-4 mt-[10vh] text-center text-white md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng 16 Bảng A
+        </h3>
 
-  <script type="module" src="./script/match-list.js"></script>
-</body>
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-full relative ids id-8"></div>
+          <div class="w-full relative ids id-9"></div>
+          <div class="w-full relative ids id-10"></div>
+          <div class="w-full relative ids id-11"></div>
+        </div>
+      </div>
+    </div>
 
+    <div
+      class="panel-content flex justify-center items-center"
+      id="round-R16_B"
+    >
+      <div
+        class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center"
+      >
+        <h3
+          class="md:mb-4 mt-[10vh] text-center text-white md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng 16 Bảng B
+        </h3>
+
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-full relative ids id-12"></div>
+          <div class="w-full relative ids id-13"></div>
+          <div class="w-full relative ids id-14"></div>
+          <div class="w-full relative ids id-15"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-content flex justify-center items-center" id="round-R8">
+      <div
+        class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center"
+      >
+        <h3
+          class="md:mb-4 mt-[10vh] text-center text-yellow-400 md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng Tứ Kết
+        </h3>
+
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-full relative ids id-4"></div>
+          <div class="w-full relative ids id-5"></div>
+          <div class="w-full relative ids id-6"></div>
+          <div class="w-full relative ids id-7"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-content flex justify-center items-center" id="round-R4">
+      <div
+        class="w-[90vw] md:w-[80vw] flex flex-col justify-center items-center"
+      >
+        <h3
+          class="md:mb-4 mt-[5vh] text-center text-yellow-400 md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng Bán Kết
+        </h3>
+
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-full relative ids id-2"></div>
+          <div class="w-full relative ids id-3"></div>
+        </div>
+
+        <h3
+          class="md:mb-4 mt-[5vh] text-center text-yellow-400 md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Tranh 3/4
+        </h3>
+
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-full relative ids id-0"></div>
+        </div>
+
+        <h3
+          class="md:mb-4 mt-[5vh] text-center text-yellow-400 md:text-5xl text-2xl font-black drop-shadow-white"
+        >
+          Vòng Chung Kết
+        </h3>
+
+        <div class="container mx-auto p-4 space-y-2">
+          <div class="w-full relative ids id-1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="panel-content flex justify-center items-center"
+      id="round-R2_R3_4"
+    >
+      <div
+        class="w-[95vw] md:w-[85vw] min-h-screen flex flex-col justify-center items-center space-y-10 py-10 mx-auto"
+      >
+        <!-- Quán quân -->
+        <div
+          class="w-full max-w-3xl bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 text-white font-extrabold text-center p-8 rounded-2xl shadow-xl border-8 border-yellow-600 relative"
+        >
+          <div
+            class="absolute -top-8 left-1/2 transform -translate-x-1/2 text-6xl drop-shadow-lg"
+          >
+            🏆
+          </div>
+          <div
+            class="text-xs md:text-lg uppercase tracking-widest text-yellow-100 mt-8"
+          >
+            Quán quân
+          </div>
+          <div class="text-xl id-1 md:text-5xl mt-4">
+            <div class="winnerName"></div>
+          </div>
+        </div>
+
+        <!-- Giải nhì -->
+        <div
+          class="w-full max-w-3xl bg-gradient-to-r from-slate-400 via-slate-300 to-slate-500 text-white font-extrabold text-center p-8 rounded-2xl shadow-xl border-8 border-slate-600 relative"
+        >
+          <div
+            class="absolute -top-8 left-1/2 transform -translate-x-1/2 text-6xl drop-shadow-lg"
+          >
+            🥈
+          </div>
+          <div
+            class="text-xs md:text-lg uppercase tracking-widest text-slate-100 mt-8"
+          >
+            Giải nhì
+          </div>
+          <div class="text-xl md:text-5xl mt-4" id="id-2nd-player"></div>
+        </div>
+
+        <!-- Giải ba -->
+        <div
+          class="w-full id-0 max-w-3xl bg-gradient-to-r from-orange-400 via-orange-300 to-orange-500 text-white font-extrabold text-center p-8 rounded-2xl shadow-xl border-8 border-orange-600 relative"
+        >
+          <div
+            class="absolute -top-8 left-1/2 transform -translate-x-1/2 text-6xl drop-shadow-lg"
+          >
+            🥉
+          </div>
+          <div
+            class="text-xs md:text-lg uppercase tracking-widest text-orange-100 mt-8"
+          >
+            Giải ba
+          </div>
+          <div class="text-xl id-0 md:text-5xl mt-4">
+            <div class="winnerName"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fixed bottom-4 right-4 flex space-x-2 md:hidden">
+      <button
+        id="prevBtn"
+        class="flex items-center gap-2 px-4 py-1 text-[#e67f0d] font-bold border border-[#e67f0d] whitespace-nowrap rounded-xl ml-2 cursor-pointer transition-all active:shadow-inner active:relative active:top-[2px] bg-[rgba(0,0,0,0.8)] md:text-base md:px-6 md:py-2"
+      >
+        &lt; Previous Round
+      </button>
+      <button
+        id="nextBtn"
+        class="flex items-center gap-2 px-4 py-1 text-[#e67f0d] font-bold border border-[#e67f0d] whitespace-nowrap rounded-xl ml-2 cursor-pointer transition-all active:shadow-inner active:relative active:top-[2px] bg-[rgba(0,0,0,0.8)] md:text-base md:px-6 md:py-2"
+      >
+        Next Round &gt;
+      </button>
+    </div>
+
+    <script type="module" src="./script/match-list.js"></script>
+  </body>
 </html>

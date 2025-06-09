@@ -23,6 +23,7 @@
       href="./assets/favicon/favicon-16x16.png"
     />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <script src="./assets/js/tailwind.min.js"></script>
   </head>
 
   <body>
@@ -121,19 +122,29 @@
       </div>
     </div>
 
-    <div class="header">
-      <div class="logo-part">
-        <a href="./landing-page.html"
-          ><img width="80px" src="./assets/logo/logo-square.svg" alt="Logo_CCC"
-        /></a>
-      </div>
-      <a href="./landing-page.html" class="btn-border-only lexend-regular">
-        <img width="24px" src="./assets/GG-icons/undo-orange.png" alt="" />
-        Trở lại
-      </a>
-    </div>
+    <header
+      class="md:w-[70%] p-2 w-[100%] mx-auto bg-black flex justify-center"
+    >
+      <div class="flex items-center justify-between w-full">
+        <a
+          href="./landing-page.html"
+          class="hover:cursor-pointer flex-shrink-0"
+          id="logo-link"
+        >
+          <img
+            class="md:h-[60px] h-[50px] min-w-[50px]"
+            src="./assets/logo/logo-square.svg"
+            alt="Logo"
+          />
+        </a>
 
-    <div class="body">
+        <a href="./landing-page.html"
+          ><button class="custom-btn">Trang chủ</button></a
+        >
+      </div>
+    </header>
+
+    <div class="body mx-auto w-[100%] md:w-[80%] flex justify-between">
       <div class="left-body">
         <p class="lexend-regular first-title">Đăng ký giải đấu Billiards</p>
         <p class="lexend-black orange-color second-title">CÓC CẦM CƠ - II</p>
@@ -219,10 +230,7 @@
               <input type="number" class="code-input" inputmode="numeric" />
             </div>
           </div>
-          <a
-            class="btn-border-only lexend-semibold transparent-background"
-            id="submitBtn"
-          >
+          <a class="custom-btn transparent-background" id="submitBtn">
             Gửi đơn đăng ký
           </a>
 
