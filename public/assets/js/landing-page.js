@@ -29,3 +29,35 @@ setInterval(updateCountdown, 1000);
 
 updateCountdown();
 
+const slider = document.getElementById('slider');
+const images = slider.children;
+const totalImages = images.length;
+let index = 0;
+
+function showSlide(i) {
+      index = i;
+      slider.style.transform = `translateX(-${index * 100}%)`;
+}
+
+document.getElementById('next').addEventListener('click', () => {
+      showSlide((index + 1) % totalImages);
+      resetAutoSlide();
+});
+
+document.getElementById('prev').addEventListener('click', () => {
+      showSlide((index - 1 + totalImages) % totalImages);
+      resetAutoSlide();
+});
+
+// Tự động chuyển slide mỗi 3 giây
+let autoSlide = setInterval(() => {
+      showSlide((index + 1) % totalImages);
+}, 3000);
+
+// Khi người dùng bấm nút thì reset lại thời gian tự động
+function resetAutoSlide() {
+      clearInterval(autoSlide);
+      autoSlide = setInterval(() => {
+            showSlide((index + 1) % totalImages);
+      }, 3000);
+}

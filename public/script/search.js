@@ -193,26 +193,67 @@ function displayUserData(userData) {
     }
   };
 
-  resultContainer.innerHTML = `
-    <div class="info-grid">
-      <p class="email">Người chơi: ${userData.name || 'Chưa có dữ liệu'}</p>
-      <p class="email">Email: ${userData.id}</p>
-      <div class="payment-info-header">
-        <img src="assets/GG-icons/payment-icon.png" alt="payment-icon" />
-        <p>Tình trạng thanh toán</p>
-      </div>
-      <p class="status">Trạng thái: <span class="info-status">${getStatusClass(userData.paymentStatus)}</span></p>
-      <p class="expire-time">Hết hạn thanh toán: ${formatTimestamp(userData.expireTime)}</p>
-      <div class="qr-code-container">
-        <img src="${userData.qrBanking}" alt="QR Code" class="qr-code-img" />
-      </div>
-      <p>Ngân hàng: MB Bank</p>
-      <p>Số tài khoản: <span class="account-number">0362718422</span><img id="copy-account" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" /></p>
-      <p>Chủ tài khoản: MAI NGUYEN DUY KHANH</p>
-      <p>Lệ phí: 120.000 VNĐ</p>
-      <p>Nội dung chuyển khoản: <span class="payment-id">COCCAMCO ${userData.paymentID}<img id="copy-payment" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" /></span></p>
-    </div>
-  `;
+  switch (userData.paymentStatus) {
+    case 'PENDING':
+      resultContainer.innerHTML = `
+        <div class="info-grid">
+          <p class="email">Người chơi: ${userData.name || 'Chưa có dữ liệu'}</p>
+          <p class="email">Email: ${userData.id}</p>
+          <div class="payment-info-header">
+            <img src="assets/GG-icons/payment-icon.png" alt="payment-icon" />
+            <p>Tình trạng thanh toán</p>
+          </div>
+          <p class="status">Trạng thái: <span class="info-status">${getStatusClass(userData.paymentStatus)}</span></p>
+          <p class="expire-time">Hết hạn thanh toán: ${formatTimestamp(userData.expireTime)}</p>
+          <div class="qr-code-container">
+            <img src="${userData.qrBanking}" alt="QR Code" class="qr-code-img" />
+          </div>
+          <p>Ngân hàng: MB Bank</p>
+          <p>Số tài khoản: <span class="account-number">0362718422</span><img id="copy-account" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" /></p>
+          <p>Chủ tài khoản: MAI NGUYEN DUY KHANH</p>
+          <p>Lệ phí: 80.000 VNĐ</p>
+          <p>Nội dung chuyển khoản: <span class="payment-id">COCCAMCO ${userData.paymentID}<img id="copy-payment" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" /></span></p>
+        </div>
+      `;
+      break;
+    case 'FAILED':
+      resultContainer.innerHTML = `
+        <div class="info-grid">
+          <p class="email">Người chơi: ${userData.name || 'Chưa có dữ liệu'}</p>
+          <p class="email">Email: ${userData.id}</p>
+          <div class="payment-info-header">
+            <img src="assets/GG-icons/payment-icon.png" alt="payment-icon" />
+            <p>Tình trạng thanh toán</p>
+          </div>
+          <p class="status">Trạng thái: <span class="info-status">${getStatusClass(userData.paymentStatus)}</span></p>
+          <p class="expire-time">Hết hạn thanh toán: ${formatTimestamp(userData.expireTime)}</p>
+          <div class="qr-code-container">
+            <img src="${userData.qrBanking}" alt="QR Code" class="qr-code-img" />
+          </div>
+          <p>Ngân hàng: MB Bank</p>
+          <p>Số tài khoản: <span class="account-number">0362718422</span><img id="copy-account" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" /></p>
+          <p>Chủ tài khoản: MAI NGUYEN DUY KHANH</p>
+          <p>Lệ phí: 80.000 VNĐ</p>
+          <p>Nội dung chuyển khoản: <span class="payment-id">COCCAMCO ${userData.paymentID}<img id="copy-payment" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" /></span></p>
+        </div>
+      `;
+      break;
+    case 'PAID':
+      resultContainer.innerHTML = `
+        <div class="info-grid">
+          <p class="email">Người chơi: ${userData.name || 'Chưa có dữ liệu'}</p>
+          <p class="email">Email: ${userData.id}</p>
+          <div class="payment-info-header">
+            <img src="assets/GG-icons/payment-icon.png" alt="payment-icon" />
+            <p>Tình trạng thanh toán</p>
+          </div>
+          <p class="status">Trạng thái: <span class="info-status">${getStatusClass(userData.paymentStatus)}</span></p>
+        </div>
+      `;
+      break;
+  }
+
+
 
   setTimeout(() => {
     const copyAccountBtn = document.getElementById('copy-account');

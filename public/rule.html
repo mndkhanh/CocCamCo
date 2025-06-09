@@ -23,148 +23,311 @@
       href="./assets/favicon/favicon-16x16.png"
     />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <script src="./assets/js/tailwind.min.js"></script>
   </head>
   <body>
-    <header>
-      <nav>
-        <div class="logo">
-          <img height="80px" src="./assets/image/logo-with-text.png" alt="Logo" />
-        </div>
-        <div class="nav-links">
-          <a href="./landing-page.html#hero">Trang Chủ</a>
-          <a href="./landing-page.html#prize">Giải Thưởng</a>
-          <a href="./landing-page.html#timeline">Timeline</a>
-          <a href="./rule.html">Quy Định Chung</a>
-          <button class="cta-button">THAM GIA NGAY</button>
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-black flex justify-center"
+    >
+      <nav
+        class="w-full max-w-7xl flex justify-between items-center px-4 md:px-0 py-2"
+      >
+        <!-- Logo and Nav Wrapper -->
+        <div class="flex items-center justify-between w-full">
+          <!-- Logo (left) -->
+          <a
+            href="./landing-page.html"
+            class="hover:cursor-pointer flex-shrink-0"
+          >
+            <img
+              class="md:h-[60px] h-[50px] min-w-[50px]"
+              src="./assets/logo/logo-square.svg"
+              alt="Logo"
+            />
+          </a>
+
+          <!-- Nav links desktop -->
+          <div class="nav-links hidden md:flex items-center gap-5 ml-auto">
+            <a href="./landing-page.html" class="text-white">Trang Chủ</a>
+            <a href="#prize" class="text-white">Giải Thưởng</a>
+            <a href="./landing-page.html#timeline" class="text-white"
+              >Timeline</a
+            >
+            <a href="#rule" class="text-white">Quy Định Chung</a>
+            <a href="./register.html"
+              ><button class="custom-btn">THAM GIA NGAY</button></a
+            >
+          </div>
+
+          <!-- Hamburger button (right for mobile only) -->
+          <button
+            id="btn-menu"
+            class="md:hidden text-white focus:outline-none z-50 relative ml-auto"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
         </div>
       </nav>
+
+      <!-- Sidebar menu mobile -->
+      <div
+        id="sidebar"
+        class="fixed top-0 left-[-100%] h-full w-64 bg-black text-white flex flex-col p-6 gap-6 transition-left duration-300 z-40 pointer-events-none"
+      >
+        <button
+          id="btn-close"
+          class="self-end mb-8 focus:outline-none text-white text-3xl font-bold"
+        >
+          &times;
+        </button>
+        <a href="./landing-page.html" class="text-white text-lg">Trang Chủ</a>
+        <a href="#prize" class="text-white text-lg">Giải Thưởng</a>
+        <a href="./landing-page.html#timeline" class="text-white text-lg"
+          >Timeline</a
+        >
+        <a href="#rule" class="text-white text-lg">Quy Định Chung</a>
+        <button class="custom-btn">THAM GIA NGAY</button>
+      </div>
     </header>
 
-    <main class="rules-container">
-      <div class="hero-content" style="margin-bottom: 2rem;">
-        <h2>Giải Đấu Billiards</h2>
-        <h1>CÓC CẦM CƠ - II</h1>
+    <main
+      class="rules-container w-full md:w-[60%] mx-auto mt-[100px] md:mt-[200px] md:p-0 p-2 text-sm md:text-base"
+    >
+      <!-- Banner Section -->
+      <div
+        class="h-[100px] md:h-[200px] mb-[50px] bg-[url('./assets/images/red-fire.png')] bg-cover bg-center bg-no-repeat"
+      >
+        <h2 class="text-center text-[16px] md:text-[50px] font-black">
+          Giải Đấu Billiards
+        </h2>
+        <h1 class="text-center text-[24px] md:text-[80px] font-black orange">
+          CÓC CẦM CƠ - II
+        </h1>
       </div>
 
-      <div class="rules-content">
-        <h2 class="section-title">I. Giới Thiệu Chung</h2>
-        <p>Giải đấu Billiards <span style="font-weight: 900;">"Cóc Cầm Cơ"</span> là sự kiện thường kỳ được tổ chức bởi CLB Cóc Cầm Cơ với mục tiêu đem lại một môi trường chơi billiards lành mạnh, văn minh. Với mong muốn giúp các bạn cơ thủ được nâng cao trình độ thực hành và giao lưu, học hỏi lẫn nhau.</p>
-        <p>Đây không chỉ là giải đấu thuần túy mà còn là nơi gặp gỡ của những người có cùng một niềm đam mê với môn thể thao bàn nỉ này, hy vọng sẽ tạo ra một cộng đồng bền vững.</p>
+      <!-- Giới Thiệu Chung -->
+      <div class="rules-content mb-10">
+        <h2 class="section-title text-lg md:text-2xl font-bold mb-2">
+          I. Giới Thiệu Chung
+        </h2>
+        <p class="mb-2">
+          Giải đấu Billiards <span class="font-black">"Cóc Cầm Cơ"</span> là sự
+          kiện thường kỳ được tổ chức bởi CLB Cóc Cầm Cơ, nhằm tạo sân chơi lành
+          mạnh, giao lưu học hỏi và nâng cao tinh thần thể thao trong cộng đồng
+          sinh viên.
+        </p>
+        <p class="mb-2">
+          Đây không chỉ là giải đấu thuần túy mà còn là nơi gặp gỡ, kết nối giữa
+          những người yêu thích bộ môn Billiards, góp phần xây dựng cộng đồng
+          vững mạnh và phát triển.
+        </p>
       </div>
 
-      <div class="rules-content">
-        <h2 class="section-title" id="prize">II. Cơ Cấu Giải Thưởng</h2>
-        <ul>
-          <li>Giải Nhất: <span style="color: #FFE283">1.000.000 VNĐ</span>, cúp vô địch, chứng nhận tham gia, quà lưu niệm từ ban tổ chức</li>
-          <li>Giải Nhì: <span style="color: #9EECF1">500.000 VNĐ</span>, cờ giải nhì, chứng nhận bản cứng, quà lưu niệm từ ban tổ chức</li>
-          <li>Giải Ba: <span style="color: #BE92BD">300.000 VNĐ</span>, cờ giải ba, chứng nhận bản cứng</li>
+      <!-- Cơ Cấu Giải Thưởng -->
+      <div class="rules-content mb-10">
+        <h2 class="section-title text-lg md:text-2xl font-bold mb-2" id="prize">
+          II. Cơ Cấu Giải Thưởng
+        </h2>
+        <ul class="list-disc list-inside space-y-1">
+          <li>
+            Giải Nhất:
+            <span class="text-[#ffe283] font-semibold">1.000.000 VNĐ</span>, cúp
+            vô địch, giấy chứng nhận và quà lưu niệm.
+          </li>
+          <li>
+            Giải Nhì:
+            <span class="text-[#9eecf1] font-semibold">500.000 VNĐ</span>, cờ
+            giải nhì, giấy chứng nhận và quà lưu niệm.
+          </li>
+          <li>
+            Giải Ba:
+            <span class="text-[#be92bd] font-semibold">300.000 VNĐ</span>, cờ
+            giải ba, giấy chứng nhận và quà lưu niệm.
+          </li>
         </ul>
       </div>
 
-      <div class="rules-content">
-        <h2 class="section-title">III. Lịch Trình Dự Án</h2>
-        <ul>
-          <li><div class="timeline-date">07/03/2025:</div> Mở form đăng ký giải đấu</li>
-          <li><div class="timeline-date">29/04/2025:</div> Đóng form đăng ký giải đấu</li>
-          <li><div class="timeline-date">29/04/2025:</div> Công bố danh sách thí sinh tham dự vòng loại trực tiếp vào trang Fanpage</li>
-          <li><div class="timeline-date">05/05/2025:</div> Giải đấu chính thức bắt đầu</li>
+      <!-- Lịch Trình Dự Án -->
+      <div class="rules-content mb-10">
+        <h2 class="section-title text-lg md:text-2xl font-bold mb-2">
+          III. Lịch Trình Dự Án
+        </h2>
+        <ul class="list-disc list-inside space-y-1">
+          <li>
+            <span class="font-bold">07/03/2025:</span> Mở form đăng ký giải đấu.
+          </li>
+          <li><span class="font-bold">29/04/2025:</span> Đóng form đăng ký.</li>
+          <li>
+            <span class="font-bold">29/04/2025:</span> Công bố danh sách vòng
+            loại.
+          </li>
+          <li>
+            <span class="font-bold">05/05/2025:</span> Giải đấu chính thức bắt
+            đầu.
+          </li>
         </ul>
       </div>
 
-      <div class="rules-content">
-        <h2 class="section-title">IV. Cơ Chế Thi Đấu</h2>
-        <p><strong>Hình thức:</strong> Thí sinh tham gia thi đấu trực tiếp tại vị trí bàn được ban tổ chức chỉ định. Mỗi trận đấu sẽ diễn ra với thể thức đánh theo tuỳ từng vòng</p>
-        <ul>
-          <li><div class="match-round"><span>Vòng loại 32:</span> đánh tới <span style="color: var(--primary-color);">3</span> ván thắng (race to 3)</div></li>
-          <li><div class="match-round"><span>Vòng loại 16:</span> đánh tới <span style="color: var(--primary-color);">3</span> ván thắng (race to 3)</div></li>
-          <li><div class="match-round"><span>Vòng loại 8:</span> đánh tới <span style="color:  #fff200">5</span> ván thắng (race to 5)</div></li>
-          <li><div class="match-round"><span>Vòng Bán Kết:</span> đánh tới <span style="color: #fff200;">5</span> ván thắng (race to 5)</div></li>
-          <li><div class="match-round"><span>Vòng Chung Kết:</span> đánh tới <span style="color: red;">7</span> ván thắng (race to 7)</div></li>
+      <!-- Cơ Chế Thi Đấu -->
+      <div class="rules-content mb-10">
+        <h2 class="section-title text-lg md:text-2xl font-bold mb-2">
+          IV. Cơ Chế Thi Đấu
+        </h2>
+        <p class="mb-2">
+          <strong>Hình thức:</strong> Thí sinh tham gia thi đấu trực tiếp tại
+          bàn do BTC chỉ định. Thi đấu loại trực tiếp theo sơ đồ chia nhánh ngẫu
+          nhiên.
+        </p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>
+            <span class="font-bold">Vòng loại 32:</span> Race to
+            <span class="text-primary font-bold">3</span>.
+          </li>
+          <li>
+            <span class="font-bold">Vòng loại 16:</span> Race to
+            <span class="text-primary font-bold">3</span>.
+          </li>
+          <li>
+            <span class="font-bold">Vòng loại 8:</span> Race to
+            <span class="text-[#fff200] font-bold">5</span>.
+          </li>
+          <li>
+            <span class="font-bold">Bán Kết:</span> Race to
+            <span class="text-[#fff200] font-bold">5</span>.
+          </li>
+          <li>
+            <span class="font-bold">Chung Kết:</span> Race to
+            <span class="text-red-600 font-bold">7</span>.
+          </li>
         </ul>
       </div>
 
-      <div class="rules-content">
-        <h2 class="section-title" id="rule">V. Quy Định Chung</h2>
-        <p>Thí sinh tham gia phải tuân thủ quy định sau:</p>
-        <ul>
-          <li>Phải là sinh viên đang học tại các trường đại học, cao đẳng.</li>
-          <li>Trang phục lịch sự, phù hợp với không gian thi đấu.</li>
-          <li>Phải thực hiện tính tự do, tự chủ, tự giác, giao tiếp minh bạch, nghiêm túc.</li>
-          <li>Hành vi xấu sẽ không được tha thứ khi có cử chỉ, lời nói thiếu văn minh hay hành động quá khích xúc phạm người khác, không tuân theo quy định của BTC.</li>
-          <li>Tất cả tư liệu hình ảnh, video quay được trong quá trình thi đấu sẽ được BTC sử dụng để quảng bá, quảng cáo, và các mục đích khác.</li>
+      <!-- Quy Định Chung -->
+      <div class="rules-content mb-10">
+        <h2 class="section-title text-lg md:text-2xl font-bold mb-2" id="rule">
+          V. Quy Định Chung
+        </h2>
+        <p class="mb-2 font-semibold">
+          Thí sinh tham gia phải tuân thủ các quy định sau:
+        </p>
+        <ul class="list-disc list-inside space-y-1 mb-4">
+          <li>Phải là sinh viên đang học tại các trường đại học/cao đẳng.</li>
+          <li>Trang phục lịch sự, phù hợp không gian thi đấu.</li>
+          <li>Phải tự chủ, giao tiếp minh bạch, nghiêm túc.</li>
+          <li>Không có hành vi xấu, lời nói thiếu văn minh.</li>
+          <li>
+            BTC có quyền sử dụng hình ảnh thí sinh cho mục đích truyền thông.
+          </li>
         </ul>
-        <p>Thí sinh có trách nhiệm chấp hành đúng quy định thi đấu:</p>
-        <ul>
-          <li>Phải tự túc chi phí đăng ký tham gia giải theo quy định.</li>
-          <li>Vắng mặt tại trận đấu sau 10 phút kể từ khi BTC công bố coi như tự ý bỏ cuộc.</li>
-          <li>Phải có tinh thần thể thao, lễ độ, tự chủ, tự giác.</li>
-          <li>Phải tôn trọng đối thủ, người tổ chức, tuân thủ các quy định chung của ban tổ chức.</li>
+
+        <p class="mb-2 font-semibold">Trách nhiệm của thí sinh:</p>
+        <ul class="list-disc list-inside space-y-1 mb-4">
+          <li>Tự túc chi phí đăng ký.</li>
+          <li>Vắng mặt sau 10 phút xem như bỏ cuộc.</li>
+          <li>Thể hiện tinh thần thể thao, giao lưu lành mạnh.</li>
+          <li>Tôn trọng đối thủ và thành viên BTC.</li>
         </ul>
-        <p>Khi tham gia giải đấu, thí sinh cần phải cam kết:</p>
-        <ul>
-          <li>Lễ phí tham gia đã được đóng sẽ không hoàn trả.</li>
-          <li>Cam kết đọc kỹ, hiểu rõ và tuân thủ đúng quy định thi đấu.</li>
-          <li>Không có các hành vi cố ý phá hoại, gây rối trật tự.</li>
+
+        <p class="mb-2 font-semibold">Khi đăng ký, thí sinh cam kết:</p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Lệ phí sẽ không được hoàn lại trong mọi trường hợp.</li>
+          <li>Đã đọc và hiểu rõ thể lệ, quy định của giải đấu.</li>
+          <li>Không cố tình phá hoại, gây rối trật tự giải đấu.</li>
         </ul>
       </div>
     </main>
 
-    <footer>
-      <div class="footer-content">
-        <div class="contact-info">
-          <h2>Liên hệ:</h2>
-          <div class="contact-item">
-            <div>
-              <img src="./assets/images/email-icon.png" alt="Logo" />
-            </div>
-            <p>coccamco.fpthcm@gmail.com</p>
+    <footer
+      class="md:mt-[200px] mt-[150px] bg-black text-white pt-5 mt-10 border-t border-gray-700 pt-4 text-center text-sm text-gray-400"
+    >
+      <div
+        class="mx-auto px-6 flex flex-col md:flex-row justify-around md:w-[70%] w-[100%]"
+      >
+        <!-- Contact Info -->
+        <div class="contact-info flex-1">
+          <h2 class="text-xl font-semibold mb-6 text-left">Liên hệ</h2>
+          <div class="contact-item flex items-center mb-4 space-x-4">
+            <img
+              src="./assets/images/email-icon.png"
+              alt="Email Icon"
+              class="w-6 h-6"
+            />
+            <p class="font-light">coccamco.fpthcm@gmail.com</p>
           </div>
 
-          <div class="contact-item">
-            <div>
-              <img src="./assets/images/fb-group-icon.png" alt="Logo" />
-            </div>
-            <p>facebook.com/coccamco.fpthcm</p>
+          <div class="contact-item flex items-center mb-4 space-x-4">
+            <img
+              src="./assets/images/fb-group-icon.png"
+              alt="Facebook Icon"
+              class="w-6 h-6"
+            />
+            <p class="font-light">facebook.com/coccamco.fpthcm</p>
           </div>
 
-          <div class="contact-item">
-            <div>
-              <img src="./assets/images/phone-icon.png" alt="Logo" />
-            </div>
-            <p>0362718422 (Mr. Minh - Project Lead)</p>
+          <div class="contact-item flex items-center mb-4 space-x-4">
+            <img
+              src="./assets/images/phone-icon.png"
+              alt="Phone Icon"
+              class="w-6 h-6"
+            />
+            <p class="font-light">0362718422 (Mr. Minh - Project Lead)</p>
           </div>
 
-          <div class="contact-item">
-            <div>
-              <img src="./assets/images/phone-icon.png" alt="Logo" />
-            </div>
-            <p>0362718422 (Mr. Khánh - Technical Lead)</p>
+          <div class="contact-item flex items-center mb-4 space-x-4">
+            <img
+              src="./assets/images/phone-icon.png"
+              alt="Phone Icon"
+              class="w-6 h-6"
+            />
+            <p class="font-light">0362718422 (Mr. Khánh - Technical Lead)</p>
           </div>
 
-          <div class="contact-item">
-            <div>
-              <img src="./assets/images/phone-icon.png" alt="Logo" />
-            </div>
-            <p>0362718422 (Ms. Loan - Media Lead)</p>
+          <div class="contact-item flex items-center mb-4 space-x-4">
+            <img
+              src="./assets/images/phone-icon.png"
+              alt="Phone Icon"
+              class="w-6 h-6"
+            />
+            <p class="font-light">0362718422 (Ms. Loan - Media Lead)</p>
           </div>
         </div>
 
-        <div class="footer-logo">
-          <div>
-            <img width="100px" height="100px" src="./assets/favicon/logo-orange.png" alt="Logo" />
-          </div>
-          <div class="logo-subtitle">
+        <!-- Footer Logo and Subtitle -->
+        <div class="flex flex-col justify-center items-center flex-1">
+          <img
+            src="./assets/logo/horizontal-logo-with-text.svg"
+            alt="Logo"
+            width="100"
+            height="100"
+            class="mb-3"
+          />
+          <div class="font-semibold text-center">
             Coc Cam Co Billiards Organization Since 2024
           </div>
         </div>
       </div>
 
-      <div class="copyright">
+      <div
+        class="copyright my-4 border-t border-gray-700 pt-4 text-center text-sm text-gray-400"
+      >
         <p>Copyright © 2025 Cóc Cầm Cơ</p>
         <p>All rights reserved</p>
       </div>
     </footer>
 
-    <script type="module" src="./assets/js/landing-page.js"></script>
+    <script src="./assets/js/navbar.js"></script>
   </body>
 </html>

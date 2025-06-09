@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coc Cam Co Tournament 2025</title>
-    <link rel="stylesheet" href="./assets/styles/landing-page.css" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -23,16 +22,24 @@
       href="./assets/favicon/favicon-16x16.png"
     />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="./assets/styles/landing-page.css" />
     <script src="./assets/js/tailwind.min.js"></script>
   </head>
   <body class="bg-black text-white">
-    <header>
-      <nav class="w-full flex justify-center mt-[10px]">
-        <div
-          class="w-full md:w-[70%] flex items-center justify-between relative"
-        >
-          <!-- Logo -->
-          <a class="hover:cursor-pointer flex-shrink-0">
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-black flex justify-center"
+    >
+      <nav
+        class="w-full max-w-7xl flex justify-between items-center px-4 md:px-0 py-2"
+      >
+        <!-- Logo and Nav Wrapper -->
+        <div class="flex items-center justify-between w-full">
+          <!-- Logo (left) -->
+          <a
+            href="./landing-page.html"
+            class="hover:cursor-pointer flex-shrink-0"
+            id="logo-link"
+          >
             <img
               class="md:h-[60px] h-[50px] min-w-[50px]"
               src="./assets/logo/logo-square.svg"
@@ -40,10 +47,21 @@
             />
           </a>
 
-          <!-- Hamburger nút -->
+          <!-- Nav links desktop -->
+          <div class="nav-links hidden md:flex items-center gap-5 ml-auto">
+            <a href="#hero" class="text-white">Trang Chủ</a>
+            <a href="./rule.html#prize" class="text-white">Giải Thưởng</a>
+            <a href="#timeline" class="text-white">Timeline</a>
+            <a href="./rule.html" class="text-white">Quy Định Chung</a>
+            <a href="./register.html"
+              ><button class="custom-btn">THAM GIA NGAY</button></a
+            >
+          </div>
+
+          <!-- Hamburger button (right for mobile only) -->
           <button
             id="btn-menu"
-            class="md:hidden text-white focus:outline-none z-50 relative"
+            class="md:hidden text-white focus:outline-none z-50 relative ml-auto"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,94 +78,184 @@
               />
             </svg>
           </button>
-
-          <!-- Nav links desktop -->
-          <div class="nav-links hidden md:flex items-center gap-5">
-            <a href="#" class="text-white">Trang Chủ</a>
-            <a href="#prize" class="text-white">Giải Thưởng</a>
-            <a href="#timeline" class="text-white">Timeline</a>
-            <a href="./rule.html" class="text-white">Quy Định Chung</a>
-            <button class="custom-btn text-center">THAM GIA NGAY</button>
-          </div>
-
-          <!-- Sidebar menu mobile -->
-          <div
-            id="sidebar"
-            class="fixed top-0 left-[-100%] h-full w-64 bg-black text-white flex flex-col p-6 gap-6 transition-left duration-300 z-40 pointer-events-none"
-          >
-            <button
-              id="btn-close"
-              class="self-end mb-8 focus:outline-none text-white text-3xl font-bold"
-            >
-              &times;
-            </button>
-            <a href="#" class="text-white text-lg">Trang Chủ</a>
-            <a href="#prize" class="text-white text-lg">Giải Thưởng</a>
-            <a href="#timeline" class="text-white text-lg">Timeline</a>
-            <a href="./rule.html" class="text-white text-lg">Quy Định Chung</a>
-            <button class="custom-btn w-full">THAM GIA NGAY</button>
-          </div>
         </div>
       </nav>
+
+      <!-- Sidebar menu mobile -->
+      <div
+        id="sidebar"
+        class="fixed top-0 left-[-100%] h-full w-64 bg-black text-white flex flex-col p-6 gap-6 transition-left duration-300 z-40 pointer-events-none"
+      >
+        <button
+          id="btn-close"
+          class="self-end mb-8 focus:outline-none text-white text-3xl font-bold"
+        >
+          &times;
+        </button>
+        <a href="#hero" class="text-white text-lg">Trang Chủ</a>
+        <a href="./rule.html#prize" class="text-white text-lg">Giải Thưởng</a>
+        <a href="#timeline" class="text-white text-lg">Timeline</a>
+        <a href="./rule.html" class="text-white text-lg">Quy Định Chung</a>
+        <a href="./register.html"
+          ><button class="custom-btn">THAM GIA NGAY</button></a
+        >
+      </div>
     </header>
 
-    <main id="hero" class="hero">
-      <div class="hero-content">
-        <h2>Giải Đấu Billiards</h2>
-        <h1>CÓC CẦM CƠ - II</h1>
-        <p>
-          Một Giải Đấu Billiards Được Khởi Xướng Thường Kỳ Do Tổ Chức Cóc Cầm Cơ
-          Thực Hiện, Nhằm Mang Lại Một Môi Trường Thi Đấu Chuyên Nghiệp, Lành
-          Mạnh, Văn Minh.
-        </p>
-        <button class="cta-button large">THAM GIA NGAY</button>
-      </div>
-      <div class="hero-image">
-        <img src="./assets/images/flaming-8ball.png" alt="Flaming 8 Ball" />
-      </div>
-    </main>
-
-    <section id="prize" class="prize-section">
-      <div class="trophy">
-        <img src="./assets/images/trophy.png" alt="Trophy" />
-      </div>
-      <div class="prize-content">
-        <h2>Tổng Giá Trị Giải Thưởng</h2>
-        <div class="prize-amount">3.0M<span>VNĐ</span></div>
-        <p>Cùng Nhiều Kỷ Niệm Chương Và Các Phần Quà Giá Trị Khác</p>
-        <div class="prize-buttons">
-          <a href="./rule.html#prize"
-            ><button class="outline-button">Cơ cấu giải thưởng</button></a
-          >
-          <a href="./rule.html#rule"
-            ><button class="outline-button">Quy định giải đấu</button></a
+    <div class="w-full">
+      <main
+        id="hero"
+        class="md:w-[70%] w-full mx-auto md:px-[0] px-3 md:mt-[200px] mt-[100px] flex justify-between flex-row gap-5"
+      >
+        <div class="hero-content w-full md:w-[70%] mx-auto flex flex-col">
+          <div class="">
+            <h2 class="font-normal text-lg md:text-[40px]">
+              Giải Đấu Billiards
+            </h2>
+            <h1 class="font-black text-2xl md:text-[70px] mt-3 orange">
+              CÓC CẦM CƠ - II
+            </h1>
+            <p
+              class="font-light text-[10px] md:text-sm md:text-xl leading-loose mt-4"
+            >
+              Một giải đấu Billiards được khởi xướng thường kỳ do Tổ chức Cóc
+              Cầm Cơ thực hiện, nhằm mang lại một môi trường thi đấu "Chuyên
+              nghiệp - Lành mạnh - Văn minh". <br />
+              Tiếp nối sự thành công của Giải đấu Cóc Cầm Cơ Mùa I, chúng tôi đã
+              trở lại!
+            </p>
+          </div>
+          <a href="./register.html">
+            <button class="custom-btn md:mt-[100px] mt-[50px] self-start">
+              THAM GIA NGAY
+            </button></a
           >
         </div>
-      </div>
-    </section>
+        <div class="hero-image mx-auto flex justify-center items-center">
+          <img
+            src="./assets/images/flaming-8ball.png"
+            class="md:w-[400px] w-[200px]"
+            alt="Flaming 8 Ball"
+          />
+        </div>
+      </main>
+    </div>
 
-    <section id="about" class="about-session">
-      <h1 class="about-title">Cóc Cầm Cơ Mùa 1</h1>
-      <div class="about-image">
-        <img
-          src="./assets/image/about-image.png"
-          alt="about-image"
-          class="about-image"
-          style="width: 100%; height: auto; margin-bottom: 2.5rem"
-        />
+    <div class="w-full mt-[50px] md:mt-[50px] flex justify-center">
+      <section id="prize" class="md:w-[70%] w-full md:mt-[250px] flex mx-auto">
+        <div class="trophy md:w-[25%] w-[30%]">
+          <img class="w-full" src="./assets/images/trophy.png" alt="Trophy" />
+        </div>
+        <div class="w-[75%] pt-5">
+          <h2 class="text-sm md:text-5xl orange-original font-bold">
+            Tổng Giá Trị Giải Thưởng
+          </h2>
+          <div>
+            <span class="prize-amount font-black text-xl md:text-[250px]"
+              >3.0M</span
+            ><span class="prize-amount text-base md:text-[200px]">VNĐ</span>
+          </div>
+          <p class="text-[10px] md:text-[30px] font-bold">
+            Cùng nhiều kỷ niệm chương và các phần quà giá trị khác
+          </p>
+          <div
+            class="prize-buttons flex md:flex-row flex-col justify-center md:justify-around px-4 gap-y-4 mt-[20px] md:mt-[50px]"
+          >
+            <a href="./rule.html#prize"
+              ><button class="custom-btn w-[200px] md:w-[250px]">
+                Cơ cấu giải thưởng
+              </button></a
+            >
+            <a href="./rule.html#rule"
+              ><button class="custom-btn w-[200px] md:w-[250px]">
+                Quy định giải đấu
+              </button></a
+            >
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section
+      id="about"
+      class="mt-[100px] md:mt-[250px] w-full md:w-[70%] mx-auto"
+    >
+      <h1 class="orange text-center font-black text-lg md:text-3xl mb-[40px]">
+        Cóc Cầm Cơ Mùa 1
+      </h1>
+      <div
+        class="relative w-full overflow-hidden rounded-xl h-[300px] md:h-[700px]"
+      >
+        <div
+          id="slider"
+          class="flex transition-transform duration-500 ease-in-out h-full"
+        >
+          <img
+            src="./assets/images/about-imgs/469079182_122161315574337494_8179519044527300627_n.jpg"
+            alt="Slide 1"
+            class="w-full flex-shrink-0 object-cover h-full"
+          />
+          <img
+            src="./assets/images/about-imgs/469297821_122161315880337494_4527771893425326946_n.jpg"
+            alt="Slide 2"
+            class="w-full flex-shrink-0 object-cover h-full"
+          />
+          <img
+            src="./assets/images/about-imgs/468973246_122161315004337494_2151045202167614512_n.jpg"
+            alt="Slide 3"
+            class="w-full flex-shrink-0 object-cover h-full"
+          />
+          <img
+            src="./assets/images/about-imgs/468917328_122161315724337494_8883363876692744990_n.jpg"
+            alt="Slide 4"
+            class="w-full flex-shrink-0 object-cover h-full"
+          />
+        </div>
+
+        <!-- Navigation buttons -->
+        <button
+          id="prev"
+          class="hover:cursor-pointer absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-4xl md:text-6xl z-10"
+        >
+          &#10094;
+        </button>
+        <button
+          id="next"
+          class="hover:cursor-pointer absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-4xl md:text-6xl z-10"
+        >
+          &#10095;
+        </button>
       </div>
-      <div class="stats-container">
-        <div class="stat-item">
-          <div id="stat" class="stat-number">10</div>
-          <span class="stat-label">Trường đại học, cao đẳng</span>
+
+      <div
+        class="flex justify-between items-center mb-[20px] md:mb-[50px] p-2 md:p-0"
+      >
+        <div class="flex justify-center items-center flex-col">
+          <div
+            id="stat"
+            class="stat-number prize-amount text-3xl md:text-[150px] font-black"
+          >
+            10
+          </div>
+          <span class="text-xs md:text-[30px]">Trường đại học, cao đẳng</span>
         </div>
-        <div class="stat-item">
-          <div id="stat" class="stat-number">48</div>
-          <span class="stat-label">Thí sinh</span>
+        <div class="flex justify-center items-center flex-col">
+          <div
+            id="stat"
+            class="stat-number prize-amount text-3xl md:text-[150px] font-black"
+          >
+            48
+          </div>
+          <span class="text-xs md:text-[30px]">Thí sinh</span>
         </div>
-        <div class="stat-item">
-          <div id="stat" class="stat-number">1.6M</div>
-          <span class="stat-label">Tổng giá trị giải thưởng</span>
+        <div class="flex justify-center items-center flex-col">
+          <div
+            id="stat"
+            class="stat-number prize-amount text-3xl md:text-[150px] font-black"
+          >
+            1.6M
+          </div>
+          <span class="text-xs md:text-[30px]">Tổng giá trị giải thưởng</span>
         </div>
       </div>
 
@@ -159,54 +267,61 @@
         />
       </div>
     </section>
-    <section id="timeline" class="timeline-section">
-      <h1 class="timeline-title">Timeline</h1>
 
-      <div class="timeline">
+    <section
+      id="timeline"
+      class="mt-[100px] md:mt-[250px] w-full md:w-[70%] w-[100%] mx-auto"
+    >
+      <h1 class="orange text-center font-black text-lg md:text-3xl mb-[40px]">
+        Timeline
+      </h1>
+
+      <div
+        class="border-l border-orange-500 pl-4 mx-3 md:pl-12 space-y-8 md:max-w-[800px] md:mx-auto"
+      >
         <div class="timeline-item">
-          <div class="date">22/12/2023</div>
-          <h2>Giai đoạn đăng ký & thanh toán:</h2>
-          <p>
+          <div class="date font-semibold orange mb-1">22/12/2023</div>
+          <h2 class="text-base md:text-lg font-bold mb-2">
+            Giai đoạn đăng ký & thanh toán:
+          </h2>
+          <p class="font-light text-sm md:text-base">
             Các thí sinh đăng ký thi đấu truy cập trang web
-            coccamco.web.app/register để tiến hành gửi đơn và trang
-            coccamco.web.app/player-info để thanh toán tiền vé tham gia thi đấu.
-          </p>
-        </div>
-
-        <div class="timeline-item">
-          <div class="date">22/12/2023</div>
-          <h2>Giai đoạn đăng ký & thanh toán:</h2>
-          <p>
-            Các thí sinh đăng ký dự thi truy cập trang web
-            coccamco.web.app/register để tiến hành gửi đơn và trang
-            coccamco.web.app/player-info để thanh toán tiền vé tham gia thi đấu.
-          </p>
-        </div>
-
-        <div class="timeline-item">
-          <div class="date">22/12/2023</div>
-          <h2>Giai đoạn đăng ký & thanh toán:</h2>
-          <p>
-            Các thí sinh đăng ký dự thi truy cập trang web
-            coccamco.web.app/register để tiến hành gửi đơn và trang
-            coccamco.web.app/player-info để thanh toán tiền vé tham gia thi đấu.
-          </p>
-        </div>
-
-        <div class="timeline-item">
-          <div class="date">22/12/2023</div>
-          <h2>Giai đoạn đăng ký & thanh toán:</h2>
-          <p>
-            Các thí sinh đăng ký dự thi truy cập trang web
-            coccamco.web.app/register để tiến hành gửi đơn và trang
-            coccamco.web.app/player-info để thanh toán tiền vé tham gia thi đấu.
+            <a
+              href="https://coccamco.web.app/register"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-orange-300 hover:cursor-pointer"
+              style="text-decoration: none"
+            >
+              coccamco.web.app/register
+            </a>
+            để tiến hành gửi đơn và trang
+            <a
+              href="https://coccamco.web.app/search"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-orange-300 hover:cursor-pointer"
+              style="text-decoration: none"
+            >
+              coccamco.web.app/player-info
+            </a>
+            để thanh toán tiền vé tham gia thi đấu.
           </p>
         </div>
       </div>
     </section>
-    <section id="countdown" class="countdown-section">
+
+    <section
+      id="countdown"
+      class="md:w-[50%] mx-auto m-[50px] md:mt-[100px] flex justify-center"
+    >
       <div class="deadline-container">
-        <p class="lexend-bold" id="register-noti">Thời gian đăng ký còn</p>
+        <p
+          class="orange text-center font-black text-lg md:text-3xl mb-[40px]"
+          id=""
+        >
+          Thời gian đăng ký còn
+        </p>
         <div class="date-container">
           <div class="date-session">
             <p class="date-number" id="day">10</p>
@@ -228,69 +343,87 @@
       </div>
     </section>
 
-    <footer>
-      <div class="footer-content">
-        <div class="contact-info">
-          <h2>Liên hệ:</h2>
-          <div class="contact-item">
-            <div>
-              <img src="./assets/images/email-icon.png" alt="Logo" />
-            </div>
-            <p>coccamco.fpthcm@gmail.com</p>
+    <footer
+      class="md:mt-[200px] mt-[150px] bg-black text-white pt-5 mt-10 border-t border-gray-700 pt-4 text-center text-sm text-gray-400"
+    >
+      <div
+        class="footer-content mx-auto px-6 flex flex-col md:flex-row justify-around md:w-[70%] w-[100%]"
+      >
+        <!-- Contact Info -->
+        <div class="contact-info flex-1">
+          <h2 class="text-xl font-semibold mb-6 text-left">Liên hệ</h2>
+          <div class="contact-item flex items-center mb-4 space-x-4">
+            <img
+              src="./assets/images/email-icon.png"
+              alt="Email Icon"
+              class="w-6 h-6"
+            />
+            <p class="font-light">coccamco.fpthcm@gmail.com</p>
           </div>
 
-          <div class="contact-item">
-            <div>
-              <img src="./assets/images/fb-group-icon.png" alt="Logo" />
-            </div>
-            <p>facebook.com/coccamco.fpthcm</p>
+          <div class="contact-item flex items-center mb-4 space-x-4">
+            <img
+              src="./assets/images/fb-group-icon.png"
+              alt="Facebook Icon"
+              class="w-6 h-6"
+            />
+            <p class="font-light">facebook.com/coccamco.fpthcm</p>
           </div>
 
-          <div class="contact-item">
-            <div>
-              <img src="./assets/images/phone-icon.png" alt="Logo" />
-            </div>
-            <p>0362718422 (Mr. Minh - Project Lead)</p>
+          <div class="contact-item flex items-center mb-4 space-x-4">
+            <img
+              src="./assets/images/phone-icon.png"
+              alt="Phone Icon"
+              class="w-6 h-6"
+            />
+            <p class="font-light">0362718422 (Mr. Minh - Project Lead)</p>
           </div>
 
-          <div class="contact-item">
-            <div>
-              <img src="./assets/images/phone-icon.png" alt="Logo" />
-            </div>
-            <p>0362718422 (Mr. Khánh - Technical Lead)</p>
+          <div class="contact-item flex items-center mb-4 space-x-4">
+            <img
+              src="./assets/images/phone-icon.png"
+              alt="Phone Icon"
+              class="w-6 h-6"
+            />
+            <p class="font-light">0362718422 (Mr. Khánh - Technical Lead)</p>
           </div>
 
-          <div class="contact-item">
-            <div>
-              <img src="./assets/images/phone-icon.png" alt="Logo" />
-            </div>
-            <p>0362718422 (Ms. Loan - Media Lead)</p>
+          <div class="contact-item flex items-center mb-4 space-x-4">
+            <img
+              src="./assets/images/phone-icon.png"
+              alt="Phone Icon"
+              class="w-6 h-6"
+            />
+            <p class="font-light">0362718422 (Ms. Loan - Media Lead)</p>
           </div>
         </div>
 
-        <div class="footer-logo">
-          <div>
-            <img
-              width="100px"
-              height="100px"
-              src="./assets/favicon/logo-orange.png"
-              alt="Logo"
-            />
-          </div>
-          <div class="logo-subtitle">
+        <!-- Footer Logo and Subtitle -->
+        <div
+          class="footer-logo flex flex-col justify-center items-center flex-1"
+        >
+          <img
+            src="./assets/logo/horizontal-logo-with-text.svg"
+            alt="Logo"
+            width="100"
+            height="100"
+            class="mb-3"
+          />
+          <div class="logo-subtitle font-semibold text-center">
             Coc Cam Co Billiards Organization Since 2024
           </div>
         </div>
       </div>
 
-      <div class="copyright">
+      <div
+        class="copyright my-4 border-t border-gray-700 pt-4 text-center text-sm text-gray-400"
+      >
         <p>Copyright © 2025 Cóc Cầm Cơ</p>
         <p>All rights reserved</p>
       </div>
     </footer>
 
     <script src="./assets/js/navbar.js"></script>
-
     <script type="module" src="./assets/js/landing-page.js"></script>
   </body>
 </html>

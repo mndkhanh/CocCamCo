@@ -1,6 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
+
+body {
+  background-color: black;
+  font-family: "Lexend", sans-serif;
+}
+
+:root {
+  --primary-color: #e67f0d;
+  --text-color: #ffffff;
+  --background-color: #000000;
+  --button-hover: #ff6b00;
+}
+
+.orange {
+  color: var(--primary-color);
+}
+
+.orange-original {
+  color: orange;
+}
+
 .custom-btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 8px 24px; /* py-2 px-6 */
   background-color: black;
@@ -20,11 +43,85 @@
   top: 2px;
 }
 
+.prize-amount {
+  font-family: "Inter";
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  background: linear-gradient(orange, white);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 @media screen and (max-width: 768px) {
   .custom-btn {
     padding: 6px 16px;
     font-size: 14px;
     gap: 6px;
     margin-left: 4px;
+  }
+}
+
+.deadline-container * {
+  background: transparent;
+}
+
+.deadline-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  min-height: 200px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)),
+    url("../image/fire-small.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(10px);
+  box-shadow: -8px 4px 5px rgba(0, 0, 0, 0.24);
+}
+
+.deadline-container .date-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.left-body .first-title {
+  font-size: 1.7em;
+  margin: 0;
+}
+
+.left-body .second-title {
+  font-size: 5em;
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.deadline-container #register-noti {
+  font-size: 1.5em;
+}
+
+.date-container .date-session {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  * {
+    margin: 0;
+  }
+
+  .date-number {
+    font-size: 3em;
+    font-weight: 600;
+  }
+
+  .date-unit {
+    font-weight: 600;
+    font-size: 1.5em;
   }
 }
