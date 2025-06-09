@@ -1,3 +1,5 @@
+import 'dotenv/config';
+import crypto from 'crypto';
 import functions from "firebase-functions";
 import { firestore } from "../firebase-admin.js";
 import { PAYMENT_STATIC_INFO } from "./payment-static-info.js";
@@ -76,6 +78,49 @@ function retrievePaymentInfoByPaymentID(paymentArr, paymentID) {
 }
 
 
+function sortObjDataByKey(data) {
+      const sortedObj = {};
+      Object.keys(data).sort().forEach((key) => {
+            if (typeof data[key] === "object" && data[key] !== null) {
+                  sortedObj[key] = sortObjDataByKey(data[key]);
+            } else {
+                  sortedObj[key] = data[key];
+            }
+      });
+      return sortedObj;
+}
+
+
+/**
+ * Hàm kiểm tra signature của Casso
+ * @param {string} signatureHeader - giá trị header "x-casso-signature"
+ * @param {object} body - dữ liệu request body (object)
+ * @param {string} secretKey - key bí mật của server
+ * @returns {boolean} - true nếu hợp lệ, false nếu không
+ */
+function verifyCassoSignature(signatureHeader, body, secretKey) {
+      if (!signatureHeader) return false;
+
+      const [timestampPart, signaturePart] = signatureHeader.split(",");
+      if (!timestampPart || !signaturePart) return false;
+
+      const timestamp = timestampPart.split("=")[1];
+      const signature = signaturePart.split("=")[1];
+      if (!timestamp || !signature) return false;
+
+      const sortedBody = sortObjDataByKey(body);
+      const rawBody = JSON.stringify(sortedBody);
+      const signedPayload = `${timestamp}.${rawBody}`;
+
+      const expectedSignature = crypto
+            .createHmac("sha512", secretKey)
+            .update(signedPayload)
+            .digest("hex");
+
+      return signature === expectedSignature;
+}
+
+
 /**
  * This is a https trigger whenever be called, aims to 
  * check payment info and modify the payment status of clients.
@@ -83,95 +128,92 @@ function retrievePaymentInfoByPaymentID(paymentArr, paymentID) {
 */
 const checkPlayerPayment = functions.https.onRequest((request, response) => {
       corsHandler(request, response, async () => {
-            //check data does exist or not
-            const transactions = request.body.data;
-            if (!transactions) {
-                  console.error("transaction does not exist");
-                  return;
+
+
+            const serverSecretKey = process.env.CASSO_SECRET_KEY;
+            const signatureHeader = request.headers["x-casso-signature"];
+
+            // Xác thực chữ ký trước khi xử lý tiếp
+            if (!verifyCassoSignature(signatureHeader, request.body, serverSecretKey)) {
+                  console.warn("Invalid or missing Casso signature");
+                  return response.status(401).send("Unauthorized");
             }
-            /*Sample data received
-                  [
-                        {
-                              id: 9607599,
-                              tid: 'FT25041233908590',
-                              description: 'COCCAMCO 12345A7BC0',
-                              amount: 2000,
-                              cusum_balance: 0,
-                              when: '2025-02-10 04:17:00',
-                              bank_sub_acc_id: '0362718422',
-                              subAccId: '0362718422',
-                              bankName: 'MBBank Official',
-                              bankAbbreviation: 'MBB',
-                              virtualAccount: '',
-                              virtualAccountName: '',
-                              corresponsiveName: '',
-                              corresponsiveAccount: '2281072020614',
-                              corresponsiveBankId: '970422',
-                              corresponsiveBankName: ''
-                        }
-                  ]
-            */
+
+            console.log("successfully verify");
+
+            const transaction = request.body.data;
+            if (!transaction) {
+                  console.error("transaction does not exist");
+                  return response.status(400).send("transaction does not exist");
+            }
+
+            console.log(transaction);
+
             try {
-                  // get player Payment array from firestore
+                  // Lấy danh sách playerPayments từ Firestore
                   const playerPayments = await getDataCollectionFromPaymentInfo();
 
-                  // traverse the array received from CASSO to get the paymentID from transaction banking
-                  // then check the expireTime
-                  // then check the amount
-                  // if success, set playerPayment to PAID, otherwise: FAILED
-                  for (const transaction of transactions) {
+                  // Lấy description trong transaction để xử lý
+                  const description = transaction.description;
 
-                        // manipulate string content transaction
-                        const description = transaction.description;
-                        if (!description.includes("COCCAMCO")) continue; // if not having the "COCCAMCO" string in the content transaction, continue operating the next transaction
-                        const match = description.match(/COCCAMCO\s([A-Za-z0-9]{10})/);
-
-                        if (!match) continue; // if not qualify the regex, pass this transaction
-                        const paymentID = match[1]; // get the paymentID
-
-                        // extract the paymentInfo in firestore
-                        const paymentInfo = retrievePaymentInfoByPaymentID(playerPayments, paymentID);
-                        if (!paymentInfo) {
-                              continue;
-                        }
-
-                        const paymentStatus = paymentInfo.paymentStatus;
-                        if (paymentStatus !== "PENDING") {
-                              continue; // if paymentStatus is FAILED or PAID, continue to the next transaction
-                        }
-
-                        //get the email
-                        const email = paymentInfo.email;
-                        const playerName = paymentInfo.name;
-
-                        // get the paymentTime, expireTime and compare
-                        const paymentTime = new Date(transaction.when.replace(" ", "T")).getTime();
-                        const expireTime = paymentInfo.expireTime;
-                        if (expireTime <= paymentTime) {
-                              await setPlayerPaymentFailedStatus(email, paymentTime, "Quá hạn thanh toán. Vui lòng liên hệ để được hỗ trợ.");
-                              await sendFailedPaymentEmail(email, playerName, "Quá hạn thời gian thanh toán. Vui lòng liên hệ để được hỗ trợ!");
-                              continue;
-                        }
-
-                        // get the amount of the transaction, then comparing with PAYMENT_STATIC_INFO (amount)
-                        const requiredAmount = PAYMENT_STATIC_INFO.PAYMENT_AMOUNT;
-                        const transactionAmount = transaction.amount;
-                        if (transactionAmount < requiredAmount) {
-                              await setPlayerPaymentFailedStatus(email, paymentTime, "Giao dịch không đủ số tiền. Vui lòng liên hệ để được hỗ trợ.");
-                              await sendFailedPaymentEmail(email, playerName, "Giao dịch không đủ số tiền. Vui lòng liên hệ để được hỗ trợ.");
-                              continue;
-                        }
-
-                        // if pass all, set to PAID status
-                        await setPlayerPaymentPaidStatus(email, paymentTime);
-
-                        // send email successfully transaction
-                        await sendSuccessPaymentEmail(email, playerName);
+                  if (!description.includes("COCCAMCO")) {
+                        console.log("Description does not contain COCCAMCO, ignore transaction");
+                        return response.status(200).send("Ignored: description not matching");
                   }
 
+                  const match = description.match(/COCCAMCO\s([A-Za-z0-9]{10})/);
+
+                  if (!match) {
+                        console.log("Description does not match pattern, ignore transaction");
+                        return response.status(200).send("Ignored: description pattern not matched");
+                  }
+
+                  const paymentID = match[1];
+
+                  // Lấy thông tin paymentInfo tương ứng paymentID
+                  const paymentInfo = retrievePaymentInfoByPaymentID(playerPayments, paymentID);
+
+                  if (!paymentInfo) {
+                        console.log("No payment info found for paymentID:", paymentID);
+                        return response.status(404).send("Payment info not found");
+                  }
+
+                  // Kiểm tra trạng thái thanh toán
+                  if (paymentInfo.paymentStatus !== "PENDING") {
+                        console.log("Payment status is not pending, skip");
+                        return response.status(200).send("Payment already processed");
+                  }
+
+                  const email = paymentInfo.email;
+                  const playerName = paymentInfo.name;
+
+                  // So sánh thời gian thanh toán và hết hạn
+                  const paymentTime = new Date(transaction.transactionDateTime.replace(" ", "T")).getTime();
+                  const expireTime = paymentInfo.expireTime;
+
+                  if (expireTime <= paymentTime) {
+                        await setPlayerPaymentFailedStatus(email, paymentTime, "Quá hạn thanh toán. Vui lòng liên hệ để được hỗ trợ.");
+                        await sendFailedPaymentEmail(email, playerName, "Quá hạn thời gian thanh toán. Vui lòng liên hệ để được hỗ trợ!");
+                        return response.status(200).send("Payment expired");
+                  }
+
+                  // So sánh số tiền giao dịch với yêu cầu
+                  const requiredAmount = PAYMENT_STATIC_INFO.PAYMENT_AMOUNT;
+                  if (transaction.amount < requiredAmount) {
+                        await setPlayerPaymentFailedStatus(email, paymentTime, "Giao dịch không đủ số tiền. Vui lòng liên hệ để được hỗ trợ.");
+                        await sendFailedPaymentEmail(email, playerName, "Giao dịch không đủ số tiền. Vui lòng liên hệ để được hỗ trợ.");
+                        return response.status(200).send("Insufficient payment amount");
+                  }
+
+                  // Nếu tất cả đều ok, cập nhật trạng thái thành công
+                  await setPlayerPaymentPaidStatus(email, paymentTime);
+                  await sendSuccessPaymentEmail(email, playerName);
+
+                  response.status(200).send("Payment processed successfully");
 
             } catch (error) {
                   console.error(error);
+                  response.status(500).send("Internal Server Error");
             }
 
 

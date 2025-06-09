@@ -255,6 +255,7 @@ function displayUserData(userData) {
 
 
 
+
   setTimeout(() => {
     const copyAccountBtn = document.getElementById('copy-account');
     if (copyAccountBtn) {
