@@ -1,19 +1,31 @@
 import { sendEmailWithHTML } from "./email-config.js";
+import * as fs from 'fs'; // Import the file system module
+import * as path from 'path'; // Import the path module
+// --- Bắt đầu thay đổi ở đây để định nghĩa __dirname tương đương trong ES Modules ---
+import { fileURLToPath } from 'url';
+
+// Lấy đường dẫn thư mục hiện tại cho ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// --- Kết thúc thay đổi ---
 
 function getFailedContent(playerName, failedComment) {
-      return `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background: #f8d7da;">
-            <h2 style="color: #721c24;">🔴 Giao Dịch Thất Bại</h2>
-            <p>Xin chào ${playerName},</p>
-            <p>Chúng tôi rất tiếc thông báo rằng giao dịch của bạn đã <strong>thất bại</strong> vì lý do sau:</p>
-            <p style="background: #f5c6cb; padding: 10px; border-radius: 5px;"><strong>Lý do:</strong> ${failedComment}</p>
-            <p>Vui lòng liên hệ để được hỗ trợ: </p>
-            <p>Zalo: 0362718422</p>
-            <p>Duy Khánh (Co-lead dự án)</p>
-            <p>Trân trọng,</p>
-            <p><strong>COCCAMCO Team</strong></p>
-        </div>
-      `;
+      const templatePath = path.join(__dirname, './templates/failPaymentMail.html');
+
+      let emailHtmlContent;
+      try {
+            emailHtmlContent = fs.readFileSync(templatePath, 'utf8');
+      } catch (readError) {
+            console.error('Error reading email template file: ', readError);
+            throw new functions.https.HttpsError('internal', 'Failed to read email template.', readError.message);
+      }
+
+      emailHtmlContent = emailHtmlContent
+            .replace('{{otp}}', code)
+            .replaceAll('{{playerName}}', playerName)
+            .replace('{{failedComment}}', failedComment);
+
+      return emailHtmlContent;
 }
 
 async function sendFailedPaymentEmail(to, playerName, failedComment) {
@@ -25,22 +37,20 @@ async function sendFailedPaymentEmail(to, playerName, failedComment) {
 }
 
 function getSuccessContent(playerName) {
-      return `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background: #d4edda;">
-            <h2 style="color: #155724;">✅ Chúc Mừng! Thanh Toán Thành Công</h2>
-            <p>Xin chào <strong>${playerName}</strong>,</p>
-            <p>Chúng tôi xin thông báo rằng giao dịch của bạn đã <strong>thành công</strong>!</p>
-            <p style="background: #c3e6cb; padding: 10px; border-radius: 5px;">
-                Bạn đã chính thức trở thành <strong>người chơi hợp lệ</strong> của giải đấu <strong>Cóc Cầm Cơ</strong>! 🎉
-            </p>
-            <p>Thông tin giải đấu và các trận đấu sẽ được gửi tới bạn sớm nhất.</p>
-            <p>Nếu có bất kỳ câu hỏi nào, vui lòng liên hệ:</p>
-            <p>Zalo: 0362718422</p>
-            <p>Duy Khánh (Co-lead dự án)</p>
-            <p>Trân trọng,</p>
-            <p><strong>COCCAMCO Team</strong></p>
-        </div>
-      `;
+      const templatePath = path.join(__dirname, './templates/successPaymentMail.html');
+
+      let emailHtmlContent;
+      try {
+            emailHtmlContent = fs.readFileSync(templatePath, 'utf8');
+      } catch (readError) {
+            console.error('Error reading email template file: ', readError);
+            throw new functions.https.HttpsError('internal', 'Failed to read email template.', readError.message);
+      }
+
+      emailHtmlContent = emailHtmlContent
+            .replaceAll('{{name}}', playerName);
+
+      return emailHtmlContent;
 }
 
 async function sendSuccessPaymentEmail(to, playerName) {

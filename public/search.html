@@ -11,6 +11,25 @@
       href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./assets/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <script src="./assets/js/tailwind.min.js"></script>
     <script src="./assets/js/tailwind.min.js"></script>
   </head>
 
@@ -46,7 +65,10 @@
           name="email"
           placeholder="Nhập đúng địa chỉ email đã đăng ký"
         />
-        <button class="search-btn" type="submit">
+        <button
+          class="custom-btn search-btn md:mt-0 mt-2 w-full md:ml-2 md:w-[200px]"
+          type="submit"
+        >
           Tìm kiếm
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -191,18 +213,10 @@
               </div>
             </div>
 
-            <div style="text-align: center; margin-top: 30px">
+            <div class="text-center mt-8">
               <a
                 href="./match-list.html"
-                style="
-                  background-color: black;
-                  border: 1px solid #e67f0d;
-                  color: #e67f0d;
-                  padding: 8px 16px;
-                  border-radius: 8px;
-                  cursor: pointer;
-                  text-decoration: none;
-                "
+                class="inline-flex items-center bg-black border border-[#e67f0d] text-[#e67f0d] px-4 py-2 rounded-lg cursor-pointer no-underline hover:bg-[#1a1a1a] transition"
                 target="_blank"
               >
                 Xem toàn bộ bảng đấu
@@ -212,7 +226,7 @@
                   height="16"
                   fill="currentColor"
                   viewBox="0 0 16 16"
-                  style="vertical-align: middle; margin-left: 5px"
+                  class="ml-1 inline-block align-middle"
                 >
                   <path
                     fill-rule="evenodd"

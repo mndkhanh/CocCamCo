@@ -1,4 +1,13 @@
 import { transporter } from "./email-config.js";
+import * as fs from 'fs'; // Import the file system module
+import * as path from 'path'; // Import the path module
+// --- Bắt đầu thay đổi ở đây để định nghĩa __dirname tương đương trong ES Modules ---
+import { fileURLToPath } from 'url';
+
+// Lấy đường dẫn thư mục hiện tại cho ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// --- Kết thúc thay đổi ---
 
 function getVNDate(timestamp) {
       const date = new Date(timestamp);
@@ -20,32 +29,31 @@ function getVNDate(timestamp) {
  */
 async function sendSuccessRegister(playerInfo) {
       const { email, name, phoneNumber, age, registerTime } = playerInfo;
+      const templatePath = path.join(__dirname, './templates/successRegisterMail.html');
+      const registerAt = getVNDate(registerTime);
 
-      const emailContent = `
-          <p>Xin chào ${name},</p>
-            <p>Bạn đã gửi đơn đăng ký thành công. Sau đây là thông tin đăng ký:</p>
-            <p><strong>Player Info:</strong></p>
-            <ul>
-                  <li><strong>Họ và tên:</strong> ${name}</li>
-                  <li><strong>Email:</strong> ${email}</li>
-                  <li><strong>Số điện thoại:</strong> ${phoneNumber}</li>
-                  <li><strong>Tuổi:</strong> ${age}</li>
-                  <li><strong>Đăng ký vào lúc:</strong> ${getVNDate(registerTime)}</li>
-            </ul>
-            <p><strong>Vui lòng thanh toán trong vòng 48 giờ để trở thành thí sinh chính thức. Tra cứu thông tin thanh toán ở
-                        đường link sau:</strong></p><br>
-            <a href="https://coccamco.web.app/search">https://coccamco.web.app/search</a>
+      let emailHtmlContent;
+      try {
+            emailHtmlContent = fs.readFileSync(templatePath, 'utf8');
+      } catch (readError) {
+            console.error('Error reading email template file: ', readError);
+            throw new functions.https.HttpsError('internal', 'Failed to read email template.', readError.message);
+      }
 
-            <p>Vui lòng đợi các thông tin mới nhất từ chúng tôi.</p>
-            <p>Best regards,<br>Cóc Cầm Cơ</p>
-      `;
+      emailHtmlContent = emailHtmlContent
+            .replaceAll('{{name}}', name)
+            .replace('{{phoneNumber}}', phoneNumber)
+            .replace('{{registerAt}}', registerAt)
+            .replace('{{phoneNumber}}', phoneNumber)
+            .replace('{{email}}', email)
+            .replace('{{age}}', age)
 
       // Configure the email options
       const mailOptions = {
             from: 'coccamco.fpthcm@gmail.com',
             to: email,
             subject: '[CÓC CẦM CƠ] - THÔNG BÁO ĐĂNG KÝ THÀNH CÔNG & THANH TOÁN LỆ PHÍ THAM GIA',
-            html: emailContent
+            html: emailHtmlContent
       };
 
       try {

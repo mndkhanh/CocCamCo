@@ -188,7 +188,7 @@ const checkPlayerPayment = functions.https.onRequest((request, response) => {
                   const playerName = paymentInfo.name;
 
                   // So sánh thời gian thanh toán và hết hạn
-                  const paymentTime = new Date(transaction.transactionDateTime.replace(" ", "T")).getTime();
+                  const paymentTime = new Date().getTime();
                   const expireTime = paymentInfo.expireTime;
 
                   if (expireTime <= paymentTime) {

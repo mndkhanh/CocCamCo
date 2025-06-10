@@ -24,6 +24,17 @@
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
     <link rel="stylesheet" href="./assets/styles/landing-page.css" />
     <script src="./assets/js/tailwind.min.js"></script>
+    <style>
+        .box {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .box.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
   </head>
   <body class="bg-black text-white">
     <header
@@ -50,7 +61,7 @@
           <!-- Nav links desktop -->
           <div class="nav-links hidden md:flex items-center gap-5 ml-auto">
             <a href="#hero" class="text-white">Trang Chủ</a>
-            <a href="./rule.html#prize" class="text-white">Giải Thưởng</a>
+            <a href="#prize" class="text-white">Giải Thưởng</a>
             <a href="#timeline" class="text-white">Timeline</a>
             <a href="./rule.html" class="text-white">Quy Định Chung</a>
             <a href="./register.html"
@@ -93,7 +104,7 @@
           &times;
         </button>
         <a href="#hero" class="text-white text-lg">Trang Chủ</a>
-        <a href="./rule.html#prize" class="text-white text-lg">Giải Thưởng</a>
+        <a href="#prize" class="text-white text-lg">Giải Thưởng</a>
         <a href="#timeline" class="text-white text-lg">Timeline</a>
         <a href="./rule.html" class="text-white text-lg">Quy Định Chung</a>
         <a href="./register.html"
@@ -102,7 +113,7 @@
       </div>
     </header>
 
-    <div class="w-full">
+    <div class="w-full box">
       <main
         id="hero"
         class="md:w-[70%] w-full mx-auto md:px-[0] px-3 md:mt-[200px] mt-[100px] flex justify-between flex-row gap-5"
@@ -142,7 +153,7 @@
       </main>
     </div>
 
-    <div class="w-full mt-[50px] md:mt-[50px] flex justify-center">
+    <div class="w-full mt-[50px] md:mt-[50px] flex justify-center box" >
       <section id="prize" class="md:w-[70%] w-full md:mt-[250px] flex mx-auto">
         <div class="trophy md:w-[25%] w-[30%]">
           <img class="w-full" src="./assets/images/trophy.png" alt="Trophy" />
@@ -179,7 +190,7 @@
 
     <section
       id="about"
-      class="mt-[100px] md:mt-[250px] w-full md:w-[70%] mx-auto"
+      class="box mt-[100px] md:mt-[250px] w-full md:w-[70%] mx-auto"
     >
       <h1 class="orange text-center font-black text-lg md:text-3xl mb-[40px]">
         Cóc Cầm Cơ Mùa 1
@@ -261,13 +272,13 @@
       </div>
 
         <div class="slogan-image">
-            <img src="images/slogan.png" alt="slogan-image" class="slogan-image">
+            <img src="./assets/images/slogan.png" alt="slogan-image" class="slogan-image">
         </div>
     </section>
 
     <section
       id="timeline"
-      class="mt-[100px] md:mt-[250px] w-full md:w-[70%] w-[100%] mx-auto"
+      class="box mt-[100px] md:mt-[250px] w-full md:w-[70%] w-[100%] mx-auto"
     >
       <h1 class="orange text-center font-black text-lg md:text-3xl mb-[40px]">
         Timeline
@@ -309,7 +320,7 @@
 
     <section
       id="countdown"
-      class="md:w-[50%] mx-auto m-[50px] md:mt-[100px] flex justify-center"
+      class="box md:w-[50%] mx-auto m-[50px] md:mt-[100px] flex justify-center"
     >
       <div class="deadline-container">
         <p
@@ -420,6 +431,26 @@
 
     <script src="./assets/js/navbar.js"></script>
     <script type="module" src="./assets/js/landing-page.js"></script>
+    <script>
+        const boxes = document.querySelectorAll('.box');
+
+        function checkBoxes() {
+            const triggerBottom = window.innerHeight * 0.8;
+
+            boxes.forEach(box => {
+                const boxTop = box.getBoundingClientRect().top;
+
+                if (boxTop < triggerBottom) {
+                    box.classList.add('show');
+                } else {
+                    box.classList.remove('show');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkBoxes);
+        checkBoxes(); // Kiểm tra ngay khi load trang
+    </script>
   </body>
 
 </html>

@@ -2,6 +2,16 @@ import { transporter } from "./email-config.js";
 import { generateCode } from "../verification-code/generateCode.js";
 import { getCodeStatus } from "../verification-code/getCodeStatus.js";
 import functions from "firebase-functions"
+import * as fs from 'fs'; // Import the file system module
+import * as path from 'path'; // Import the path module
+
+// --- Bắt đầu thay đổi ở đây để định nghĩa __dirname tương đương trong ES Modules ---
+import { fileURLToPath } from 'url';
+
+// Lấy đường dẫn thư mục hiện tại cho ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// --- Kết thúc thay đổi ---
 
 const sendEmailWithVerCode = functions.https.onCall(async (request) => {
       const email = request.data.email;
@@ -28,12 +38,25 @@ const sendEmailWithVerCode = functions.https.onCall(async (request) => {
                   throw new functions.https.HttpsError('internal', `Failed to generate code for ${email}`);
             }
 
+            const templatePath = path.join(__dirname, './templates/sendOTPregisterMail.html');
+            console.log(templatePath);
+
+            let emailHtmlContent;
+            try {
+                  emailHtmlContent = fs.readFileSync(templatePath, 'utf8');
+            } catch (readError) {
+                  console.error('Error reading email template file: ', readError);
+                  throw new functions.https.HttpsError('internal', 'Failed to read email template.', readError.message);
+            }
+
+            emailHtmlContent = emailHtmlContent.replace('{{otp}}', code);
+
             // Setup mail options
             const mailOptions = {
                   from: 'coccamco.fpthcm@gmail.com',
                   to: email,
                   subject: `[CÓC CẦM CƠ] - MÃ XÁC MINH ĐĂNG KÝ THAM GIA`,
-                  text: `Mã xác minh: ${code}`,
+                  html: emailHtmlContent,
             };
 
             // Send the email
