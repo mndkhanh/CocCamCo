@@ -5,6 +5,7 @@ import { firestore } from "../firebase-admin.js";
 import { PAYMENT_STATIC_INFO } from "./payment-static-info.js";
 import { sendFailedPaymentEmail, sendSuccessPaymentEmail } from "../emails/sendPaymentInform.js"
 import cors from "cors";
+import { sendEmailWithText } from '../emails/email-config.js';
 const corsHandler = cors({ origin: true }); // Allow all origins
 
 
@@ -129,6 +130,8 @@ function verifyCassoSignature(signatureHeader, body, secretKey) {
 const checkPlayerPayment = functions.https.onRequest((request, response) => {
       corsHandler(request, response, async () => {
 
+            await sendEmailWithText('mndkhanh@gmail.com', 'Cóc Cầm Cơ - Chú ý! Có ip request tới cloud function check payment!',
+                  `Nếu bạn nhận được nhiều mail này. rất có thể bạn đang bị spam request và có người đagn cố gắng hack payment.`);
 
             const serverSecretKey = process.env.CASSO_SECRET_KEY;
             const signatureHeader = request.headers["x-casso-signature"];
@@ -208,6 +211,8 @@ const checkPlayerPayment = functions.https.onRequest((request, response) => {
                   // Nếu tất cả đều ok, cập nhật trạng thái thành công
                   await setPlayerPaymentPaidStatus(email, paymentTime);
                   await sendSuccessPaymentEmail(email, playerName);
+                  await sendEmailWithText('mndkhanh@gmail.com', 'Cóc Cầm Cơ - Chú ý! Có giao dịch mới đến',
+                        `Check tài khoản MB Bank xem tiền vào chưa, phòng trường hợp có đứa nó spam request tới checkPayment và pass được cái check casso key. ID giao dịch: ${paymentID}`);
 
                   response.status(200).send("Payment processed successfully");
 
