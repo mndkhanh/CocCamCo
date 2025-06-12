@@ -29,6 +29,39 @@ const emailUsed = httpsCallable(functions, "isEmailUsed");
 const availSlot = httpsCallable(functions, "hasAvailSlot");
 
 
+
+let countdownInterval = null;
+
+function startCountdown(durationInSeconds, textElement, buttonElement) {
+      let remaining = durationInSeconds;
+      textElement.textContent = `${remaining}s`;
+
+      // Clear any existing countdown
+      if (countdownInterval) {
+            clearInterval(countdownInterval);
+      }
+
+      // Start new countdown
+      countdownInterval = setInterval(() => {
+            remaining--;
+            if (remaining > 0) {
+                  textElement.textContent = `${remaining}s`;
+            } else {
+                  clearInterval(countdownInterval);
+                  countdownInterval = null;
+                  textElement.textContent = "Gửi lại";
+                  buttonElement.classList.remove("pointer-events-none", "opacity-50");
+            }
+      }, 1000);
+}
+
+function clearCountdown() {
+      if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+      }
+}
+
 //---------------------------------------------------------------------------- DOM EVENT VALIDATION
 function setError(errorTxt, str) {
       if (errorTxt) {
@@ -49,6 +82,7 @@ function unsetErrorAll() {
       errorEmailTxt.innerHTML = "";
       errorVerCodeTxt.innerHTML = "";
 }
+
 
 // Check Name
 function isValidName() {
@@ -186,34 +220,61 @@ function getVerificationCode() {
 
 //---------------------------------------------------------------------------- DOM BUTTON EVENT TRIGGER
 
-// Trigger the email sending when the button is clicked
 sendEmailBtn.addEventListener("click", async (e) => {
       e.preventDefault();
+      // Disable button immediately
+      sendEmailBtn.classList.add("pointer-events-none", "opacity-50");
+
       const bool = await isValidEmail();
+      const textSpan = document.getElementById("send-email-text");
+      const loadingIcon = document.getElementById("send-email-loading-icon");
+
+
+
       if (!bool) {
+            sendEmailBtn.classList.remove("pointer-events-none", "opacity-50");
             return;
       }
-      try {
-            //loading effect
-            document.querySelector("#send-email-loading-icon").style = "visibility: visible;";
-            // Call the Firebase Cloud Function to send an email
-            const sendEmailWithVerCode = httpsCallable(functions, 'sendEmailWithVerCode');
 
+      try {
+            loadingIcon.style.visibility = "visible";
+
+            const sendEmailWithVerCode = httpsCallable(functions, 'sendEmailWithVerCode');
             const response = await sendEmailWithVerCode({ email: emailTxt.value });
             const codeStatus = response.data;
-            document.querySelector("#send-email-loading-icon").style = "visibility: hidden;";
-            if (codeStatus && codeStatus.status === "ACTIVE") setError(errorVerCodeTxt, "*Gửi thành công. Mã sẽ hết hạn sau 2 phút.");
-            else setError(errorVerCodeTxt, "*Lỗi khi gửi email. Try again.");
+
+            loadingIcon.style.visibility = "hidden";
+
+            if (codeStatus && codeStatus.status === "ACTIVE") {
+                  setError(errorVerCodeTxt, "*Gửi thành công. Mã sẽ hết hạn sau 2 phút.");
+
+                  startCountdown(120, textSpan, sendEmailBtn);
+
+            } else {
+                  setError(errorVerCodeTxt, "*Lỗi khi gửi email. Thử lại.");
+                  textSpan.textContent = "Gửi mã mới";
+                  clearCountdown();
+                  sendEmailBtn.classList.remove("pointer-events-none", "opacity-50");
+            }
       } catch (error) {
-            console.error('Error calling sendEmail:', error);
-            setError(errorVerCodeTxt, "*Lỗi khi gửi email. Try again.");
+
+            console.error("Error calling sendEmail:", error);
+            clearCountdown();
+            setError(errorVerCodeTxt, "*Lỗi khi gửi email. Thử lại.");
+            loadingIcon.style.visibility = "hidden";
+            textSpan.textContent = "Gửi lại";
+            sendEmailBtn.classList.remove("pointer-events-none", "opacity-50");
       }
 });
+
 
 
 // --------------------------------- submit form 
 submitBtn.addEventListener("click", async (e) => {
       e.preventDefault();
+
+      // Disable button immediately
+      submitBtn.classList.add("pointer-events-none", "opacity-50");
 
       // Validate all inputs
       const isNameValid = isValidName();
@@ -227,21 +288,24 @@ submitBtn.addEventListener("click", async (e) => {
 
       // If any validation fails, stop the submission
       if (!(isNameValid && isPhoneValid && isAgeValid && isEmailValid && areVerificationCodeFilled)) {
+            setTimeout(() => {
+                  submitBtn.classList.remove("pointer-events-none", "opacity-50");
+            }, 2000); // 5 giây
             return;
       }
 
       // Check if there are any empty slots
       if (!anyLeftSlot) {
-            //set the failure window to have below failed detail
             setFailureWindow("Giải đấu đã nhận đủ đơn đăng ký. Chúng tôi sẽ cập nhật khi có các thông tin mới nhất.");
+            setTimeout(() => {
+                  submitBtn.classList.remove("pointer-events-none", "opacity-50");
+            }, 2000);
             return;
       }
 
       try {
-            // set loading effect to be active
             setLoadingEffect();
 
-            //send registration form
             const sendRegisterForm = httpsCallable(functions, 'sendRegisterForm');
             const playerInfo = {
                   name: nameTxt.value,
@@ -255,29 +319,29 @@ submitBtn.addEventListener("click", async (e) => {
             const registerStatus = await response.data;
             const status = registerStatus.status;
             const comment = registerStatus.comment;
-            // check the register status
-            if (status === "SUCCESS") { // successfully submitted
-                  // unset loading effect
-                  unsetLoadingEffect();
-                  //show success registration window
+
+            unsetLoadingEffect();
+
+            if (status === "SUCCESS") {
                   setSuccessWindow();
-                  //set the form empty
                   unsetErrorAll();
-            } else { // failure
-                  // unset loading effect
-                  unsetLoadingEffect();
-                  // show failure window 
+                  clearForm();
+            } else {
                   setFailureWindow(comment);
             }
 
-
       } catch (error) {
-            // unset loading effect and show failure window
             unsetLoadingEffect();
             setFailureWindow("Lỗi hệ thống, chụp lại màn hình lỗi để được hỗ trợ: " + error);
             console.error('Error calling sendRegisterForm:', error);
+      } finally {
+            // Re-enable after 2s
+            setTimeout(() => {
+                  submitBtn.classList.remove("pointer-events-none", "opacity-50");
+            }, 2000);
       }
 });
+
 
 function setFailureWindow(comment) {
       document.querySelector(".message-box-wrapper-failure").classList.add("active");
@@ -298,6 +362,42 @@ function unsetLoadingEffect() {
 
 
 // --------------------------------- ending submit form 
+
+
+
+function clearForm() {
+      // Xóa nội dung các trường input
+      nameTxt.value = "";
+      PNTxt.value = "";
+      ageTxt.value = "";
+      emailTxt.value = "";
+
+      // Xóa các input mã xác thực
+      const codeInputs = document.querySelectorAll(".code-input");
+      codeInputs.forEach(input => input.value = "");
+
+      // Xóa thông báo lỗi
+      unsetErrorAll();
+
+      // Bật lại nút gửi mã và đổi nội dung
+      const sendEmailBtn = document.getElementById("sendEmailBtn");
+      const sendEmailText = document.getElementById("send-email-text");
+      const sendEmailLoadingIcon = document.getElementById("send-email-loading-icon");
+
+      // Bỏ disable bằng class
+      sendEmailBtn.classList.remove("pointer-events-none", "opacity-50");
+
+      // Bật lại pointer
+      sendEmailBtn.style.pointerEvents = "auto";
+
+      // Đặt lại nội dung
+      sendEmailText.textContent = "Gửi mã";
+
+      // Ẩn icon loading
+      sendEmailLoadingIcon.style.visibility = "hidden";
+      clearCountdown();
+}
+
 
 
 

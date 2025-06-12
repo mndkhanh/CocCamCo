@@ -149,7 +149,7 @@ async function listenToMatchesCollection(email, renderMatchesToUI) {
 
 function setDefaultUserDetails() {
   if (resultContainer) {
-    resultContainer.innerHTML = `<p class="user-details-text">Vui lòng nhập email để tìm kiếm</p>`;
+    resultContainer.innerHTML = `<p class="user-details-text text-center">Vui lòng nhập email để tìm kiếm thông tin thí sinh và thông tin thanh toán!</p>`;
   }
 }
 

@@ -15,9 +15,8 @@ btnClose.addEventListener('click', () => {
 });
 
 const header = document.querySelector('header');
-const headerOffset = header.offsetHeight;
 
-function smoothScrollTo(targetId) {
+function smoothScrollTo(targetId, headerOffset = 200) {
     const target = document.getElementById(targetId);
     if (target) {
         const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
@@ -29,7 +28,6 @@ function smoothScrollTo(targetId) {
         });
     }
 }
-
 // Handle nav and sidebar links
 document.querySelectorAll('.nav-links a[href^="#"], #sidebar a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
@@ -63,17 +61,13 @@ document.addEventListener('click', (e) => {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('header');
-    const offset = header ? header.offsetHeight : 0;
-
     if (window.location.hash) {
         const targetId = window.location.hash.substring(1);
         const target = document.getElementById(targetId);
 
         if (target) {
             setTimeout(() => {
-                const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = elementPosition - offset;
+                const offsetPosition = 200;
 
                 window.scrollTo({
                     top: offsetPosition,
