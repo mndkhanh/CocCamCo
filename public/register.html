@@ -172,7 +172,10 @@
       </div>
       <div id="register-form">
         <form autocomplete="off">
-          <h1 class="lexend-semibold orange-color transparent-background">
+          <h1
+            style="font-size: 18px; margin: 0px; margin-top: 10px"
+            class="lexend-semibold orange-color transparent-background"
+          >
             Đăng ký
           </h1>
 
@@ -193,6 +196,34 @@
             placeholder="Tuổi"
             inputmode="numeric"
             id="ageTxt"
+          />
+
+          <div class="flex justify-between gap-10 transparent-background">
+            <div class="transparent-background w-[40%]">
+              <span id="errorGenderSelect" class="error-txt"></span><br />
+              <select id="genderSelect" class="hover:cursor-pointer">
+                <option value="">Giới tính</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+              </select>
+            </div>
+            <div class="transparent-background w-[40%]">
+              <span id="errorRankSelect" class="error-txt"></span><br />
+              <select id="rankSelect" class="hover:cursor-pointer">
+                <option value="">Hạng</option>
+                <option value="G">G</option>
+                <option value="H">H</option>
+                <option value="I">I</option>
+              </select>
+            </div>
+          </div>
+
+          <span id="errorColegeTxt" class="error-txt"></span><br />
+          <input
+            type="text"
+            placeholder="Trường đại học, cao đẳng đang theo học"
+            class=""
+            id="colegeTxt"
           />
 
           <span id="errorEmailTxt" class="error-txt"></span><br />
@@ -255,7 +286,7 @@
         </form>
       </div>
     </div>
-    <script src="./assets/js/register-page.js"></script>
+    <script type="module" src="./assets/js/register-page.js"></script>
     <script type="module" src="./script/register.js"></script>
   </body>
 </html>

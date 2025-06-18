@@ -268,7 +268,8 @@ form {
   margin-top: 20px;
 }
 
-input {
+input,
+select {
   width: 100%;
   padding: 10px;
   margin: 5px 0;
@@ -394,7 +395,8 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.error-input {
+.error-input,
+.error-select {
   border: 2px solid red;
   /* Red border for error state */
   box-shadow: 0 0 5px red;
@@ -402,7 +404,8 @@ input::-webkit-inner-spin-button {
   border-color: red;
 }
 
-.error-input:focus {
+.error-input:focus,
+.error-select:focus {
   border: 2px solid red;
   border-color: red;
   outline: none;

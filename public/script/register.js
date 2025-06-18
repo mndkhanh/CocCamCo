@@ -1,6 +1,7 @@
 import { app } from "./firebase-config.js";
 import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-functions.js";
 import { getFirestore, collection, doc, getDoc, query, getDocs } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { TOURNAMENT_INFO } from "./tournament-info.js";
 
 const functions = getFunctions(app);
 const firestore = getFirestore(app);
@@ -13,12 +14,19 @@ const nameTxt = document.getElementById("nameTxt");
 const PNTxt = document.getElementById("PNTxt");
 const ageTxt = document.getElementById("ageTxt");
 const emailTxt = document.getElementById("emailTxt");
+const genderSelect = document.getElementById("genderSelect");
+const rankSelect = document.getElementById("rankSelect");
+const colegeTxt = document.getElementById("colegeTxt");
 
 const errorNameTxt = document.getElementById("errorNameTxt");
 const errorPNTxt = document.getElementById("errorPNTxt");
 const errorAgeTxt = document.getElementById("errorAgeTxt");
 const errorEmailTxt = document.getElementById("errorEmailTxt");
 const errorVerCodeTxt = document.getElementById("errorVerCodeTxt");
+const errorGenderTxt = document.getElementById("errorGenderSelect");
+const errorRankTxt = document.getElementById("errorRankSelect");
+const errorColegeTxt = document.getElementById("errorColegeTxt");
+
 
 const sendEmailBtn = document.getElementById("sendEmailBtn");
 const submitBtn = document.querySelector("#submitBtn");
@@ -81,6 +89,9 @@ function unsetErrorAll() {
       errorAgeTxt.innerHTML = "";
       errorEmailTxt.innerHTML = "";
       errorVerCodeTxt.innerHTML = "";
+      errorGenderTxt.innerHTML = "";
+      errorRankTxt.innerHTML = "";
+      errorColegeTxt.innerHTML = "";
 }
 
 
@@ -133,6 +144,48 @@ function isValidAge() {
 
       unsetError(errorAgeTxt);
       ageTxt.classList.remove("error-input");
+      return true;
+}
+
+// check gender
+function isValidGender() {
+      const gender = genderSelect.value;
+      if (gender !== "Nam" && gender !== "Nữ") {
+            setError(errorGenderTxt, "*Không để trống.");
+            genderSelect.classList.add("error-select");
+            return false;
+      }
+
+      unsetError(errorGenderTxt);
+      genderSelect.classList.remove("error-select");
+      return true;
+}
+
+// check rank
+function isValidRank() {
+      const rank = rankSelect.value;
+      if (rank !== "G" && rank !== "H" && rank !== "I") {
+            setError(errorRankTxt, "*Không để trống.");
+            rankSelect.classList.add("error-select");
+            return false;
+      }
+
+      unsetError(errorRankTxt);
+      rankSelect.classList.remove("error-select");
+      return true;
+}
+
+// check Colege
+function isValidColege() {
+      const colege = colegeTxt.value;
+      if (colege === "") {
+            setError(errorColegeTxt, "*Không để trống.");
+            colegeTxt.classList.add("error-select");
+            return false;
+      }
+
+      unsetError(errorColegeTxt);
+      colegeTxt.classList.remove("error-select");
       return true;
 }
 
@@ -200,6 +253,9 @@ nameTxt.addEventListener("change", isValidName);
 PNTxt.addEventListener("change", isValidPN);
 ageTxt.addEventListener("change", isValidAge);
 emailTxt.addEventListener("change", isValidEmail);
+genderSelect.addEventListener("change", isValidGender);
+rankSelect.addEventListener("change", isValidRank);
+colegeTxt.addEventListener("change", isValidColege);
 
 
 //---------------------------------------------------------------------------- Function get the code from 6-inputs
@@ -276,42 +332,56 @@ submitBtn.addEventListener("click", async (e) => {
       // Disable button immediately
       submitBtn.classList.add("pointer-events-none", "opacity-50");
 
+      setLoadingEffect();
+      if (isRegistrationClosedByTime()) {
+            unsetLoadingEffect();
+            setFailureWindow("Đã quá hạn nộp đơn đăng ký!");
+            return;
+      }
+
+
       // Validate all inputs
       const isNameValid = isValidName();
       const isPhoneValid = isValidPN();
       const isAgeValid = isValidAge();
       const isEmailValid = await isValidEmail();
       const areVerificationCodeFilled = areFilledVerificationCode();
+      const isGenderValid = isValidGender();
+      const isRankValid = isValidRank();
+      const isColegeValid = isValidColege();
 
       const response = await availSlot();
       const anyLeftSlot = response.data;
 
       // If any validation fails, stop the submission
-      if (!(isNameValid && isPhoneValid && isAgeValid && isEmailValid && areVerificationCodeFilled)) {
+      if (!(isNameValid && isPhoneValid && isAgeValid && isEmailValid && areVerificationCodeFilled && isGenderValid && isRankValid && isColegeValid)) {
+            unsetLoadingEffect();
             setTimeout(() => {
                   submitBtn.classList.remove("pointer-events-none", "opacity-50");
-            }, 2000); // 5 giây
+            }, 1000); // 1 giây
             return;
       }
 
       // Check if there are any empty slots
       if (!anyLeftSlot) {
+            unsetLoadingEffect();
             setFailureWindow("Giải đấu đã nhận đủ đơn đăng ký. Chúng tôi sẽ cập nhật khi có các thông tin mới nhất.");
             setTimeout(() => {
                   submitBtn.classList.remove("pointer-events-none", "opacity-50");
-            }, 2000);
+            }, 1000);
             return;
       }
 
       try {
-            setLoadingEffect();
-
             const sendRegisterForm = httpsCallable(functions, 'sendRegisterForm');
             const playerInfo = {
-                  name: nameTxt.value,
-                  phoneNumber: PNTxt.value,
+                  name: nameTxt.value.trim(),
+                  phoneNumber: PNTxt.value.trim(),
                   age: Number(ageTxt.value.trim()),
-                  email: emailTxt.value,
+                  gender: genderSelect.value,
+                  rank: rankSelect.value,
+                  colege: colegeTxt.value.trim(),
+                  email: emailTxt.value.trim(),
                   code: getVerificationCode(),
             }
 
@@ -335,10 +405,11 @@ submitBtn.addEventListener("click", async (e) => {
             setFailureWindow("Lỗi hệ thống, chụp lại màn hình lỗi để được hỗ trợ: " + error);
             console.error('Error calling sendRegisterForm:', error);
       } finally {
-            // Re-enable after 2s
+            unsetLoadingEffect();
+            // Re-enable after 1s
             setTimeout(() => {
                   submitBtn.classList.remove("pointer-events-none", "opacity-50");
-            }, 2000);
+            }, 1000);
       }
 });
 
@@ -360,6 +431,13 @@ function unsetLoadingEffect() {
       document.querySelector("#loading-effect-dialog").close();
 }
 
+function isRegistrationClosedByTime() {
+      const targetDate = new Date(TOURNAMENT_INFO.REGISTRATION_DEADLINE).getTime();
+      console.log(targetDate);
+      const currentTime = Date.now();
+      return currentTime >= targetDate;
+}
+
 
 // --------------------------------- ending submit form 
 
@@ -371,6 +449,9 @@ function clearForm() {
       PNTxt.value = "";
       ageTxt.value = "";
       emailTxt.value = "";
+      genderSelect.value = "";
+      rankSelect.value = "";
+      colegeTxt.value = "";
 
       // Xóa các input mã xác thực
       const codeInputs = document.querySelectorAll(".code-input");

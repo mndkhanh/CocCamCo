@@ -1,7 +1,7 @@
 const TOURNAMENT_INFO = {
       PLAYER_NUM: 32,
       MATCH_NUM: 32,
-      
+      REGISTRATION_DEADLINE: "2025-07-04T18:00:00"
 }
 
 export { TOURNAMENT_INFO }

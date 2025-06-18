@@ -1,5 +1,7 @@
+import { TOURNAMENT_INFO } from "../../script/tournament-info.js";
+
 // Ngày kết thúc (thay đổi theo nhu cầu)
-const targetDate = new Date("2025-07-04T18:00:00").getTime();
+const targetDate = new Date(TOURNAMENT_INFO.REGISTRATION_DEADLINE).getTime();
 
 function updateCountdown() {
       const now = new Date().getTime();
