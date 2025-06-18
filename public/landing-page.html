@@ -120,7 +120,7 @@
     <div class="w-full box">
       <main
         id="hero"
-        class="md:w-[70%] w-full mx-auto md:px-[0] px-3 md:mt-[200px] mt-[100px] flex justify-between flex-row gap-5"
+        class="md:w-[70%] w-full mx-auto md:px-[0] px-3 md:mt-[200px] mt-[100px] flex justify-between flex-row gap-5 scroll-mt-[200px]"
       >
         <div class="hero-content w-full md:w-[70%] mx-auto flex flex-col">
           <div class="">
@@ -158,18 +158,28 @@
     </div>
 
     <div class="w-full mt-[50px] flex justify-center box">
-      <section id="prize" class="md:w-[70%] w-full md:mt-[250px] flex mx-auto">
+      <section
+        id="prize"
+        class="md:w-[70%] w-full md:mt-[250px] flex mx-auto scroll-mt-[200px]"
+      >
         <div class="trophy md:w-[25%] w-[30%]">
           <img class="w-full" src="./assets/images/trophy.png" alt="Trophy" />
         </div>
         <div class="w-[75%] pt-5">
-          <h2 class="text-sm md:text-5xl orange-original font-bold">
+          <h2
+            class="text-base sm:text-2xl md:text-4xl lg:text-[50px] xl:text-[70px] font-bold orange-original leading-snug"
+          >
             Tổng Giá Trị Giải Thưởng
           </h2>
+
           <div>
-            <span class="prize-amount font-black text-xl md:text-[250px]"
+            <span
+              class="prize-amount font-black text-5xl sm:text-6xl md:text-7xl lg:text-[150px] xl:text-[200px]"
               >2.3M</span
-            ><span class="prize-amount text-base md:text-[200px]">VNĐ</span>
+            ><span
+              class="prize-amount text-2xl sm:text-3xl md:text-5xl lg:text-[100px] xl:text-[140px]"
+              >VNĐ</span
+            >
           </div>
           <p class="text-[10px] md:text-[30px] font-bold">
             Cùng kỷ niệm chương và các phần quà giá trị khác
@@ -280,7 +290,7 @@
 
     <section
       id="about"
-      class="box mt-[100px] md:mt-[250px] w-full md:w-[70%] mx-auto"
+      class="box mt-[100px] md:mt-[250px] w-full md:w-[70%] mx-auto scroll-mt-[120px]"
     >
       <h1 class="orange text-center font-black text-lg md:text-3xl mb-[40px]">
         Cóc Cầm Cơ Mùa 1
@@ -372,7 +382,7 @@
 
     <section
       id="timeline"
-      class="box mt-[100px] md:mt-[250px] w-full md:w-[70%] w-[100%] mx-auto"
+      class="box mt-[100px] md:mt-[250px] w-full md:w-[70%] w-[100%] mx-auto scroll-mt-[200px]"
     >
       <h1 class="orange text-center font-black text-lg md:text-3xl mb-[40px]">
         Timeline
@@ -492,19 +502,19 @@
         </p>
         <div class="date-container">
           <div class="date-session">
-            <p class="date-number" id="day">00</p>
+            <p class="date-number" id="day">10</p>
             <p class="date-unit">Ngày</p>
           </div>
           <div class="date-session">
-            <p class="date-number" id="hour">00</p>
+            <p class="date-number" id="hour">15</p>
             <p class="date-unit">Giờ</p>
           </div>
           <div class="date-session">
-            <p class="date-number" id="minute">00</p>
+            <p class="date-number" id="minute">10</p>
             <p class="date-unit">Phút</p>
           </div>
           <div class="date-session">
-            <p class="date-number" id="second">00</p>
+            <p class="date-number" id="second">10</p>
             <p class="date-unit">Giây</p>
           </div>
         </div>
@@ -591,7 +601,7 @@
       </div>
     </footer>
 
-    <script type="module" src="./assets/js/navbar.js"></script>
+    <script src="./assets/js/navbar.js"></script>
     <script type="module" src="./assets/js/landing-page.js"></script>
     <script>
       const boxes = document.querySelectorAll(".box");

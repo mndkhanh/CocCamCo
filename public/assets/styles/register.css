@@ -461,15 +461,14 @@ input::-webkit-inner-spin-button {
 #loading-effect-dialog {
   border: none;
   outline: none;
-  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   backdrop-filter: blur(1px);
   background: rgba(0, 0, 0, 0.3);
   z-index: 1;
-
+  visibility: hidden;
   div {
     background: transparent;
     width: 100%;
@@ -478,6 +477,7 @@ input::-webkit-inner-spin-button {
     justify-content: center;
     align-items: center;
   }
+  position: fixed;
 }
 
 .message-box-wrapper-success {
@@ -485,7 +485,6 @@ input::-webkit-inner-spin-button {
   justify-content: center;
   align-items: center;
   z-index: 2;
-  position: absolute;
   height: 100vh;
   width: 100vw;
   visibility: hidden;
@@ -499,7 +498,6 @@ input::-webkit-inner-spin-button {
   justify-content: center;
   align-items: center;
   z-index: 3;
-  position: absolute;
   height: 100vh;
   width: 100vw;
   visibility: hidden;

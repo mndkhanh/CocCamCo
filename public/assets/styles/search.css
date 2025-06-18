@@ -133,7 +133,7 @@ body {
 }
 
 .user-icon {
-  width: 150px;
+  width: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -157,7 +157,8 @@ body {
 
 .info-grid {
   margin: 0px 40px;
-  line-height: 1.2rem;
+  font-size: 20px;
+  line-height: 1.8;
 }
 
 .info-grid p:first-child {
@@ -449,4 +450,21 @@ body {
   .player-name {
     font-size: 14px;
   }
+}
+
+.copy-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.copy-container span {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+
+.copy-container img.copy-icon {
+  margin-left: auto;
+  top: 0;
 }

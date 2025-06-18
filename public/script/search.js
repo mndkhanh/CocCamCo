@@ -8,6 +8,7 @@ import {
   where,
   doc
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { TOURNAMENT_INFO } from "./tournament-info.js";
 
 // Firebase config and initialization
 const firebaseConfig = {
@@ -193,15 +194,16 @@ function displayUserData(userData) {
     }
   };
 
+  // Gán nội dung tuỳ theo trạng thái
   switch (userData.paymentStatus) {
     case 'PENDING':
       resultContainer.innerHTML = `
         <div class="info-grid">
           <p class="email">Người chơi: ${userData.name || 'Chưa có dữ liệu'}</p>
           <p class="email">Email: ${userData.id}</p>
-          <div class="payment-info-header">
-            <img src="assets/GG-icons/payment-icon.png" alt="payment-icon" />
-            <p>Tình trạng thanh toán</p>
+          <div class="payment-info-header" style="display: flex; align-items: center; gap: 8px;">
+            <img src="assets/GG-icons/payment-icon.png" alt="payment-icon" style="width: 18px; height: 18px;" />
+            <p style="margin: 0;">Tình trạng thanh toán</p>
           </div>
           <p class="status">Trạng thái: <span class="info-status">${getStatusClass(userData.paymentStatus)}</span></p>
           <p class="expire-time">Hết hạn thanh toán: ${formatTimestamp(userData.expireTime)}</p>
@@ -209,17 +211,25 @@ function displayUserData(userData) {
             <img src="${userData.qrBanking}" alt="QR Code" class="qr-code-img" />
           </div>
           <p>Ngân hàng: MB Bank</p>
-          <div>Số tài khoản: </div>
-          <div style="display: flex; justify-content: center;"><span class="account-number">0362718422</span><img id="copy-account" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" /></div>
+          <div style="display: inline-flex; align-items: center; gap: 8px;">
+            <span>Số tài khoản:</span>
+            <span class="account-number">0362718422</span>
+            <img id="copy-account" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" />
+          </div>
+          <div class="copy-container">
+            
+          </div>
           <p>Chủ tài khoản: MAI NGUYEN DUY KHANH</p>
-          <p>Lệ phí: 90.000 VNĐ</p>
-          <div>Nội dung chuyển khoản: </div>
-          <div style="margin-top: 10px;">
-            <span class="payment-id">COCCAMCO ${userData.paymentID}</span><img id="copy-payment" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" />
+          <p>Lệ phí: ${TOURNAMENT_INFO.PAYMENT_AMOUNT} VNĐ</p>
+          <div>Nội dung chuyển khoản:</div>
+          <div style="display: inline-flex; align-items: center; gap: 8px; margin-top: 10px;">
+            <span class="payment-id">COCCAMCO ${userData.paymentID}</span>
+            <img id="copy-payment" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" />
           </div>
         </div>
       `;
       break;
+
     case 'FAILED':
       resultContainer.innerHTML = `
         <div class="info-grid">
@@ -231,17 +241,10 @@ function displayUserData(userData) {
           </div>
           <p class="status">Trạng thái: <span class="info-status">${getStatusClass(userData.paymentStatus)}</span></p>
           <p class="expire-time">Hết hạn thanh toán: ${formatTimestamp(userData.expireTime)}</p>
-          <div class="qr-code-container">
-            <img src="${userData.qrBanking}" alt="QR Code" class="qr-code-img" />
-          </div>
-          <p>Ngân hàng: MB Bank</p>
-          <p>Số tài khoản: <span class="account-number">0362718422</span><img id="copy-account" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" /></p>
-          <p>Chủ tài khoản: MAI NGUYEN DUY KHANH</p>
-          <p>Lệ phí: 80.000 VNĐ</p>
-          <p>Nội dung chuyển khoản: <span class="payment-id">COCCAMCO ${userData.paymentID}<img id="copy-payment" class="copy-icon" src="assets/GG-icons/copy-icon.png" alt="copy-icon" /></span></p>
         </div>
       `;
       break;
+
     case 'PAID':
       resultContainer.innerHTML = `
         <div class="info-grid">
@@ -257,27 +260,55 @@ function displayUserData(userData) {
       break;
   }
 
-
-
-
+  // Gắn sự kiện sau khi DOM đã render xong
   setTimeout(() => {
-    const copyAccountBtn = document.getElementById('copy-account');
+    const copyAccountBtn = document.getElementById("copy-account");
+    const copyPaymentBtn = document.getElementById("copy-payment");
+
     if (copyAccountBtn) {
-      copyAccountBtn.addEventListener('click', () => {
-        const accountNumber = document.querySelector('.account-number').textContent;
-        copyToClipboard(accountNumber, 'Đã sao chép số tài khoản');
+      copyAccountBtn.addEventListener("click", () => {
+        const accNumber = document.querySelector(".account-number")?.textContent.trim();
+        if (accNumber) copyToClipboard(accNumber);
       });
     }
 
-    const copyPaymentBtn = document.getElementById('copy-payment');
     if (copyPaymentBtn) {
-      copyPaymentBtn.addEventListener('click', () => {
-        const paymentContent = document.querySelector('.payment-id').textContent;
-        copyToClipboard(paymentContent, 'Đã sao chép nội dung chuyển khoản');
+      copyPaymentBtn.addEventListener("click", () => {
+        const paymentText = document.querySelector(".payment-id")?.textContent.trim();
+        if (paymentText) copyToClipboard(paymentText);
       });
     }
-  }, 100);
+  }, 0); // đợi DOM cập nhật xong
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = message;
+    toast.style.visibility = "visible";
+    toast.style.opacity = "1";
+    toast.style.transition = "opacity 0.3s ease";
+
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.transition = "opacity 0.5s ease";
+    }, 1000);
+
+    setTimeout(() => {
+      toast.style.visibility = "hidden";
+    }, 1500);
+  }
+
+  function copyToClipboard(text) {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => showToast("Đã sao chép!"))
+      .catch((err) => {
+        console.error("Lỗi sao chép:", err);
+        showToast("Không thể sao chép!");
+      });
+  }
 }
+
 
 function formatTimestamp(timestamp) {
   if (!timestamp) return 'Không có';

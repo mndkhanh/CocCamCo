@@ -425,11 +425,10 @@ function setSuccessWindow() {
 }
 
 function setLoadingEffect() {
-      document.querySelector("#loading-effect-dialog").showModal();
+      document.querySelector("#loading-effect-dialog").style.visibility = "visible";
 }
-
 function unsetLoadingEffect() {
-      document.querySelector("#loading-effect-dialog").close();
+      document.querySelector("#loading-effect-dialog").style.visibility = "hidden";
 }
 
 function isRegistrationClosedByTime() {
