@@ -10,6 +10,18 @@
   color: var(--primary-color);
 }
 
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .rules-container,
+  .rules-container p,
+  .rules-container li {
+    font-size: 14px !important;
+  }
+}
+
 .custom-btn {
   display: flex;
   align-items: center;

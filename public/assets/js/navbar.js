@@ -50,6 +50,7 @@ if (logoLink) {
         smoothScrollTo('hero'); // Assuming your hero section has id="hero"
     });
 }
+
 // Đóng sidebar khi click ra ngoài
 document.addEventListener('click', (e) => {
     const isClickInsideSidebar = sidebar.contains(e.target);
@@ -67,7 +68,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (target) {
             setTimeout(() => {
-                const offsetPosition = 200;
 
                 window.scrollTo({
                     top: offsetPosition,

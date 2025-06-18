@@ -58,7 +58,7 @@ document.querySelector("#btnCloseFailureMessageBox").addEventListener("click", (
 
 
 // Ngày kết thúc (thay đổi theo nhu cầu)
-const targetDate = new Date("2025-10-10T00:00:00").getTime();
+const targetDate = new Date("2025-07-04T18:00:00").getTime();
 
 function updateCountdown() {
       const now = new Date().getTime();

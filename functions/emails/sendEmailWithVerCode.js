@@ -23,6 +23,7 @@ const sendEmailWithVerCode = functions.https.onCall(async (request) => {
 
       try {
             let codeStatus = await getCodeStatus(email);
+            console.log(codeStatus);
 
             // Check if the code status is active
             // If then stopping exec next
