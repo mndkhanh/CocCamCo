@@ -28,7 +28,8 @@ function getVNDate(timestamp) {
  * Function to send a success registration email after player registration & payment info
  */
 async function sendSuccessRegister(playerInfo) {
-      const { email, name, phoneNumber, age, registerTime } = playerInfo;
+      const { email, name, phoneNumber, age, gender, rank, college, registerTime } = playerInfo;
+      console.log(playerInfo);
       const templatePath = path.join(__dirname, './templates/successRegisterMail.html');
       const registerAt = getVNDate(registerTime);
 
@@ -42,11 +43,14 @@ async function sendSuccessRegister(playerInfo) {
 
       emailHtmlContent = emailHtmlContent
             .replaceAll('{{name}}', name)
-            .replace('{{phoneNumber}}', phoneNumber)
-            .replace('{{registerAt}}', registerAt)
-            .replace('{{phoneNumber}}', phoneNumber)
-            .replace('{{email}}', email)
-            .replace('{{age}}', age)
+            .replaceAll('{{phoneNumber}}', phoneNumber)
+            .replaceAll('{{registerAt}}', registerAt)
+            .replaceAll('{{email}}', email)
+            .replaceAll('{{age}}', age)
+            .replaceAll('{{gender}}', gender)
+            .replaceAll('{{rank}}', rank)
+            .replaceAll('{{college}}', college);
+
 
       // Configure the email options
       const mailOptions = {

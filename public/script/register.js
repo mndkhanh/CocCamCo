@@ -380,10 +380,11 @@ submitBtn.addEventListener("click", async (e) => {
                   age: Number(ageTxt.value.trim()),
                   gender: genderSelect.value,
                   rank: rankSelect.value,
-                  colege: colegeTxt.value.trim(),
+                  college: colegeTxt.value.trim(),
                   email: emailTxt.value.trim(),
                   code: getVerificationCode(),
             }
+            console.log(playerInfo);
 
             const response = await sendRegisterForm(playerInfo);
             const registerStatus = await response.data;
