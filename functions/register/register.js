@@ -54,6 +54,36 @@ function isValidAge(age) {
       return true;
 }
 
+//check gender 
+function isValidGender(gender) {
+
+      if (gender !== "Nam" && gender !== "Nữ") {
+            console.log("Vui lòng chọn giới tính là Nam hoặc Nữ.");
+            return false;
+      }
+
+      return true;
+}
+
+// check hạng
+function isValidRank(rank) {
+      if (rank !== "G" && rank !== "H" && rank !== "I") {
+            console.log("Vui lòng chọn đúng rank G-H-I.");
+            return false;
+      }
+      return true;
+}
+
+// check colege
+function isValidColege(college) {
+      if (college === "") {
+            console.log("Trường đại học không được để trống.");
+            return false;
+      }
+      return true;
+}
+
+
 //check email
 async function isValidEmail(email) {
       if (email == "") {
@@ -82,7 +112,7 @@ async function isValidCode(email, code) {
       return okCode;
 }
 
-async function validateAllFields(name, phoneNumber, age, email) {
+async function validateAllFields(name, phoneNumber, age, gender, rank, college, email) {
       if (!isValidName(name)) {
             return false;
       }
@@ -92,6 +122,18 @@ async function validateAllFields(name, phoneNumber, age, email) {
       }
 
       if (!isValidAge(age)) {
+            return false;
+      }
+
+      if (!isValidGender(gender)) {
+            return false;
+      }
+
+      if (!isValidRank(rank)) {
+            return false;
+      }
+
+      if (!isValidColege(college)) {
             return false;
       }
 
@@ -122,7 +164,7 @@ const sendRegisterForm = functions.https.onCall(async (request) => {
                   return registerStatus;
             }
 
-            const { email, name, phoneNumber, age, code } = playerInfo;
+            const { email, name, phoneNumber, age, gender, rank, college, code } = playerInfo;
 
             // Check if slots are available
             const leftSlot = await hasAvailSlot();
@@ -133,7 +175,7 @@ const sendRegisterForm = functions.https.onCall(async (request) => {
             }
 
             // Validate all fields
-            const isValidAll = await validateAllFields(name, phoneNumber, age, email);
+            const isValidAll = await validateAllFields(name, phoneNumber, age, gender, rank, college, email);
             if (!isValidAll) {
                   registerStatus.status = "FAILED";
                   registerStatus.comment = "Thông tin không đúng định dạng hoặc gặp lỗi. Hãy thử lại!";
@@ -155,6 +197,9 @@ const sendRegisterForm = functions.https.onCall(async (request) => {
                   name,
                   phoneNumber,
                   age,
+                  gender,
+                  rank,
+                  college,
                   registerTime: new Date().getTime(),
             }
             await playersRef.doc(email).set(actualStorePlayerData);
