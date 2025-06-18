@@ -135,7 +135,8 @@ const checkPlayerPayment = functions.https.onRequest((request, response) => {
 
             const serverSecretKey = process.env.CASSO_SECRET_KEY;
             const signatureHeader = request.headers["x-casso-signature"];
-
+            console.log(serverSecretKey);
+            console.log(signatureHeader);
             // Xác thực chữ ký trước khi xử lý tiếp
             if (!verifyCassoSignature(signatureHeader, request.body, serverSecretKey)) {
                   console.warn("Invalid or missing Casso signature");
