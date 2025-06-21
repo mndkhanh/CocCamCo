@@ -5,6 +5,16 @@ body {
   font-family: "Lexend", sans-serif;
 }
 
+.hero-image img {
+  max-width: 400px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.trophy img {
+  animation: tada 2s infinite;
+}
+
+
 :root {
   --primary-color: #e67f0d;
   --text-color: #ffffff;
@@ -25,13 +35,16 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 8px 24px; /* py-2 px-6 */
+  padding: 8px 24px;
+  /* py-2 px-6 */
   background-color: black;
   color: #e67f0d;
   font-weight: bold;
   border: 1.5px solid #e67f0d;
-  border-radius: 12px; /* rounded-xl ≈ 12px */
-  margin-left: 8px; /* ml-2 */
+  border-radius: 12px;
+  /* rounded-xl ≈ 12px */
+  margin-left: 8px;
+  /* ml-2 */
   cursor: pointer;
   transition: all 0.1s;
   position: relative;
@@ -124,4 +137,39 @@ body {
     font-weight: 600;
     font-size: 1.5em;
   }
+  
+}
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes tada {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+  10%, 20% {
+    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+  }
+  30%, 50%, 70%, 90% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+  40%, 60%, 80% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.animate-flaming {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-trophy {
+  animation: tada 2s infinite;
 }
